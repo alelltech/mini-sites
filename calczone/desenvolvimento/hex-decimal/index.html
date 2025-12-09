@@ -38,6 +38,46 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const decimal = document.getElementById('decimal');
+            const hex = document.getElementById('hexadecimal');
+            
+            decimal.addEventListener('input', function() {
+                if (decimal.value === '') {
+                    document.getElementById('result').style.display = 'none';
+                    hex.value = '';
+                    return;
+                }
+                try {
+                    const d = parseInt(decimal.value);
+                    if (!isNaN(d)) {
+                        const h = d.toString(16).toUpperCase();
+                        hex.value = h;
+                        showResult('Hexadecimal: ' + h);
+                    }
+                } catch(e) {
+                    document.getElementById('result').style.display = 'none';
+                }
+            });
+            
+            hex.addEventListener('input', function() {
+                if (hex.value === '') {
+                    document.getElementById('result').style.display = 'none';
+                    decimal.value = '';
+                    return;
+                }
+                try {
+                    const h = parseInt(hex.value, 16);
+                    if (!isNaN(h)) {
+                        decimal.value = h;
+                        showResult('Decimal: ' + h);
+                    }
+                } catch(e) {
+                    document.getElementById('result').style.display = 'none';
+                }
+            });
+        });
+
         function decimalToHex() {
             const decimal = document.getElementById('decimal').value;
             if(!decimal || isNaN(decimal)) { alert('Digite um número decimal válido'); return; }

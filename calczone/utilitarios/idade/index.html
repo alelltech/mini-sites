@@ -32,10 +32,18 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dataNasc = document.getElementById('dataNascimento');
+            dataNasc.addEventListener('change', calcular);
+        });
+
         function calcular() {
             const dataNasc = new Date(document.getElementById('dataNascimento').value);
             const hoje = new Date();
-            if(!dataNasc || dataNasc > hoje) { alert('Data inválida'); return; }
+            if(!document.getElementById('dataNascimento').value || dataNasc > hoje) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
             let anos = hoje.getFullYear() - dataNasc.getFullYear();
             let meses = hoje.getMonth() - dataNasc.getMonth();
             let dias = hoje.getDate() - dataNasc.getDate();

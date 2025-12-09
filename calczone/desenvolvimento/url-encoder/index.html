@@ -31,6 +31,33 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            input.addEventListener('input', function() {
+                if (input.value.trim() === '') {
+                    document.getElementById('result').style.display = 'none';
+                    return;
+                }
+                try {
+                    // Auto-detect if it's encoded or not
+                    const decoded = decodeURIComponent(input.value);
+                    if (decoded !== input.value) {
+                        showResult('[Decodificado]\n' + decoded);
+                    } else {
+                        const encoded = encodeURIComponent(input.value);
+                        showResult('[Codificado]\n' + encoded);
+                    }
+                } catch(e) {
+                    try {
+                        const encoded = encodeURIComponent(input.value);
+                        showResult('[Codificado]\n' + encoded);
+                    } catch(e2) {
+                        document.getElementById('result').style.display = 'none';
+                    }
+                }
+            });
+        });
+
         function encode() {
             const input = document.getElementById('input').value;
             try {

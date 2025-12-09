@@ -32,12 +32,33 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            input.addEventListener('input', function() {
+                if (input.value.trim() === '') {
+                    document.getElementById('result').style.display = 'none';
+                    return;
+                }
+                try {
+                    const parsed = JSON.parse(input.value);
+                    const formatted = JSON.stringify(parsed, null, 2);
+                    document.getElementById('output').textContent = formatted;
+                    document.getElementById('resultTitle').textContent = '✓ JSON Válido - Formatado:';
+                    document.getElementById('result').style.display = 'block';
+                } catch(e) {
+                    document.getElementById('resultTitle').textContent = '✗ JSON Inválido: ' + e.message;
+                    document.getElementById('output').textContent = '';
+                    document.getElementById('result').style.display = 'block';
+                }
+            });
+        });
+
         function format() {
             const input = document.getElementById('input').value;
             try {
                 const parsed = JSON.parse(input);
                 const formatted = JSON.stringify(parsed, null, 2);
-                showResult(formatted);
+                showResult(formatted, 'Formatado');
             } catch(e) { alert('JSON inválido: ' + e.message); }
         }
         function minify() {
@@ -45,7 +66,7 @@
             try {
                 const parsed = JSON.parse(input);
                 const minified = JSON.stringify(parsed);
-                showResult(minified);
+                showResult(minified, 'Minificado');
             } catch(e) { alert('JSON inválido: ' + e.message); }
         }
         function validate() {
@@ -55,8 +76,9 @@
                 alert('✓ JSON válido!');
             } catch(e) { alert('✗ JSON inválido: ' + e.message); }
         }
-        function showResult(text) {
+        function showResult(text, type) {
             document.getElementById('output').textContent = text;
+            document.getElementById('resultTitle').textContent = type + ':';
             document.getElementById('result').style.display = 'block';
         }
         function copyResult() {

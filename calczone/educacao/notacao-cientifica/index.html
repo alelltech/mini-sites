@@ -37,9 +37,16 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('numero').addEventListener('input', converter);
+        });
+
         function converter() {
             const numero = parseFloat(document.getElementById('numero').value);
-            if(isNaN(numero)) { alert('Digite um número válido'); return; }
+            if(isNaN(numero) || document.getElementById('numero').value === '') {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
             const eNotation = numero.toExponential(4);
             let expoente = 0;
             if(numero !== 0) {

@@ -48,14 +48,30 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alimento = document.getElementById('alimento');
+            const quantidade = document.getElementById('quantidade');
+            alimento.addEventListener('change', calcular);
+            quantidade.addEventListener('input', calcular);
+        });
+
         let caloriasPorPorcao = 0;
         function atualizarCaloria() {
             caloriasPorPorcao = parseFloat(document.getElementById('alimento').value) || 0;
+            calcular();
         }
         function calcular() {
-            if(!caloriasPorPorcao) { alert('Selecione um alimento'); return; }
+            const selAlimento = document.getElementById('alimento').value;
+            if(!selAlimento) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
+            caloriasPorPorcao = parseFloat(selAlimento);
             const quantidade = parseFloat(document.getElementById('quantidade').value);
-            if(!quantidade) { alert('Digite a quantidade'); return; }
+            if(!quantidade || quantidade <= 0) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
             const calorias = (caloriasPorPorcao * quantidade) / 100;
             document.getElementById('calorias').textContent = calorias.toFixed(1) + ' kcal';
             document.getElementById('detalhes').textContent = `${quantidade}g de alimento`;

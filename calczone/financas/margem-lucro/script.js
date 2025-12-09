@@ -1,51 +1,57 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('toolForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            calcularMargem();
-        });
-    }
+    // Setup cálculo em tempo real
+    setupRealTimeCalculation('input[type="number"]', calcularMargem, 300);
+    
+    // Calcula na primeira vez
+    calcularMargem();
 });
 
 function calcularMargem() {
-    const custo = parseFloat(document.getElementById('custo').value);
-    const preco = parseFloat(document.getElementById('preco').value);
+    const custo = safeParseFloat(document.getElementById('custo').value);
+    const preco = safeParseFloat(document.getElementById('preco').value);
 
-    if (!isPositive(custo) || !isPositive(preco)) {
-        showAlert('Por favor, preencha todos os campos com valores válidos', 'danger');
+    // Se algum campo está vazio, esconde resultado
+    if (custo === 0 || preco === 0) {
         hideResult();
         return;
     }
 
-    if (preco < custo) {
-        showAlert('O preço de venda deve ser maior que o custo!', 'warning');
+    try {
+        const lucro = preco - custo;
+        const margem = (lucro / preco) * 100;
+        const markup = ((preco / custo) - 1) * 100;
+        const percentualCusto = (custo / preco) * 100;
+
+        // Aviso visual se preço < custo
+        let avisoHtml = '';
+        if (preco < custo) {
+            avisoHtml = '<div class="alert alert-danger" style="margin-bottom: 15px;">⚠️ Preço de venda menor que o custo!</div>';
+        }
+
+        const html = `
+            ${avisoHtml}
+            <div class="result-item">
+                <label>Lucro (R$)</label>
+                <value style="color: ${lucro >= 0 ? '#28a745' : '#dc3545'}">${formatCurrency(lucro)}</value>
+            </div>
+            <div class="result-item">
+                <label>Margem de Lucro</label>
+                <value>${formatNumber(margem, 2)}%</value>
+            </div>
+            <div class="result-item">
+                <label>Markup</label>
+                <value>${formatNumber(markup, 2)}%</value>
+            </div>
+            <div class="result-item">
+                <label>% Custo</label>
+                <value>${formatNumber(percentualCusto, 2)}%</value>
+            </div>
+        `;
+
+        showResult(html);
+    } catch (e) {
+        hideResult();
     }
+}
 
-    const lucro = preco - custo;
-    const margem = (lucro / preco) * 100;
-    const markup = ((preco / custo) - 1) * 100;
-    const percentualCusto = (custo / preco) * 100;
-
-    const html = `
-        <div class="result-item">
-            <label>Lucro (R$)</label>
-            <value>${formatCurrency(lucro)}</value>
-        </div>
-        <div class="result-item">
-            <label>Margem de Lucro</label>
-            <value>${formatNumber(margem, 2)}%</value>
-        </div>
-        <div class="result-item">
-            <label>Markup</label>
-            <value>${formatNumber(markup, 2)}%</value>
-        </div>
-        <div class="result-item">
-            <label>% Custo</label>
-            <value>${formatNumber(percentualCusto, 2)}%</value>
-        </div>
-    `;
-
-    showResult(html);
-    trackToolUsage('calculadora-margem-lucro');
 }

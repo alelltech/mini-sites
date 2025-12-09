@@ -50,16 +50,29 @@
     </div>
     <script src="../../global.js"></script>
     <script>
-        document.getElementById('toolForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const valor = parseFloat(document.getElementById('valor').value);
+        document.addEventListener('DOMContentLoaded', function() {
+            setupRealTimeCalculation('input[type="number"], select', converter, 300);
+            converter();
+        });
+
+        function converter() {
+            const valor = safeParseFloat(document.getElementById('valor').value);
             const de = document.getElementById('de').value;
             const para = document.getElementById('para').value;
             
-            const em_metros = { 'm': 1, 'km': 1000, 'cm': 0.01, 'mm': 0.001, 'mi': 1609.34, 'pol': 0.0254 };
-            const resultado = (valor * em_metros[de]) / em_metros[para];
-            showResult(`<div class="result-item"><label>${de} → ${para}</label><value>${formatNumber(resultado, 2)}</value></div>`);
-        });
+            if (valor === 0) {
+                hideResult();
+                return;
+            }
+
+            try {
+                const em_metros = { 'm': 1, 'km': 1000, 'cm': 0.01, 'mm': 0.001, 'mi': 1609.34, 'pol': 0.0254 };
+                const resultado = (valor * em_metros[de]) / em_metros[para];
+                showResult(`<div class="result-item"><label>${de} → ${para}</label><value>${formatNumber(resultado, 2)}</value></div>`);
+            } catch (e) {
+                hideResult();
+            }
+        }
     </script>
 </body>
 </html>

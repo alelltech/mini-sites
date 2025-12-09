@@ -41,10 +41,20 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const total = document.getElementById('total');
+            const percentual = document.getElementById('percentual');
+            total.addEventListener('input', calcular);
+            percentual.addEventListener('input', calcular);
+        });
+
         function calcular() {
             const total = parseFloat(document.getElementById('total').value);
             const percentual = parseFloat(document.getElementById('percentual').value);
-            if(!total || !percentual) { alert('Preencha todos os campos'); return; }
+            if(!total || total <= 0 || !percentual) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
             const valor = (total * percentual) / 100;
             const final = total + valor;
             document.getElementById('vTotal').textContent = total.toFixed(2);

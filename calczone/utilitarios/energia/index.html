@@ -49,15 +49,39 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('potencia').addEventListener('input', calcular);
+            document.getElementById('horas').addEventListener('input', calcular);
+            document.getElementById('dias').addEventListener('input', calcular);
+            document.getElementById('tarifa').addEventListener('input', calcular);
+        });
+
         function calcular() {
             const potencia = parseFloat(document.getElementById('potencia').value);
             const horas = parseFloat(document.getElementById('horas').value);
             const dias = parseFloat(document.getElementById('dias').value);
             const tarifa = parseFloat(document.getElementById('tarifa').value);
-            if(!potencia || !horas || !dias || !tarifa) { alert('Preencha todos os campos'); return; }
+            if(!potencia || potencia <= 0 || !horas || horas <= 0 || !dias || dias <= 0 || !tarifa || tarifa <= 0) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
             const diario = (potencia * horas) / 1000;
             const mensal = diario * dias;
             const custo = mensal * tarifa;
+            document.getElementById('pot').textContent = potencia.toFixed(2) + ' W';
+            document.getElementById('diario').textContent = diario.toFixed(2) + ' kWh';
+            document.getElementById('mensal').textContent = mensal.toFixed(2) + ' kWh';
+            document.getElementById('custo').textContent = 'R$ ' + custo.toFixed(2);
+            document.getElementById('result').style.display = 'block';
+        }
+        function limpar() {
+            document.getElementById('potencia').value = '';
+            document.getElementById('horas').value = '';
+            document.getElementById('dias').value = '30';
+            document.getElementById('tarifa').value = '1.00';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
             document.getElementById('pot').textContent = potencia.toFixed(2);
             document.getElementById('diario').textContent = diario.toFixed(3);
             document.getElementById('mensal').textContent = mensal.toFixed(2);

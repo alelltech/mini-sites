@@ -55,7 +55,12 @@
                 palette.appendChild(box);
             });
         }
-        generatePalette();
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const colorInput = document.getElementById('baseColor');
+            colorInput.addEventListener('change', generatePalette);
+            generatePalette();
+        });
     </script>
 </body>
 </html>

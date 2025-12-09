@@ -48,7 +48,7 @@
             if(document.getElementById('minusculas').checked) charset += 'abcdefghijklmnopqrstuvwxyz';
             if(document.getElementById('numeros').checked) charset += '0123456789';
             if(document.getElementById('especiais').checked) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-            if(!charset) { alert('Selecione pelo menos um tipo de caractere'); return; }
+            if(!charset) { return; }
             let password = '';
             for(let i = 0; i < comprimento; i++) {
                 password += charset.charAt(Math.floor(Math.random() * charset.length));

@@ -41,7 +41,7 @@
         function gerar() {
             const minimo = parseInt(document.getElementById('minimo').value) || 0;
             const maximo = parseInt(document.getElementById('maximo').value) || 100;
-            if(minimo >= maximo) { alert('Mínimo deve ser menor que máximo'); return; }
+            if(minimo >= maximo) { return; }
             const numero = Math.floor(Math.random() * (maximo - minimo + 1)) + minimo;
             document.getElementById('numero').textContent = numero;
             document.getElementById('result').style.display = 'block';
@@ -49,7 +49,7 @@
         function gerar10() {
             const minimo = parseInt(document.getElementById('minimo').value) || 0;
             const maximo = parseInt(document.getElementById('maximo').value) || 100;
-            if(minimo >= maximo) { alert('Mínimo deve ser menor que máximo'); return; }
+            if(minimo >= maximo) { return; }
             let numeros = [];
             for(let i = 0; i < 10; i++) {
                 numeros.push(Math.floor(Math.random() * (maximo - minimo + 1)) + minimo);

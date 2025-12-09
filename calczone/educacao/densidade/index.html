@@ -54,11 +54,20 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('valor').addEventListener('input', converter);
+            document.getElementById('de').addEventListener('change', converter);
+            document.getElementById('para').addEventListener('change', converter);
+        });
+
         function converter() {
             const valor = parseFloat(document.getElementById('valor').value);
             const de = document.getElementById('de').value;
             const para = document.getElementById('para').value;
-            if(!valor || isNaN(valor)) { alert('Digite um valor válido'); return; }
+            if(!valor || valor <= 0) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
             const conversoes = {
                 'kg_m3_g_cm3': 0.001,
                 'kg_m3_lb_ft3': 0.062428,

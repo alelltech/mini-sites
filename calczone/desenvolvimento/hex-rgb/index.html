@@ -48,26 +48,51 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hex = document.getElementById('hex');
+            const r = document.getElementById('r');
+            const g = document.getElementById('g');
+            const b = document.getElementById('b');
+            
+            hex.addEventListener('input', function() {
+                if (hex.value.trim() === '') {
+                    document.getElementById('result').style.display = 'none';
+                    return;
+                }
+                hexToRgb();
+            });
+            
+            [r, g, b].forEach(input => {
+                input.addEventListener('input', function() {
+                    if (r.value === '' || g.value === '' || b.value === '') {
+                        document.getElementById('result').style.display = 'none';
+                        return;
+                    }
+                    rgbToHex();
+                });
+            });
+        });
+
         function hexToRgb() {
             const hex = document.getElementById('hex').value.trim();
-            if(!/^#?[0-9A-F]{6}$/i.test(hex)) { alert('Hex inválido'); return; }
+            if(!/^#?[0-9A-F]{6}$/i.test(hex)) { return; }
             const h = hex.replace('#', '');
-            const r = parseInt(h.substr(0, 2), 16);
-            const g = parseInt(h.substr(2, 2), 16);
-            const b = parseInt(h.substr(4, 2), 16);
-            document.getElementById('r').value = r;
-            document.getElementById('g').value = g;
-            document.getElementById('b').value = b;
-            showResult(`rgb(${r}, ${g}, ${b})`, hex);
+            const rv = parseInt(h.substr(0, 2), 16);
+            const gv = parseInt(h.substr(2, 2), 16);
+            const bv = parseInt(h.substr(4, 2), 16);
+            document.getElementById('r').value = rv;
+            document.getElementById('g').value = gv;
+            document.getElementById('b').value = bv;
+            showResult(`rgb(${rv}, ${gv}, ${bv})`, hex);
         }
         function rgbToHex() {
-            const r = parseInt(document.getElementById('r').value);
-            const g = parseInt(document.getElementById('g').value);
-            const b = parseInt(document.getElementById('b').value);
-            if(isNaN(r) || isNaN(g) || isNaN(b) || r<0 || g<0 || b<0 || r>255 || g>255 || b>255) { alert('RGB inválido'); return; }
-            const hex = '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('').toUpperCase();
+            const rv = parseInt(document.getElementById('r').value);
+            const gv = parseInt(document.getElementById('g').value);
+            const bv = parseInt(document.getElementById('b').value);
+            if(isNaN(rv) || isNaN(gv) || isNaN(bv) || rv<0 || gv<0 || bv<0 || rv>255 || gv>255 || bv>255) { return; }
+            const hex = '#' + [rv,gv,bv].map(x => x.toString(16).padStart(2,'0')).join('').toUpperCase();
             document.getElementById('hex').value = hex;
-            showResult(`rgb(${r}, ${g}, ${b})`, hex);
+            showResult(`rgb(${rv}, ${gv}, ${bv})`, hex);
         }
         function colorPickerChange() {
             const hex = document.getElementById('colorPicker').value;

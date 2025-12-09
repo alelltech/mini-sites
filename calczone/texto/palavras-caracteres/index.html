@@ -25,20 +25,35 @@
     </div>
     <script src="../../global.js"></script>
     <script>
-        document.getElementById('toolForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const texto = document.getElementById('texto').value;
-            const palavras = countWords(texto);
-            const caracteres = countCharacters(texto);
-            const sem_espacos = countCharactersWithoutSpaces(texto);
-            const linhas = countLines(texto);
-            showResult(`
-                <div class="result-item"><label>Palavras</label><value>${palavras}</value></div>
-                <div class="result-item"><label>Caracteres</label><value>${caracteres}</value></div>
-                <div class="result-item"><label>Sem Espaços</label><value>${sem_espacos}</value></div>
-                <div class="result-item"><label>Linhas</label><value>${linhas}</value></div>
-            `);
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('texto');
+            textarea.addEventListener('input', contar);
+            contar();
         });
+
+        function contar() {
+            const texto = document.getElementById('texto').value;
+            
+            if (texto.trim() === '') {
+                hideResult();
+                return;
+            }
+
+            try {
+                const palavras = countWords(texto);
+                const caracteres = countCharacters(texto);
+                const sem_espacos = countCharactersWithoutSpaces(texto);
+                const linhas = countLines(texto);
+                showResult(`
+                    <div class="result-item"><label>Palavras</label><value>${palavras}</value></div>
+                    <div class="result-item"><label>Caracteres</label><value>${caracteres}</value></div>
+                    <div class="result-item"><label>Sem Espaços</label><value>${sem_espacos}</value></div>
+                    <div class="result-item"><label>Linhas</label><value>${linhas}</value></div>
+                `);
+            } catch (e) {
+                hideResult();
+            }
+        }
     </script>
 </body>
 </html>

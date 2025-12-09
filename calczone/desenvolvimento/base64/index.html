@@ -31,6 +31,28 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            input.addEventListener('input', function() {
+                if (input.value.trim() === '') {
+                    document.getElementById('result').style.display = 'none';
+                    return;
+                }
+                // Try to auto-detect if it's base64 or text
+                try {
+                    const decoded = decodeURIComponent(escape(atob(input.value)));
+                    showResult('[Decodificado de Base64]\n' + decoded);
+                } catch(e) {
+                    try {
+                        const encoded = btoa(unescape(encodeURIComponent(input.value)));
+                        showResult('[Codificado em Base64]\n' + encoded);
+                    } catch(e2) {
+                        document.getElementById('result').style.display = 'none';
+                    }
+                }
+            });
+        });
+
         function encode() {
             const input = document.getElementById('input').value;
             try {

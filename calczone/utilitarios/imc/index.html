@@ -36,10 +36,21 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const peso = document.getElementById('peso');
+            const altura = document.getElementById('altura');
+            peso.addEventListener('input', calcular);
+            altura.addEventListener('input', calcular);
+        });
+
         function calcular() {
             const peso = parseFloat(document.getElementById('peso').value);
-            const altura = parseFloat(document.getElementById('altura').value) / 100;
-            if(!peso || !altura) { alert('Preencha todos os campos'); return; }
+            const alturaInput = parseFloat(document.getElementById('altura').value);
+            if(!peso || peso <= 0 || !alturaInput || alturaInput <= 0) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
+            const altura = alturaInput / 100;
             const imc = (peso / (altura * altura)).toFixed(1);
             let categoria = '';
             if(imc < 18.5) categoria = 'Abaixo do peso';

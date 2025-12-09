@@ -26,16 +26,33 @@
     </div>
     <script src="../../global.js"></script>
     <script>
-        document.getElementById('toolForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('texto');
+            const select = document.getElementById('tipo');
+            textarea.addEventListener('input', converter);
+            select.addEventListener('change', converter);
+            converter();
+        });
+
+        function converter() {
             const texto = document.getElementById('texto').value;
             const tipo = document.getElementById('tipo').value;
-            let resultado = '';
-            if (tipo === 'upper') resultado = toUpperCase(texto);
-            else if (tipo === 'lower') resultado = toLowerCase(texto);
-            else resultado = toPascalCase(texto);
-            showResult(`<div><strong>Resultado:</strong><br><textarea readonly style="width:100%;height:100px;">${resultado}</textarea></div>`);
-        });
+            
+            if (texto.trim() === '') {
+                hideResult();
+                return;
+            }
+
+            try {
+                let resultado = '';
+                if (tipo === 'upper') resultado = toUpperCase(texto);
+                else if (tipo === 'lower') resultado = toLowerCase(texto);
+                else resultado = toPascalCase(texto);
+                showResult(`<div><strong>Resultado:</strong><br><textarea readonly style="width:100%;height:100px;">${resultado}</textarea></div>`);
+            } catch (e) {
+                hideResult();
+            }
+        }
     </script>
 </body>
 </html>

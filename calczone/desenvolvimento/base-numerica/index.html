@@ -39,9 +39,20 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const decimal = document.getElementById('decimal');
+            decimal.addEventListener('input', function() {
+                if (decimal.value === '') {
+                    document.getElementById('result').style.display = 'none';
+                    return;
+                }
+                convertFromDecimal();
+            });
+        });
+
         function convertFromDecimal() {
             const dec = parseInt(document.getElementById('decimal').value);
-            if(isNaN(dec)) { alert('Digite um número decimal válido'); return; }
+            if(isNaN(dec)) { return; }
             document.getElementById('dec').textContent = dec;
             document.getElementById('bin').textContent = dec.toString(2);
             document.getElementById('oct').textContent = dec.toString(8);

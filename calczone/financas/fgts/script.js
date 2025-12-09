@@ -1,42 +1,43 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('toolForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            calcularFGTS();
-        });
-    }
+    // Setup cálculo em tempo real
+    setupRealTimeCalculation('input[type="number"]', calcularFGTS, 300);
+    
+    // Calcula na primeira vez
+    calcularFGTS();
 });
 
 function calcularFGTS() {
-    const saldo = parseFloat(document.getElementById('saldo').value);
-    const aliquota = parseFloat(document.getElementById('aliquota').value);
+    const saldo = safeParseFloat(document.getElementById('saldo').value);
+    const aliquota = safeParseFloat(document.getElementById('aliquota').value);
 
-    if (!isPositive(saldo) || !isNonNegative(aliquota)) {
-        showAlert('Por favor, insira valores válidos', 'danger');
+    // Se algum campo está vazio, esconde resultado
+    if (saldo === 0) {
         hideResult();
         return;
     }
 
-    const aliquotaDecimal = aliquota / 100;
-    const rendimento = saldo * aliquotaDecimal;
-    const saldoAtualizado = saldo + rendimento;
+    try {
+        const aliquotaDecimal = aliquota / 100;
+        const rendimento = saldo * aliquotaDecimal;
+        const saldoAtualizado = saldo + rendimento;
 
-    const html = `
-        <div class="result-item">
-            <label>Saldo Inicial (R$)</label>
-            <value>${formatCurrency(saldo)}</value>
-        </div>
-        <div class="result-item">
-            <label>Rendimento (R$)</label>
-            <value>${formatCurrency(rendimento)}</value>
-        </div>
-        <div class="result-item">
-            <label>Saldo Atualizado (R$)</label>
-            <value>${formatCurrency(saldoAtualizado)}</value>
-        </div>
-    `;
+        const html = `
+            <div class="result-item">
+                <label>Saldo Inicial (R$)</label>
+                <value>${formatCurrency(saldo)}</value>
+            </div>
+            <div class="result-item">
+                <label>Rendimento (${formatNumber(aliquota, 2)}%)</label>
+                <value>${formatCurrency(rendimento)}</value>
+            </div>
+            <div class="result-item">
+                <label>Saldo Atualizado (R$)</label>
+                <value>${formatCurrency(saldoAtualizado)}</value>
+            </div>
+        `;
 
-    showResult(html);
-    trackToolUsage('calculadora-fgts');
+        showResult(html);
+    } catch (e) {
+        hideResult();
+    }
 }

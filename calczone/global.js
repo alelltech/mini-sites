@@ -519,3 +519,101 @@ function hide(element) {
 function show(element) {
     if (element) element.classList.remove('hidden');
 }
+
+// ============================================
+// FUNÇÕES PARA CÁLCULO EM TEMPO REAL
+// ============================================
+
+/**
+ * Safely parse float, retorna 0 se inválido
+ */
+function safeParseFloat(value) {
+    const num = parseFloat(value);
+    return isNaN(num) || !isFinite(num) ? 0 : num;
+}
+
+/**
+ * Valida se campo tem valor válido
+ */
+function isFieldValid(element) {
+    const value = safeParseFloat(element.value);
+    return value > 0 || (element.dataset.allowZero === 'true' && value >= 0);
+}
+
+/**
+ * Conta campos válidos
+ */
+function countValidFields(selector) {
+    const fields = document.querySelectorAll(selector);
+    return Array.from(fields).filter(f => isFieldValid(f)).length;
+}
+
+/**
+ * Configura cálculo em tempo real com debounce
+ */
+function setupRealTimeCalculation(inputSelector, calculateFunction, debounceMs = 300) {
+    const inputs = document.querySelectorAll(inputSelector);
+    let debounceTimer;
+    
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                calculateFunction();
+            }, debounceMs);
+        });
+    });
+}
+
+/**
+ * Formata resultado com cor baseada em tipo
+ */
+function formatResult(label, value, type = 'default', decimals = 2) {
+    let formattedValue = '';
+    let colorClass = '';
+    
+    switch(type) {
+        case 'currency':
+            formattedValue = formatCurrency(value);
+            colorClass = 'text-success';
+            break;
+        case 'percentage':
+            formattedValue = formatNumber(value, decimals) + '%';
+            colorClass = 'text-info';
+            break;
+        case 'number':
+            formattedValue = formatNumber(value, decimals);
+            colorClass = 'text-primary';
+            break;
+        default:
+            formattedValue = String(value);
+    }
+    
+    return `<div class="result-item">
+        <strong>${label}:</strong>
+        <span class="${colorClass}">${formattedValue}</span>
+    </div>`;
+}
+
+/**
+ * Display resultado com múltiplos itens
+ */
+function displayResults(items) {
+    const result = document.getElementById('result');
+    const resultContent = document.getElementById('resultContent');
+    
+    if (result && resultContent) {
+        resultContent.innerHTML = items.join('');
+        show(result);
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+/**
+ * Valida intervalo de valor
+ */
+function clampValue(value, min = 0, max = Infinity) {
+    const num = safeParseFloat(value);
+    return Math.max(min, Math.min(max, num));
+}
+
