@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calcule ICMS, IPI, ISS e outros impostos brasileiros.">
+    <meta name="keywords" content="imposto, icms, ipi, iss, cálculo fiscal">
+    <title>Calculadora de Impostos - CalcZone BR</title>
+    <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">CalcZone BR</a>
+            <nav>
+                <a href="/">Início</a>
+                <a href="#about">Sobre</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="tool-section">
+                <div class="tool-header">
+                    <h1>📋 Calculadora de Impostos</h1>
+                    <p class="description">Calcule ICMS, IPI, ISS e outros impostos brasileiros.</p>
+                </div>
+
+                <div class="tool-container">
+                    <form class="tool-form" id="toolForm">
+                        <div class="form-group">
+                            <label for="valor">Valor Base (R$)</label>
+                            <input type="number" id="valor" placeholder="1000" min="0" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipo">Tipo de Imposto</label>
+                            <select id="tipo">
+                                <option value="icms">ICMS (18%)</option>
+                                <option value="ipi">IPI (10%)</option>
+                                <option value="iss">ISS (5%)</option>
+                                <option value="pis">PIS (1,65%)</option>
+                                <option value="cofins">COFINS (7,6%)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Calcular</button>
+                    </form>
+
+                    <div id="result" class="result hidden">
+                        <h2>Resultado</h2>
+                        <div id="resultContent" class="result-content"></div>
+                        <button type="button" class="btn btn-secondary btn-small" onclick="copyToClipboard(document.querySelector('#resultContent').textContent, this)">📋 Copiar Resultado</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <div class="info-card">
+                    <h3>💡 Sobre Impostos</h3>
+                    <p>Os impostos são obrigações fiscais que variam conforme o tipo de produto, serviço e região.</p>
+                </div>
+                <div class="info-card">
+                    <h3>📐 Tipos de Impostos</h3>
+                    <p>ICMS: Imposto sobre Circulação de Mercadorias<br>IPI: Imposto sobre Produtos Industrializados<br>ISS: Imposto sobre Serviços</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔒 Privacidade</h3>
+                    <p>Todos os cálculos são feitos no seu navegador. Nenhum dado é enviado para servidores.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 CalcZone BR - Ferramentas Online Grátis</p>
+        </footer>
+    </div>
+
+    <script src="../../global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

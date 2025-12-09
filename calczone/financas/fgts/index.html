@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calcule saques e benefícios do FGTS conforme as regras atuais.">
+    <meta name="keywords" content="fgts, fundo garantia, saque, benefício">
+    <title>Calculadora de FGTS - CalcZone BR</title>
+    <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">CalcZone BR</a>
+            <nav>
+                <a href="/">Início</a>
+                <a href="#about">Sobre</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="tool-section">
+                <div class="tool-header">
+                    <h1>🏦 Calculadora de FGTS</h1>
+                    <p class="description">Calcule saques e benefícios do FGTS conforme as regras atuais.</p>
+                </div>
+
+                <div class="tool-container">
+                    <form class="tool-form" id="toolForm">
+                        <div class="form-group">
+                            <label for="saldo">Saldo em Conta (R$)</label>
+                            <input type="number" id="saldo" placeholder="5000" min="0" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aliquota">Alíquota (% ao ano)</label>
+                            <input type="number" id="aliquota" placeholder="8" min="0" step="0.01" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Calcular</button>
+                    </form>
+
+                    <div id="result" class="result hidden">
+                        <h2>Resultado</h2>
+                        <div id="resultContent" class="result-content"></div>
+                        <button type="button" class="btn btn-secondary btn-small" onclick="copyToClipboard(document.querySelector('#resultContent').textContent, this)">📋 Copiar Resultado</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <div class="info-card">
+                    <h3>💡 Sobre FGTS</h3>
+                    <p>O FGTS é um benefício social que garante proteção ao trabalhador. O empregador deposita 8% do salário mensalmente em uma conta específica.</p>
+                </div>
+                <div class="info-card">
+                    <h3>📐 Cálculo de Rendimento</h3>
+                    <p>O FGTS rende juros e correção monetária. Esta calculadora mostra uma estimativa com base na alíquota informada.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔒 Privacidade</h3>
+                    <p>Todos os cálculos são feitos no seu navegador. Nenhum dado é enviado para servidores.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 CalcZone BR - Ferramentas Online Grátis</p>
+        </footer>
+    </div>
+
+    <script src="../../global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calcule margem de lucro, markup e preço final para seu negócio.">
+    <meta name="keywords" content="margem lucro, markup, preço venda, lucro, negócio, comércio">
+    <title>Calculadora de Margem e Lucro - CalcZone BR</title>
+    <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">CalcZone BR</a>
+            <nav>
+                <a href="/">Início</a>
+                <a href="#about">Sobre</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="tool-section">
+                <div class="tool-header">
+                    <h1>💰 Calculadora de Margem e Lucro</h1>
+                    <p class="description">Calcule margem de lucro, markup e preço final para seu negócio.</p>
+                </div>
+
+                <div class="tool-container">
+                    <form class="tool-form" id="toolForm">
+                        <div class="form-group">
+                            <label for="custo">Custo do Produto (R$)</label>
+                            <input type="number" id="custo" placeholder="100" min="0" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preco">Preço de Venda (R$)</label>
+                            <input type="number" id="preco" placeholder="150" min="0" step="0.01" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Calcular</button>
+                    </form>
+
+                    <div id="result" class="result hidden">
+                        <h2>Resultado</h2>
+                        <div id="resultContent" class="result-content"></div>
+                        <button type="button" class="btn btn-secondary btn-small" onclick="copyToClipboard(document.querySelector('#resultContent').textContent, this)">📋 Copiar Resultado</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <div class="info-card">
+                    <h3>💡 Sobre Margem de Lucro</h3>
+                    <p>A margem de lucro é a porcentagem de lucro que você ganha em relação ao preço de venda. É fundamental para calcular a lucratividade do seu negócio.</p>
+                </div>
+                <div class="info-card">
+                    <h3>📐 Fórmulas Utilizadas</h3>
+                    <p><strong>Lucro = Preço - Custo</strong><br><strong>Margem = (Lucro / Preço) × 100</strong><br><strong>Markup = (Preço / Custo - 1) × 100</strong></p>
+                </div>
+                <div class="info-card">
+                    <h3>🔒 Privacidade</h3>
+                    <p>Todos os cálculos são feitos no seu navegador. Nenhum dado é enviado para servidores.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 CalcZone BR - Ferramentas Online Grátis</p>
+        </footer>
+    </div>
+
+    <script src="../../global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
