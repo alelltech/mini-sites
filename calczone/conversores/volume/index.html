@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Volume - CalcZone BR</title>
+    <link rel="stylesheet" href="../../global.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header"><a href="/" class="logo">CalcZone BR</a></header>
+        <main class="main">
+            <section class="tool-section">
+                <div class="tool-header"><h1>🧃 Conversor de Volume</h1></div>
+                <div class="tool-container">
+                    <form class="tool-form" id="toolForm">
+                        <div class="form-group"><label>Valor</label><input type="number" id="valor" placeholder="1" required></div>
+                        <div class="form-group"><label>De</label><select id="de"><option value="l">Litro (L)</option><option value="ml">Mililitro (mL)</option><option value="gal">Galão (gal)</option><option value="pt">Pinta (pt)</option></select></div>
+                        <div class="form-group"><label>Para</label><select id="para"><option value="l">Litro (L)</option><option value="ml">Mililitro (mL)</option><option value="gal">Galão (gal)</option></select></div>
+                        <button type="submit" class="btn btn-primary">Converter</button>
+                    </form>
+                    <div id="result" class="result hidden"><div id="resultContent"></div></div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer"><p>&copy; 2024 CalcZone BR</p></footer>
+    </div>
+    <script src="../../global.js"></script>
+    <script>
+        document.getElementById('toolForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const valor = parseFloat(document.getElementById('valor').value);
+            const de = document.getElementById('de').value;
+            const para = document.getElementById('para').value;
+            const em_l = { 'l': 1, 'ml': 0.001, 'gal': 3.78541, 'pt': 0.473176 };
+            const resultado = (valor * em_l[de]) / em_l[para];
+            showResult(`<div class="result-item"><label>${de} → ${para}</label><value>${formatNumber(resultado, 2)}</value></div>`);
+        });
+    </script>
+</body>
+</html>

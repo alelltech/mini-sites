@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Comprimento - CalcZone BR</title>
+    <link rel="stylesheet" href="../../global.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header"><a href="/" class="logo">CalcZone BR</a></header>
+        <main class="main">
+            <section class="tool-section">
+                <div class="tool-header"><h1>📏 Conversor de Comprimento</h1></div>
+                <div class="tool-container">
+                    <form class="tool-form" id="toolForm">
+                        <div class="form-group">
+                            <label>Valor</label>
+                            <input type="number" id="valor" placeholder="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label>De</label>
+                            <select id="de">
+                                <option value="m">Metro (m)</option>
+                                <option value="km">Quilômetro (km)</option>
+                                <option value="cm">Centímetro (cm)</option>
+                                <option value="mm">Milímetro (mm)</option>
+                                <option value="mi">Milha (mi)</option>
+                                <option value="pol">Polegada (pol)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Para</label>
+                            <select id="para">
+                                <option value="m">Metro (m)</option>
+                                <option value="km">Quilômetro (km)</option>
+                                <option value="cm">Centímetro (cm)</option>
+                                <option value="mm">Milímetro (mm)</option>
+                                <option value="mi">Milha (mi)</option>
+                                <option value="pol">Polegada (pol)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Converter</button>
+                    </form>
+                    <div id="result" class="result hidden"><div id="resultContent"></div></div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer"><p>&copy; 2024 CalcZone BR</p></footer>
+    </div>
+    <script src="../../global.js"></script>
+    <script>
+        document.getElementById('toolForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const valor = parseFloat(document.getElementById('valor').value);
+            const de = document.getElementById('de').value;
+            const para = document.getElementById('para').value;
+            
+            const em_metros = { 'm': 1, 'km': 1000, 'cm': 0.01, 'mm': 0.001, 'mi': 1609.34, 'pol': 0.0254 };
+            const resultado = (valor * em_metros[de]) / em_metros[para];
+            showResult(`<div class="result-item"><label>${de} → ${para}</label><value>${formatNumber(resultado, 2)}</value></div>`);
+        });
+    </script>
+</body>
+</html>
