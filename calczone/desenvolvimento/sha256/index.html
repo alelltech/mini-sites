@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA256 Hash Generator</title>
+    <link rel="stylesheet" href="../../global.css">
+    <style>
+        .tool-container { max-width: 600px; margin: 20px auto; padding: 20px; }
+        textarea { width: 100%; height: 100px; padding: 10px; font-family: monospace; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 4px; border-left: 4px solid #007bff; }
+        pre { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; overflow-x: auto; font-family: monospace; }
+        .copy-btn { padding: 5px 10px; font-size: 12px; background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>Gerador SHA256</h1>
+        <textarea id="input" placeholder="Digite o texto para gerar o hash..."></textarea>
+        <div>
+            <button onclick="generate()">Gerar Hash</button>
+            <button onclick="clear()">Limpar</button>
+        </div>
+        <div class="result" id="result" style="display:none;">
+            <strong>Hash SHA256:</strong>
+            <pre id="output"></pre>
+            <button class="copy-btn" onclick="copyResult()">Copiar</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.0/crypto-js.min.js"></script>
+    <script>
+        function generate() {
+            const input = document.getElementById('input').value;
+            if(!input) { alert('Digite algo'); return; }
+            const hash = CryptoJS.SHA256(input).toString();
+            document.getElementById('output').textContent = hash;
+            document.getElementById('result').style.display = 'block';
+        }
+        function copyResult() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output);
+            alert('Copiado!');
+        }
+        function clear() {
+            document.getElementById('input').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

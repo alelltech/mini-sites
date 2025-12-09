@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder</title>
+    <link rel="stylesheet" href="../../global.css">
+    <style>
+        .tool-container { max-width: 600px; margin: 20px auto; padding: 20px; }
+        textarea { width: 100%; height: 120px; padding: 10px; font-family: monospace; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 4px; border-left: 4px solid #007bff; }
+        pre { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; overflow-x: auto; }
+        .copy-btn { padding: 5px 10px; font-size: 12px; background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>Base64 Encoder/Decoder</h1>
+        <textarea id="input" placeholder="Digite o texto ou Base64..."></textarea>
+        <div>
+            <button onclick="encode()">Codificar</button>
+            <button onclick="decode()">Decodificar</button>
+            <button onclick="clear()">Limpar</button>
+        </div>
+        <div class="result" id="result" style="display:none;">
+            <strong>Resultado:</strong>
+            <pre id="output"></pre>
+            <button class="copy-btn" onclick="copyResult()">Copiar</button>
+        </div>
+    </div>
+    <script>
+        function encode() {
+            const input = document.getElementById('input').value;
+            try {
+                const result = btoa(unescape(encodeURIComponent(input)));
+                showResult(result);
+            } catch(e) { alert('Erro ao codificar'); }
+        }
+        function decode() {
+            const input = document.getElementById('input').value;
+            try {
+                const result = decodeURIComponent(escape(atob(input)));
+                showResult(result);
+            } catch(e) { alert('Base64 inválido'); }
+        }
+        function showResult(text) {
+            document.getElementById('output').textContent = text;
+            document.getElementById('result').style.display = 'block';
+        }
+        function copyResult() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output);
+            alert('Copiado!');
+        }
+        function clear() {
+            document.getElementById('input').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

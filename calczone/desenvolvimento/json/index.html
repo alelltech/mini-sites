@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter</title>
+    <link rel="stylesheet" href="../../global.css">
+    <style>
+        .tool-container { max-width: 800px; margin: 20px auto; padding: 20px; }
+        textarea { width: 100%; height: 150px; padding: 10px; font-family: monospace; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 4px; border-left: 4px solid #007bff; }
+        pre { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; overflow-x: auto; max-height: 300px; }
+        .copy-btn { padding: 5px 10px; font-size: 12px; background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>Formatador JSON</h1>
+        <textarea id="input" placeholder="Cole seu JSON aqui..."></textarea>
+        <div>
+            <button onclick="format()">Formatar</button>
+            <button onclick="minify()">Minificar</button>
+            <button onclick="validate()">Validar</button>
+            <button onclick="clear()">Limpar</button>
+        </div>
+        <div class="result" id="result" style="display:none;">
+            <strong id="resultTitle">Resultado:</strong>
+            <pre id="output"></pre>
+            <button class="copy-btn" onclick="copyResult()">Copiar</button>
+        </div>
+    </div>
+    <script>
+        function format() {
+            const input = document.getElementById('input').value;
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 2);
+                showResult(formatted);
+            } catch(e) { alert('JSON inválido: ' + e.message); }
+        }
+        function minify() {
+            const input = document.getElementById('input').value;
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                showResult(minified);
+            } catch(e) { alert('JSON inválido: ' + e.message); }
+        }
+        function validate() {
+            const input = document.getElementById('input').value;
+            try {
+                JSON.parse(input);
+                alert('✓ JSON válido!');
+            } catch(e) { alert('✗ JSON inválido: ' + e.message); }
+        }
+        function showResult(text) {
+            document.getElementById('output').textContent = text;
+            document.getElementById('result').style.display = 'block';
+        }
+        function copyResult() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output);
+            alert('Copiado!');
+        }
+        function clear() {
+            document.getElementById('input').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

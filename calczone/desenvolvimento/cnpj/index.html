@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNPJ Generator</title>
+    <link rel="stylesheet" href="../../global.css">
+    <style>
+        .tool-container { max-width: 600px; margin: 20px auto; padding: 20px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 4px; border-left: 4px solid #007bff; }
+        pre { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 18px; font-weight: bold; }
+        .copy-btn { padding: 5px 10px; font-size: 12px; background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>Gerador de CNPJ</h1>
+        <p>Gera CNPJs válidos (apenas para testes)</p>
+        <div>
+            <button onclick="generateOne()">Gerar Um CNPJ</button>
+            <button onclick="generateMultiple()">Gerar 10 CNPJs</button>
+            <button onclick="clear()">Limpar</button>
+        </div>
+        <div class="result" id="result" style="display:none;">
+            <strong>CNPJ(s) Gerado(s):</strong>
+            <pre id="output"></pre>
+            <button class="copy-btn" onclick="copyResult()">Copiar</button>
+        </div>
+    </div>
+    <script>
+        function generateCNPJ() {
+            let cnpj = '00000001000160';
+            let base = '';
+            for(let i = 0; i < 8; i++) base += Math.floor(Math.random() * 10);
+            cnpj = base + '0001' + '00';
+            let d1 = (cnpj.substring(0, 12).split('').reduce((acc, val, i) => 
+                acc + (val * ((i % 8) + 2)), 0) % 11) % 10;
+            let d2 = (cnpj.substring(0, 12) + d1).split('').reduce((acc, val, i) => 
+                acc + (val * ((i % 8) + 2)), 0);
+            d2 = (d2 % 11) % 10;
+            return cnpj.substring(0, 12) + d1 + d2;
+        }
+        function formatCNPJ(cnpj) {
+            return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+        }
+        function generateOne() {
+            const cnpj = generateCNPJ();
+            document.getElementById('output').textContent = formatCNPJ(cnpj);
+            document.getElementById('result').style.display = 'block';
+        }
+        function generateMultiple() {
+            let cnpjs = [];
+            for(let i = 0; i < 10; i++) cnpjs.push(formatCNPJ(generateCNPJ()));
+            document.getElementById('output').textContent = cnpjs.join('\n');
+            document.getElementById('result').style.display = 'block';
+        }
+        function copyResult() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output);
+            alert('Copiado!');
+        }
+        function clear() {
+            document.getElementById('output').textContent = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <link rel="stylesheet" href="../../global.css">
+    <style>
+        .tool-container { max-width: 500px; margin: 20px auto; padding: 20px; }
+        .calculator { background: #333; padding: 20px; border-radius: 8px; }
+        .display { background: #000; color: #fff; padding: 15px; border-radius: 4px; text-align: right; font-size: 24px; margin-bottom: 10px; font-family: monospace; }
+        .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+        button { padding: 15px; font-size: 16px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-number { background: #555; color: #fff; }
+        .btn-number:hover { background: #666; }
+        .btn-op { background: #ff9500; color: #fff; }
+        .btn-op:hover { background: #ffb74d; }
+        .btn-equals { background: #28a745; color: #fff; grid-column: span 2; }
+        .btn-equals:hover { background: #4caf50; }
+        .btn-clear { background: #dc3545; color: #fff; grid-column: span 2; }
+        .btn-clear:hover { background: #f77a7a; }
+        .btn-func { background: #2196f3; color: #fff; }
+        .btn-func:hover { background: #42a5f5; }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>Calculadora Científica</h1>
+        <div class="calculator">
+            <div class="display" id="display">0</div>
+            <div class="buttons">
+                <button class="btn-clear" onclick="limpar()">C</button>
+                <button class="btn-op" onclick="adicionar('(')">(</button>
+                <button class="btn-op" onclick="adicionar(')')">)</button>
+                <button class="btn-op" onclick="adicionar('/')">/</button>
+                
+                <button class="btn-number" onclick="adicionar('7')">7</button>
+                <button class="btn-number" onclick="adicionar('8')">8</button>
+                <button class="btn-number" onclick="adicionar('9')">9</button>
+                <button class="btn-op" onclick="adicionar('*')">×</button>
+                
+                <button class="btn-number" onclick="adicionar('4')">4</button>
+                <button class="btn-number" onclick="adicionar('5')">5</button>
+                <button class="btn-number" onclick="adicionar('6')">6</button>
+                <button class="btn-op" onclick="adicionar('-')">−</button>
+                
+                <button class="btn-number" onclick="adicionar('1')">1</button>
+                <button class="btn-number" onclick="adicionar('2')">2</button>
+                <button class="btn-number" onclick="adicionar('3')">3</button>
+                <button class="btn-op" onclick="adicionar('+')">+</button>
+                
+                <button class="btn-number" onclick="adicionar('0')">0</button>
+                <button class="btn-number" onclick="adicionar('.')">.</button>
+                <button class="btn-equals" onclick="calcular()">=</button>
+                
+                <button class="btn-func" onclick="raizQuadrada()">√</button>
+                <button class="btn-func" onclick="potencia()">x²</button>
+                <button class="btn-func" onclick="logaritmo()">log</button>
+                <button class="btn-func" onclick="seno()">sin</button>
+                <button class="btn-func" onclick="cosseno()">cos</button>
+                <button class="btn-func" onclick="tangente()">tan</button>
+                <button class="btn-func" onclick="pi()">π</button>
+                <button class="btn-func" onclick="e()">e</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let display = '0';
+        function atualizar() { document.getElementById('display').textContent = display; }
+        function adicionar(char) {
+            if(display === '0' && char !== '.') display = char;
+            else display += char;
+            atualizar();
+        }
+        function calcular() {
+            try {
+                display = String(eval(display.replace(/×/g, '*').replace(/−/g, '-')));
+                atualizar();
+            } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function limpar() { display = '0'; atualizar(); }
+        function raizQuadrada() {
+            try { display = String(Math.sqrt(eval(display))); atualizar(); } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function potencia() {
+            try { display = String(eval(display) ** 2); atualizar(); } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function logaritmo() {
+            try { display = String(Math.log10(eval(display))); atualizar(); } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function seno() {
+            try { display = String(Math.sin(eval(display) * Math.PI / 180)); atualizar(); } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function cosseno() {
+            try { display = String(Math.cos(eval(display) * Math.PI / 180)); atualizar(); } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function tangente() {
+            try { display = String(Math.tan(eval(display) * Math.PI / 180)); atualizar(); } catch(e) { display = 'Erro'; atualizar(); }
+        }
+        function pi() { display += Math.PI.toString().substring(0, 5); atualizar(); }
+        function e() { display += Math.E.toString().substring(0, 5); atualizar(); }
+    </script>
+</body>
+</html>

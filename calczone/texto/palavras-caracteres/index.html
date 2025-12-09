@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Palavras e Caracteres - CalcZone BR</title>
+    <link rel="stylesheet" href="../../global.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header"><a href="/" class="logo">CalcZone BR</a></header>
+        <main class="main">
+            <section class="tool-section">
+                <div class="tool-header"><h1>📝 Contador de Palavras e Caracteres</h1></div>
+                <div class="tool-container">
+                    <form class="tool-form" id="toolForm">
+                        <div class="form-group"><label>Digite seu texto:</label><textarea id="texto" placeholder="Digite seu texto aqui..."></textarea></div>
+                        <button type="submit" class="btn btn-primary">Contar</button>
+                    </form>
+                    <div id="result" class="result hidden"><div id="resultContent"></div></div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer"><p>&copy; 2024 CalcZone BR</p></footer>
+    </div>
+    <script src="../../global.js"></script>
+    <script>
+        document.getElementById('toolForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const texto = document.getElementById('texto').value;
+            const palavras = countWords(texto);
+            const caracteres = countCharacters(texto);
+            const sem_espacos = countCharactersWithoutSpaces(texto);
+            const linhas = countLines(texto);
+            showResult(`
+                <div class="result-item"><label>Palavras</label><value>${palavras}</value></div>
+                <div class="result-item"><label>Caracteres</label><value>${caracteres}</value></div>
+                <div class="result-item"><label>Sem Espaços</label><value>${sem_espacos}</value></div>
+                <div class="result-item"><label>Linhas</label><value>${linhas}</value></div>
+            `);
+        });
+    </script>
+</body>
+</html>
