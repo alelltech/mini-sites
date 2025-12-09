@@ -23,36 +23,44 @@
             <section class="tool-section">
                 <div class="tool-header">
                     <h1>⏰ Calculadora de Horas Extras</h1>
-                    <p class="description">Calcule o valor de horas extras com diferentes percentuais e salários.</p>
+                    <p class="description">Calcule o valor de horas extras com diferentes percentuais e salários em um período.</p>
                 </div>
 
                 <div class="tool-container">
-                    <form class="tool-form" id="toolForm">
-                        <div class="form-group">
-                            <label for="salario">Salário Mensal (R$)</label>
-                            <input type="number" id="salario" placeholder="3000" min="0" step="0.01" required>
+                    <!-- Período Completo -->
+                    <div>
+                        <form class="tool-form" id="periodoForm">
+                            <div class="form-group">
+                                <label for="salarioPeriodo">Salário Mensal (R$)</label>
+                                <input type="number" id="salarioPeriodo" placeholder="3000" min="0" step="0.01" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Distribuição de Horas</label>
+                                <div class="horas-distribuicao">
+                                    <div class="input-group">
+                                        <label for="horasNormaisPeriodo" class="small">Horas Normais</label>
+                                        <input type="number" id="horasNormaisPeriodo" placeholder="0" min="0" step="0.5" value="0">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="horas50Periodo" class="small">Horas a 50%</label>
+                                        <input type="number" id="horas50Periodo" placeholder="0" min="0" step="0.5" value="0">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="horas100Periodo" class="small">Horas a 100%</label>
+                                        <input type="number" id="horas100Periodo" placeholder="0" min="0" step="0.5" value="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Calcular Período</button>
+                        </form>
+
+                        <div id="resultPeriodo" class="result hidden">
+                            <h2>Resultado do Período</h2>
+                            <div id="resultPeriodoContent" class="result-content"></div>
+                            <button type="button" class="btn btn-secondary btn-small" onclick="copyToClipboard(document.querySelector('#resultPeriodoContent').textContent, this)">📋 Copiar Resultado</button>
                         </div>
-
-                        <div class="form-group">
-                            <label for="horas">Horas Extras Trabalhadas</label>
-                            <input type="number" id="horas" placeholder="10" min="0" step="0.5" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="percentual">Percentual Extra</label>
-                            <select id="percentual">
-                                <option value="50">50% (normal)</option>
-                                <option value="100">100% (noturna)</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Calcular</button>
-                    </form>
-
-                    <div id="result" class="result hidden">
-                        <h2>Resultado</h2>
-                        <div id="resultContent" class="result-content"></div>
-                        <button type="button" class="btn btn-secondary btn-small" onclick="copyToClipboard(document.querySelector('#resultContent').textContent, this)">📋 Copiar Resultado</button>
                     </div>
                 </div>
             </section>

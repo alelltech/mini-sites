@@ -34,14 +34,29 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tipo">Tipo de Imposto</label>
-                            <select id="tipo">
-                                <option value="icms">ICMS (18%)</option>
-                                <option value="ipi">IPI (10%)</option>
-                                <option value="iss">ISS (5%)</option>
-                                <option value="pis">PIS (1,65%)</option>
-                                <option value="cofins">COFINS (7,6%)</option>
-                            </select>
+                            <label>Selecione os Impostos</label>
+                            <div class="checkboxes-container">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="icms" name="imposto" value="icms">
+                                    <label for="icms" class="tooltip-label" title="Imposto sobre Circulação de Mercadorias e Serviços. Cobrado em operações de venda e circulação de bens.">ICMS (18%)<span class="tooltip-icon">?</span></label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="ipi" name="imposto" value="ipi">
+                                    <label for="ipi" class="tooltip-label" title="Imposto sobre Produtos Industrializados. Incide sobre produtos manufaturados e industrializados.">IPI (10%)<span class="tooltip-icon">?</span></label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="iss" name="imposto" value="iss">
+                                    <label for="iss" class="tooltip-label" title="Imposto sobre Serviços. Cobrado pela prestação de serviços diversos. Alíquota varia por tipo de serviço.">ISS (5%)<span class="tooltip-icon">?</span></label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="pis" name="imposto" value="pis">
+                                    <label for="pis" class="tooltip-label" title="Programa de Integração Social. Contribuição social sobre o faturamento de empresas e folha de pagamento.">PIS (1,65%)<span class="tooltip-icon">?</span></label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cofins" name="imposto" value="cofins">
+                                    <label for="cofins" class="tooltip-label" title="Contribuição para o Financiamento da Seguridade Social. Contribuição cobrada sobre o faturamento das empresas.">COFINS (7,6%)<span class="tooltip-icon">?</span></label>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Calcular</button>
