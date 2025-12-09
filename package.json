@@ -1,0 +1,20 @@
+{
+  "name": "mini-sites",
+  "version": "1.0.0",
+  "description": "Uma plataforma web completa com **50 ferramentas educacionais e utilitários** organizadas em 6 categorias, desenvolvida com HTML5, CSS3 e JavaScript vanilla.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fetch-rates": "node scripts/fetch-credit-rates.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
