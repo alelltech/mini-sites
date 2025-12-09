@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CalcZone BR - Mais de 50 ferramentas online gratuitas: calculadoras, conversores, geradores e utilitários. 100% grátis e sem instalação.">
+    <meta name="keywords" content="calculadora, conversor, ferramentas online, utilitários grátis, calc">
+    <meta name="author" content="CalcZone BR">
+    <title>CalcZone BR - 50+ Ferramentas Online Grátis</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CalcZone BR",
+        "description": "Plataforma com ferramentas online gratuitas",
+        "url": "https://calc-br.zone",
+        "logo": "https://calc-br.zone/logo.png"
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="/" class="logo">
+                <span class="logo-icon">🧮</span>
+                <span class="logo-text">CalcZone BR</span>
+            </a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>Ferramentas Online Grátis</h1>
+                <p>Mais de 50 calculadoras, conversores e utilitários 100% grátis. Sem instalação, sem conta, sem anúncios invasivos.</p>
+                
+                <!-- Search -->
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Procurar ferramentas... (calc, conversor, etc)"
+                        onkeyup="filterTools()"
+                    >
+                </div>
+
+                <!-- Category Filters -->
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterByCategory('')">Todos</button>
+                    <button class="filter-btn" onclick="filterByCategory('Finanças')">Finanças</button>
+                    <button class="filter-btn" onclick="filterByCategory('Conversores')">Conversores</button>
+                    <button class="filter-btn" onclick="filterByCategory('Texto')">Texto</button>
+                    <button class="filter-btn" onclick="filterByCategory('Desenvolvimento')">Dev</button>
+                    <button class="filter-btn" onclick="filterByCategory('Utilitários')">Utilitários</button>
+                    <button class="filter-btn" onclick="filterByCategory('Educação')">Educação</button>
+                </div>
+            </section>
+
+            <!-- Tools Grid -->
+            <section id="tools" class="tools-grid">
+                <!-- Tools will be generated here -->
+            </section>
+
+            <!-- No Results -->
+            <div id="noResults" class="no-results hidden">
+                <h3>😕 Nenhuma ferramenta encontrada</h3>
+                <p>Tente buscar com outras palavras ou explorar todas as categorias.</p>
+            </div>
+
+            <!-- Ads -->
+            <div class="ads-container">
+                <!-- Google AdSense será inserido aqui -->
+            </div>
+
+            <!-- Features Section -->
+            <section class="features">
+                <h2>Por que usar CalcZone BR?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% Seguro</h3>
+                        <p>Todos os cálculos são feitos no seu navegador. Seus dados não são armazenados nem enviados.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Muito Rápido</h3>
+                        <p>Carregamento instantâneo. Nenhum delay, nenhuma lentidão. Funciona até offline.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Sem Complicações</h3>
+                        <p>Interface simples e intuitiva. Use sem precisar criar conta ou instalar nada.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Funciona em Tudo</h3>
+                        <p>Desktop, tablet, smartphone. Responde perfeitamente em qualquer dispositivo.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💯</div>
+                        <h3>Sempre Grátis</h3>
+                        <p>Sem pagamentos, sem assinaturas, sem paywalls. 100% grátis para sempre.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Sempre Crescendo</h3>
+                        <p>Novas ferramentas são adicionadas regularmente. Confira em breve!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 CalcZone BR - Ferramentas Online Grátis. Todos os direitos reservados.</p>
+            <p><a href="mailto:contato@calc-br.zone">Contato</a> | <a href="/privacy">Privacidade</a> | <a href="/terms">Termos</a></p>
+        </footer>
+    </div>
+
+    <style>
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .tool-card-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .tool-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .tool-card p {
+            font-size: 13px;
+            color: #999;
+            flex-grow: 1;
+            margin-bottom: 12px;
+        }
+
+        .tool-card-category {
+            font-size: 11px;
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 4px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .tool-card.hidden {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: #999;
+            font-size: 16px;
+        }
+
+        .features {
+            margin: 60px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .filters {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <script>
+        // Data will be injected here
+        const toolsData = [
+            {id:1,slug:"calculadora-juros-compostos",title:"Calculadora de Juros Compostos",description:"Calcule juros compostos com facilidade. Ideal para investimentos, poupança e análise financeira.",icon:"📊",category:"Finanças"},
+            {id:2,slug:"conversor-moedas",title:"Conversor de Moedas em Tempo Real",description:"Converta entre diferentes moedas com cotação atualizada. Dólar, Euro, Real e mais.",icon:"💱",category:"Conversores"},
+            {id:3,slug:"calculadora-margem-lucro",title:"Calculadora de Margem e Lucro",description:"Calcule margem de lucro, markup e preço final para seu negócio.",icon:"💰",category:"Finanças"},
+            {id:4,slug:"calculadora-horas-extras",title:"Calculadora de Horas Extras",description:"Calcule o valor de horas extras com diferentes percentuais e salários.",icon:"⏰",category:"Finanças"},
+            {id:5,slug:"conversor-temperatura",title:"Conversor de Temperatura",description:"Converta entre Celsius, Fahrenheit e Kelvin instantaneamente.",icon:"🌡️",category:"Conversores"},
+            {id:6,slug:"gerador-qr-code",title:"Gerador de QR Code",description:"Gere QR codes para URLs, textos e contatos facilmente.",icon:"📱",category:"Utilitários"},
+            {id:7,slug:"contador-palavras-caracteres",title:"Contador de Palavras e Caracteres",description:"Conte palavras, caracteres e linhas de qualquer texto.",icon:"📝",category:"Texto"},
+            {id:8,slug:"calculadora-inss",title:"Calculadora de INSS",description:"Simule contribuições e benefícios do INSS com as tabelas atualizadas.",icon:"🏛️",category:"Finanças"},
+            {id:9,slug:"calculadora-fgts",title:"Calculadora de FGTS",description:"Calcule saques e benefícios do FGTS conforme as regras atuais.",icon:"🏦",category:"Finanças"},
+            {id:10,slug:"simulador-emprestimo",title:"Simulador de Empréstimo",description:"Simule pagamentos de empréstimo com diferentes taxas e prazos.",icon:"🏧",category:"Finanças"},
+            {id:11,slug:"conversor-unidades-comprimento",title:"Conversor de Unidades de Comprimento",description:"Converta metros, quilômetros, milhas, polegadas e mais.",icon:"📏",category:"Conversores"},
+            {id:12,slug:"conversor-peso-massa",title:"Conversor de Peso e Massa",description:"Converta quilogramas, libras, gramas e outras unidades de peso.",icon:"⚖️",category:"Conversores"},
+            {id:13,slug:"conversor-volume",title:"Conversor de Volume",description:"Converta litros, mililitros, galões, xícaras e mais.",icon:"🧃",category:"Conversores"},
+            {id:14,slug:"gerador-senha",title:"Gerador de Senha Segura",description:"Gere senhas aleatórias e seguras com customização completa.",icon:"🔐",category:"Utilitários"},
+            {id:15,slug:"codificador-base64",title:"Codificador/Decodificador Base64",description:"Codifique e decodifique textos em Base64.",icon:"🔒",category:"Desenvolvimento"},
+            {id:16,slug:"gerador-uuid",title:"Gerador de UUID",description:"Gere UUIDs aleatórios versão 4 para aplicações.",icon:"🆔",category:"Desenvolvimento"},
+            {id:17,slug:"formatador-json",title:"Formatador de JSON",description:"Formate, valide e minifique JSON facilmente.",icon:"{}️",category:"Desenvolvimento"},
+            {id:18,slug:"conversor-hex-decimal",title:"Conversor Hexadecimal/Decimal",description:"Converta entre números hexadecimais e decimais.",icon:"🔢",category:"Desenvolvimento"},
+            {id:19,slug:"calculadora-imc",title:"Calculadora de IMC",description:"Calcule seu Índice de Massa Corporal e avalie sua saúde.",icon:"⚕️",category:"Utilitários"},
+            {id:20,slug:"calculadora-idade",title:"Calculadora de Idade",description:"Calcule sua idade precisa em anos, meses e dias.",icon:"🎂",category:"Utilitários"},
+            {id:21,slug:"conversor-tempo",title:"Conversor de Unidades de Tempo",description:"Converta horas, minutos, segundos, dias e mais.",icon:"⏱️",category:"Conversores"},
+            {id:22,slug:"calculadora-velocidade",title:"Calculadora de Velocidade",description:"Calcule velocidade, distância e tempo de deslocamento.",icon:"🚗",category:"Utilitários"},
+            {id:23,slug:"conversor-velocidade",title:"Conversor de Velocidade",description:"Converta km/h, m/s, nós, mph e outras unidades.",icon:"⚡",category:"Conversores"},
+            {id:24,slug:"calculadora-desconto",title:"Calculadora de Desconto",description:"Calcule descontos percentuais e preço final de produtos.",icon:"🏷️",category:"Finanças"},
+            {id:25,slug:"calculadora-impostos",title:"Calculadora de Impostos",description:"Calcule ICMS, IPI, ISS e outros impostos brasileiros.",icon:"📋",category:"Finanças"},
+            {id:26,slug:"gerador-codigo-barras",title:"Gerador de Código de Barras",description:"Gere códigos de barras para produtos e documentos.",icon:"📦",category:"Utilitários"},
+            {id:27,slug:"conversor-cor-hex-rgb",title:"Conversor de Cor Hex/RGB",description:"Converta cores entre formato Hex e RGB facilmente.",icon:"🎨",category:"Desenvolvimento"},
+            {id:28,slug:"gerador-paleta-cores",title:"Gerador de Paleta de Cores",description:"Gere paletas de cores harmônicas para seus projetos.",icon:"🌈",category:"Desenvolvimento"},
+            {id:29,slug:"calculadora-nota-final",title:"Calculadora de Nota Final",description:"Calcule sua nota final levando em conta pesos e múltiplas avaliações.",icon:"📚",category:"Educação"},
+            {id:30,slug:"conversor-base-numerica",title:"Conversor de Base Numérica",description:"Converta entre decimal, binário, octal e hexadecimal.",icon:"🔀",category:"Desenvolvimento"},
+            {id:31,slug:"calculadora-raiz-quadrada",title:"Calculadora Científica Simples",description:"Realize cálculos científicos: raiz, potência, logaritmo e trigonometria.",icon:"🔬",category:"Educação"},
+            {id:32,slug:"calculadora-porcentagem",title:"Calculadora de Porcentagem",description:"Calcule porcentagens, acréscimos e descontos com precisão.",icon:"📈",category:"Utilitários"},
+            {id:33,slug:"contador-dias-restantes",title:"Contador de Dias Restantes",description:"Conte quantos dias faltam até uma data específica.",icon:"📅",category:"Utilitários"},
+            {id:34,slug:"gerador-numero-aleatorio",title:"Gerador de Número Aleatório",description:"Gere números aleatórios em um intervalo especificado.",icon:"🎲",category:"Utilitários"},
+            {id:35,slug:"conversor-area",title:"Conversor de Área",description:"Converta metros quadrados, quilômetros quadrados, acres e mais.",icon:"📐",category:"Conversores"},
+            {id:36,slug:"calculadora-energia",title:"Calculadora de Consumo de Energia",description:"Calcule o consumo de energia de seus eletrodomésticos.",icon:"⚡",category:"Utilitários"},
+            {id:37,slug:"conversor-pressao",title:"Conversor de Pressão",description:"Converta entre Pascal, Bar, PSI, Atm e outras unidades.",icon:"🌪️",category:"Conversores"},
+            {id:38,slug:"gerador-cronograma",title:"Gerador de Cronograma de Estudos",description:"Crie um cronograma de estudos personalizado para suas metas.",icon:"📖",category:"Educação"},
+            {id:39,slug:"calculadora-calorias",title:"Calculadora de Calorias",description:"Calcule sua ingestão diária recomendada de calorias.",icon:"🍎",category:"Utilitários"},
+            {id:40,slug:"conversor-densidade",title:"Conversor de Densidade",description:"Converta entre diferentes unidades de densidade.",icon:"⚫",category:"Conversores"},
+            {id:41,slug:"validador-cpf",title:"Validador de CPF",description:"Valide se um número de CPF é válido conforme as regras.",icon:"🆔",category:"Utilitários"},
+            {id:42,slug:"gerador-cpf",title:"Gerador de CPF Válido",description:"Gere números de CPF válidos para testes e simulações.",icon:"📝",category:"Desenvolvimento"},
+            {id:43,slug:"validador-cnpj",title:"Validador de CNPJ",description:"Valide se um número de CNPJ é válido conforme as regras.",icon:"🏢",category:"Utilitários"},
+            {id:44,slug:"gerador-cnpj",title:"Gerador de CNPJ Válido",description:"Geve números de CNPJ válidos para testes e simulações.",icon:"📄",category:"Desenvolvimento"},
+            {id:45,slug:"inversor-texto",title:"Inversor de Texto",description:"Inverta o texto, crie efeitos espelhados e manipule strings.",icon:"🔄",category:"Texto"},
+            {id:46,slug:"removedor-acentos",title:"Removedor de Acentos",description:"Remova acentos e caracteres especiais de textos.",icon:"✏️",category:"Texto"},
+            {id:47,slug:"conversor-maiuscula-minuscula",title:"Conversor de Maiúscula/Minúscula",description:"Converta textos entre maiúsculas, minúsculas e capitalize.",icon:"Aa",category:"Texto"},
+            {id:48,slug:"gerador-hash-md5",title:"Gerador de Hash MD5",description:"Gere hashes MD5 para strings e validações.",icon:"🔐",category:"Desenvolvimento"},
+            {id:49,slug:"gerador-hash-sha256",title:"Gerador de Hash SHA256",description:"Gere hashes SHA256 para segurança e validação de dados.",icon:"🔒",category:"Desenvolvimento"},
+            {id:50,slug:"calculadora-hipoteca",title:"Calculadora de Hipoteca",description:"Simule pagamentos de hipoteca/financiamento imobiliário.",icon:"🏠",category:"Finanças"}
+        ];
+
+        let currentCategory = '';
+        let currentSearch = '';
+
+        function renderTools() {
+            const toolsGrid = document.getElementById('tools');
+            const noResults = document.getElementById('noResults');
+            
+            const filtered = toolsData.filter(tool => {
+                const matchCategory = !currentCategory || tool.category === currentCategory;
+                const matchSearch = !currentSearch || 
+                    tool.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    tool.description.toLowerCase().includes(currentSearch.toLowerCase());
+                
+                return matchCategory && matchSearch;
+            });
+
+            toolsGrid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            filtered.forEach(tool => {
+                const card = document.createElement('a');
+                card.href = `/${tool.slug}/`;
+                card.className = 'tool-card';
+                card.innerHTML = `
+                    <div class="tool-card-icon">${tool.icon}</div>
+                    <h3>${tool.title}</h3>
+                    <p>${tool.description}</p>
+                    <span class="tool-card-category">${tool.category}</span>
+                `;
+                toolsGrid.appendChild(card);
+            });
+        }
+
+        function filterTools() {
+            currentSearch = document.getElementById('searchInput').value;
+            renderTools();
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(category === '' ? 'Todos' : category)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            renderTools();
+        }
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', renderTools);
+    </script>
+</body>
+</html>

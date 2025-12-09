@@ -1,0 +1,469 @@
+{
+  "metadata": {
+    "title": "CalcZone BR - Ferramentas Online Grátis",
+    "description": "Plataforma com 50+ ferramentas online gratuitas: calculadoras, conversores, geradores e muito mais.",
+    "domain": "calc-br.zone",
+    "author": "alelltech",
+    "language": "pt-BR"
+  },
+  "categories": [
+    "Finanças",
+    "Conversores",
+    "Texto",
+    "Desenvolvimento",
+    "Utilitários",
+    "Educação"
+  ],
+  "tools": [
+    {
+      "id": 1,
+      "slug": "calculadora-juros-compostos",
+      "title": "Calculadora de Juros Compostos",
+      "description": "Calcule juros compostos com facilidade. Ideal para investimentos, poupança e análise financeira.",
+      "keywords": "juros compostos, investimento, poupança, simulação",
+      "category": "Finanças",
+      "icon": "📊"
+    },
+    {
+      "id": 2,
+      "slug": "conversor-moedas",
+      "title": "Conversor de Moedas em Tempo Real",
+      "description": "Converta entre diferentes moedas com cotação atualizada. Dólar, Euro, Real e mais.",
+      "keywords": "conversor moedas, dólar, euro, câmbio",
+      "category": "Conversores",
+      "icon": "💱"
+    },
+    {
+      "id": 3,
+      "slug": "calculadora-margem-lucro",
+      "title": "Calculadora de Margem e Lucro",
+      "description": "Calcule margem de lucro, markup e preço final para seu negócio.",
+      "keywords": "margem lucro, markup, preço venda, lucro",
+      "category": "Finanças",
+      "icon": "💰"
+    },
+    {
+      "id": 4,
+      "slug": "calculadora-horas-extras",
+      "title": "Calculadora de Horas Extras",
+      "description": "Calcule o valor de horas extras com diferentes percentuais e salários.",
+      "keywords": "horas extras, cálculo salarial, folha pagamento",
+      "category": "Finanças",
+      "icon": "⏰"
+    },
+    {
+      "id": 5,
+      "slug": "conversor-temperatura",
+      "title": "Conversor de Temperatura",
+      "description": "Converta entre Celsius, Fahrenheit e Kelvin instantaneamente.",
+      "keywords": "temperatura, celsius, fahrenheit, kelvin",
+      "category": "Conversores",
+      "icon": "🌡️"
+    },
+    {
+      "id": 6,
+      "slug": "gerador-qr-code",
+      "title": "Gerador de QR Code",
+      "description": "Gere QR codes para URLs, textos e contatos facilmente.",
+      "keywords": "qr code, código qr, gerador, scanner",
+      "category": "Utilitários",
+      "icon": "📱"
+    },
+    {
+      "id": 7,
+      "slug": "contador-palavras-caracteres",
+      "title": "Contador de Palavras e Caracteres",
+      "description": "Conte palavras, caracteres e linhas de qualquer texto.",
+      "keywords": "contador palavras, análise texto, caracteres",
+      "category": "Texto",
+      "icon": "📝"
+    },
+    {
+      "id": 8,
+      "slug": "calculadora-inss",
+      "title": "Calculadora de INSS",
+      "description": "Simule contribuições e benefícios do INSS com as tabelas atualizadas.",
+      "keywords": "inss, aposentadoria, contribuição, benefício",
+      "category": "Finanças",
+      "icon": "🏛️"
+    },
+    {
+      "id": 9,
+      "slug": "calculadora-fgts",
+      "title": "Calculadora de FGTS",
+      "description": "Calcule saques e benefícios do FGTS conforme as regras atuais.",
+      "keywords": "fgts, fundo garantia, saque, benefício",
+      "category": "Finanças",
+      "icon": "🏦"
+    },
+    {
+      "id": 10,
+      "slug": "simulador-emprestimo",
+      "title": "Simulador de Empréstimo",
+      "description": "Simule pagamentos de empréstimo com diferentes taxas e prazos.",
+      "keywords": "empréstimo, financiamento, prestação, juros",
+      "category": "Finanças",
+      "icon": "🏧"
+    },
+    {
+      "id": 11,
+      "slug": "conversor-unidades-comprimento",
+      "title": "Conversor de Unidades de Comprimento",
+      "description": "Converta metros, quilômetros, milhas, polegadas e mais.",
+      "keywords": "comprimento, metros, milhas, conversão",
+      "category": "Conversores",
+      "icon": "📏"
+    },
+    {
+      "id": 12,
+      "slug": "conversor-peso-massa",
+      "title": "Conversor de Peso e Massa",
+      "description": "Converta quilogramas, libras, gramas e outras unidades de peso.",
+      "keywords": "peso, massa, quilograma, libra, conversão",
+      "category": "Conversores",
+      "icon": "⚖️"
+    },
+    {
+      "id": 13,
+      "slug": "conversor-volume",
+      "title": "Conversor de Volume",
+      "description": "Converta litros, mililitros, galões, xícaras e mais.",
+      "keywords": "volume, litro, galão, mililitro, conversão",
+      "category": "Conversores",
+      "icon": "🧃"
+    },
+    {
+      "id": 14,
+      "slug": "gerador-senha",
+      "title": "Gerador de Senha Segura",
+      "description": "Gere senhas aleatórias e seguras com customização completa.",
+      "keywords": "senha, gerador, segurança, random, criptografia",
+      "category": "Utilitários",
+      "icon": "🔐"
+    },
+    {
+      "id": 15,
+      "slug": "codificador-base64",
+      "title": "Codificador/Decodificador Base64",
+      "description": "Codifique e decodifique textos em Base64.",
+      "keywords": "base64, codificador, decodificador, criptografia",
+      "category": "Desenvolvimento",
+      "icon": "🔒"
+    },
+    {
+      "id": 16,
+      "slug": "gerador-uuid",
+      "title": "Gerador de UUID",
+      "description": "Gere UUIDs aleatórios versão 4 para aplicações.",
+      "keywords": "uuid, gerador, identificador único, desenvolvimento",
+      "category": "Desenvolvimento",
+      "icon": "🆔"
+    },
+    {
+      "id": 17,
+      "slug": "formatador-json",
+      "title": "Formatador de JSON",
+      "description": "Formate, valide e minifique JSON facilmente.",
+      "keywords": "json, formatador, validador, minificador",
+      "category": "Desenvolvimento",
+      "icon": "{}️"
+    },
+    {
+      "id": 18,
+      "slug": "conversor-hex-decimal",
+      "title": "Conversor Hexadecimal/Decimal",
+      "description": "Converta entre números hexadecimais e decimais.",
+      "keywords": "hex, decimal, binário, conversão, programação",
+      "category": "Desenvolvimento",
+      "icon": "🔢"
+    },
+    {
+      "id": 19,
+      "slug": "calculadora-imc",
+      "title": "Calculadora de IMC",
+      "description": "Calcule seu Índice de Massa Corporal e avalie sua saúde.",
+      "keywords": "imc, índice massa corporal, peso, altura, saúde",
+      "category": "Utilitários",
+      "icon": "⚕️"
+    },
+    {
+      "id": 20,
+      "slug": "calculadora-idade",
+      "title": "Calculadora de Idade",
+      "description": "Calcule sua idade precisa em anos, meses e dias.",
+      "keywords": "idade, nascimento, data, cálculo",
+      "category": "Utilitários",
+      "icon": "🎂"
+    },
+    {
+      "id": 21,
+      "slug": "conversor-tempo",
+      "title": "Conversor de Unidades de Tempo",
+      "description": "Converta horas, minutos, segundos, dias e mais.",
+      "keywords": "tempo, horas, minutos, segundos, conversão",
+      "category": "Conversores",
+      "icon": "⏱️"
+    },
+    {
+      "id": 22,
+      "slug": "calculadora-velocidade",
+      "title": "Calculadora de Velocidade",
+      "description": "Calcule velocidade, distância e tempo de deslocamento.",
+      "keywords": "velocidade, distância, tempo, km/h, m/s",
+      "category": "Utilitários",
+      "icon": "🚗"
+    },
+    {
+      "id": 23,
+      "slug": "conversor-velocidade",
+      "title": "Conversor de Velocidade",
+      "description": "Converta km/h, m/s, nós, mph e outras unidades.",
+      "keywords": "velocidade, km/h, mph, nós, conversão",
+      "category": "Conversores",
+      "icon": "⚡"
+    },
+    {
+      "id": 24,
+      "slug": "calculadora-desconto",
+      "title": "Calculadora de Desconto",
+      "description": "Calcule descontos percentuais e preço final de produtos.",
+      "keywords": "desconto, percentual, promoção, preço final",
+      "category": "Finanças",
+      "icon": "🏷️"
+    },
+    {
+      "id": 25,
+      "slug": "calculadora-impostos",
+      "title": "Calculadora de Impostos",
+      "description": "Calcule ICMS, IPI, ISS e outros impostos brasileiros.",
+      "keywords": "imposto, icms, ipi, iss, cálculo fiscal",
+      "category": "Finanças",
+      "icon": "📋"
+    },
+    {
+      "id": 26,
+      "slug": "gerador-codigo-barras",
+      "title": "Gerador de Código de Barras",
+      "description": "Gere códigos de barras para produtos e documentos.",
+      "keywords": "código barras, barcode, gerador, produto",
+      "category": "Utilitários",
+      "icon": "📦"
+    },
+    {
+      "id": 27,
+      "slug": "conversor-cor-hex-rgb",
+      "title": "Conversor de Cor Hex/RGB",
+      "description": "Converta cores entre formato Hex e RGB facilmente.",
+      "keywords": "cor, hex, rgb, design, web, cores",
+      "category": "Desenvolvimento",
+      "icon": "🎨"
+    },
+    {
+      "id": 28,
+      "slug": "gerador-paleta-cores",
+      "title": "Gerador de Paleta de Cores",
+      "description": "Gere paletas de cores harmônicas para seus projetos.",
+      "keywords": "paleta cores, design, harmonia cromática, web",
+      "category": "Desenvolvimento",
+      "icon": "🌈"
+    },
+    {
+      "id": 29,
+      "slug": "calculadora-nota-final",
+      "title": "Calculadora de Nota Final",
+      "description": "Calcule sua nota final levando em conta pesos e múltiplas avaliações.",
+      "keywords": "nota, média, escola, educação, cálculo",
+      "category": "Educação",
+      "icon": "📚"
+    },
+    {
+      "id": 30,
+      "slug": "conversor-base-numerica",
+      "title": "Conversor de Base Numérica",
+      "description": "Converta entre decimal, binário, octal e hexadecimal.",
+      "keywords": "base numérica, binário, octal, decimal, hex",
+      "category": "Desenvolvimento",
+      "icon": "🔀"
+    },
+    {
+      "id": 31,
+      "slug": "calculadora-raiz-quadrada",
+      "title": "Calculadora Científica Simples",
+      "description": "Realize cálculos científicos: raiz, potência, logaritmo e trigonometria.",
+      "keywords": "científica, raiz quadrada, potência, logaritmo, trigonometria",
+      "category": "Educação",
+      "icon": "🔬"
+    },
+    {
+      "id": 32,
+      "slug": "calculadora-porcentagem",
+      "title": "Calculadora de Porcentagem",
+      "description": "Calcule porcentagens, acréscimos e descontos com precisão.",
+      "keywords": "porcentagem, percentual, acréscimo, desconto, cálculo",
+      "category": "Utilitários",
+      "icon": "📈"
+    },
+    {
+      "id": 33,
+      "slug": "contador-dias-restantes",
+      "title": "Contador de Dias Restantes",
+      "description": "Conte quantos dias faltam até uma data específica.",
+      "keywords": "dias, data, contagem regressiva, evento",
+      "category": "Utilitários",
+      "icon": "📅"
+    },
+    {
+      "id": 34,
+      "slug": "gerador-numero-aleatorio",
+      "title": "Gerador de Número Aleatório",
+      "description": "Gere números aleatórios em um intervalo especificado.",
+      "keywords": "aleatório, random, número, gerador, sorteio",
+      "category": "Utilitários",
+      "icon": "🎲"
+    },
+    {
+      "id": 35,
+      "slug": "conversor-area",
+      "title": "Conversor de Área",
+      "description": "Converta metros quadrados, quilômetros quadrados, acres e mais.",
+      "keywords": "área, metro quadrado, acre, hectare, conversão",
+      "category": "Conversores",
+      "icon": "📐"
+    },
+    {
+      "id": 36,
+      "slug": "calculadora-energia",
+      "title": "Calculadora de Consumo de Energia",
+      "description": "Calcule o consumo de energia de seus eletrodomésticos.",
+      "keywords": "energia, eletricidade, consumo, kilowatt, conta",
+      "category": "Utilitários",
+      "icon": "⚡"
+    },
+    {
+      "id": 37,
+      "slug": "conversor-pressao",
+      "title": "Conversor de Pressão",
+      "description": "Converta entre Pascal, Bar, PSI, Atm e outras unidades.",
+      "keywords": "pressão, pascal, bar, psi, atm, conversão",
+      "category": "Conversores",
+      "icon": "🌪️"
+    },
+    {
+      "id": 38,
+      "slug": "gerador-cronograma",
+      "title": "Gerador de Cronograma de Estudos",
+      "description": "Crie um cronograma de estudos personalizado para suas metas.",
+      "keywords": "cronograma, estudo, planejamento, educação, organização",
+      "category": "Educação",
+      "icon": "📖"
+    },
+    {
+      "id": 39,
+      "slug": "calculadora-calorias",
+      "title": "Calculadora de Calorias",
+      "description": "Calcule sua ingestão diária recomendada de calorias.",
+      "keywords": "calorias, dieta, nutrição, saúde, exercício",
+      "category": "Utilitários",
+      "icon": "🍎"
+    },
+    {
+      "id": 40,
+      "slug": "conversor-densidade",
+      "title": "Conversor de Densidade",
+      "description": "Converta entre diferentes unidades de densidade.",
+      "keywords": "densidade, conversão, kg/m3, g/cm3",
+      "category": "Conversores",
+      "icon": "⚫"
+    },
+    {
+      "id": 41,
+      "slug": "validador-cpf",
+      "title": "Validador de CPF",
+      "description": "Valide se um número de CPF é válido conforme as regras.",
+      "keywords": "cpf, validação, documento, brasil, identidade",
+      "category": "Utilitários",
+      "icon": "🆔"
+    },
+    {
+      "id": 42,
+      "slug": "gerador-cpf",
+      "title": "Gerador de CPF Válido",
+      "description": "Gere números de CPF válidos para testes e simulações.",
+      "keywords": "cpf, gerador, teste, desenvolvimento, válido",
+      "category": "Desenvolvimento",
+      "icon": "📝"
+    },
+    {
+      "id": 43,
+      "slug": "validador-cnpj",
+      "title": "Validador de CNPJ",
+      "description": "Valide se um número de CNPJ é válido conforme as regras.",
+      "keywords": "cnpj, validação, empresa, brasil, documento",
+      "category": "Utilitários",
+      "icon": "🏢"
+    },
+    {
+      "id": 44,
+      "slug": "gerador-cnpj",
+      "title": "Gerador de CNPJ Válido",
+      "description": "Gere números de CNPJ válidos para testes e simulações.",
+      "keywords": "cnpj, gerador, teste, desenvolvimento, empresa",
+      "category": "Desenvolvimento",
+      "icon": "📄"
+    },
+    {
+      "id": 45,
+      "slug": "inversor-texto",
+      "title": "Inversor de Texto",
+      "description": "Inverta o texto, crie efeitos espelhados e manipule strings.",
+      "keywords": "texto, inversor, espelhado, strings, manipulação",
+      "category": "Texto",
+      "icon": "🔄"
+    },
+    {
+      "id": 46,
+      "slug": "removedor-acentos",
+      "title": "Removedor de Acentos",
+      "description": "Remova acentos e caracteres especiais de textos.",
+      "keywords": "acentos, caracteres especiais, limpeza, texto",
+      "category": "Texto",
+      "icon": "✏️"
+    },
+    {
+      "id": 47,
+      "slug": "conversor-maiuscula-minuscula",
+      "title": "Conversor de Maiúscula/Minúscula",
+      "description": "Converta textos entre maiúsculas, minúsculas e capitalize.",
+      "keywords": "maiúscula, minúscula, capitalize, texto, conversão",
+      "category": "Texto",
+      "icon": "Aa"
+    },
+    {
+      "id": 48,
+      "slug": "gerador-hash-md5",
+      "title": "Gerador de Hash MD5",
+      "description": "Gere hashes MD5 para strings e validações.",
+      "keywords": "md5, hash, criptografia, validação, strings",
+      "category": "Desenvolvimento",
+      "icon": "🔐"
+    },
+    {
+      "id": 49,
+      "slug": "gerador-hash-sha256",
+      "title": "Gerador de Hash SHA256",
+      "description": "Gere hashes SHA256 para segurança e validação de dados.",
+      "keywords": "sha256, hash, criptografia, segurança, validação",
+      "category": "Desenvolvimento",
+      "icon": "🔒"
+    },
+    {
+      "id": 50,
+      "slug": "calculadora-hipoteca",
+      "title": "Calculadora de Hipoteca",
+      "description": "Simule pagamentos de hipoteca/financiamento imobiliário.",
+      "keywords": "hipoteca, imóvel, financiamento, casa, prestação",
+      "category": "Finanças",
+      "icon": "🏠"
+    }
+  ]
+}

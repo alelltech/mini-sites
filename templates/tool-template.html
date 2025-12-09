@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="keywords" content="{{KEYWORDS}}">
+    <meta name="author" content="CalcZone BR">
+    <title>{{TITLE}} | CalcZone BR</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "{{TITLE}}",
+        "description": "{{DESCRIPTION}}",
+        "url": "https://calc-br.zone/{{SLUG}}/",
+        "applicationCategory": "Utility",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="/" class="logo">
+                <span class="logo-icon">🧮</span>
+                <span class="logo-text">CalcZone BR</span>
+            </a>
+            <nav class="nav">
+                <a href="/" class="nav-link">Início</a>
+                <a href="/#tools" class="nav-link">Ferramentas</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Tool Header -->
+            <section class="tool-header">
+                <div class="tool-icon">{{ICON}}</div>
+                <h1>{{TITLE}}</h1>
+                <p class="subtitle">{{DESCRIPTION}}</p>
+            </section>
+
+            <!-- Tool Container -->
+            <section class="tool-container">
+                <div id="tool-content">
+                    {{TOOL_HTML}}
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>✨ Características</h3>
+                        <ul>
+                            <li>100% Grátis</li>
+                            <li>Rápido e Seguro</li>
+                            <li>Sem Instalação</li>
+                            <li>Funciona Offline</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎯 Como Usar</h3>
+                        <ol>
+                            <li>Preencha os dados</li>
+                            <li>Clique em Calcular</li>
+                            <li>Veja o resultado</li>
+                            <li>Copie ou compartilhe</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Perguntas Frequentes</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>Como funciona esta ferramenta?</summary>
+                        <p>Esta ferramenta usa JavaScript puro para fazer os cálculos localmente no seu navegador. Seus dados não são enviados para nenhum servidor.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>É seguro usar?</summary>
+                        <p>Sim! Todos os cálculos são feitos no seu navegador. Nenhum dado é armazenado ou enviado.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Preciso de internet?</summary>
+                        <p>Você precisa de internet apenas para carregar a página. Após o carregamento, a ferramenta funciona perfeitamente offline.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Há limite de uso?</summary>
+                        <p>Não! Você pode usar quantas vezes quiser, sem limitações ou restrições.</p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Ads Placeholder -->
+            <div class="ads-container">
+                <!-- Google AdSense será inserido aqui -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 CalcZone BR - Ferramentas Online Grátis</p>
+            <p><a href="/">Voltar ao Início</a> | <a href="/#tools">Ver Mais Ferramentas</a></p>
+        </footer>
+    </div>
+
+    <script src="/script.js"></script>
+    <script>
+        // Tool-specific script
+        {{TOOL_SCRIPT}}
+    </script>
+</body>
+</html>

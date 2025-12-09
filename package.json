@@ -1,0 +1,24 @@
+{
+  "name": "calczone-br",
+  "version": "1.0.0",
+  "description": "Plataforma de ferramentas online gratuitas - CalcZone BR",
+  "main": "scripts/generate.js",
+  "scripts": {
+    "generate": "node scripts/generate.js",
+    "dev": "node scripts/generate.js",
+    "build": "node scripts/generate.js",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "calculadora",
+    "conversor",
+    "ferramentas",
+    "online",
+    "gratis"
+  ],
+  "author": "alelltech",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
