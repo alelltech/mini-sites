@@ -330,3 +330,8 @@ Desenvolvido como plataforma educacional completa.
 **🌟 Aproveite as 50 ferramentas e produtividade garantida!**
 
 *Última atualização: 2024 - 50/50 ferramentas implementadas ✅*
+
+
+ref.:
+
+https://medium.com/@tete5423/como-fazer-um-site-no-github-pages-ter-um-dominio-registrado-no-registro-br-872482317901

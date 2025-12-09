@@ -1,0 +1,58 @@
+# Robots.txt - CalcZone BR
+# Data: 9 de Dezembro de 2024
+# Este arquivo controla como os motores de busca rastreiam o site
+
+# Permitir acesso a todos os bots
+User-agent: *
+Allow: /
+Disallow: /dev/
+Disallow: /temp/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /doc/
+Disallow: /test/
+Disallow: /*.json$
+Disallow: /*.php$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo Slurp
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Yandex Bot
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# Desabilitar crawlers mal comportados
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap
+Sitemap: https://calczone.com.br/sitemap.xml
+Sitemap: https://calczone.com.br/sitemap-mobile.xml
+
+# Cache-Control
+# (As diretrizes de cache devem estar nos headers HTTP, não aqui)
+
+# Aviso: Este arquivo segue a especificação do Robots Exclusion Standard
+# Referência: https://www.robotstxt.org/
