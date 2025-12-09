@@ -18,9 +18,9 @@ concurrency:
 
 jobs:
   publish:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}  
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}  
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,6 +45,6 @@ jobs:
           # Upload entire repository
           path: 'dist'
 
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v3
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
