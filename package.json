@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetch-rates": "node scripts/fetch-credit-rates.js"
+    "process-data": "node scripts/taxascredito-to-json.js"
   },
   "keywords": [],
   "author": "",

@@ -8,13 +8,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const XLS_URL = 'https://www.bcb.gov.br/conteudo/txcred/Documents/taxascredito.xls';
-const DOWNLOAD_PATH = path.join(__dirname, '../data/taxascredito.xls');
-const JSON_OUTPUT_PATH = path.join(__dirname, '../data/taxascredito.json');
+const DOWNLOAD_PATH = path.join(__dirname, 'taxascredito.xls');
+const JSON_OUTPUT_PATH = path.join(__dirname, '../public/data/taxascredito.json');
 
 // Criar diretório data se não existir
 const dataDir = path.dirname(DOWNLOAD_PATH);
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
+}
+
+const jsonDir = path.dirname(JSON_OUTPUT_PATH);
+if (!fs.existsSync(jsonDir)) {
+  fs.mkdirSync(jsonDir, { recursive: true });
 }
 
 /**
@@ -81,16 +86,29 @@ function processSheetWithMergedHeaders(sheet) {
 
   // Processar dados a partir da linha 7 (índice 6)
   const data = [];
+  let lastValidRow = null;
   for (let i = 6; i < rows.length; i++) {
     const row = rows[i];
+    
     if (!row || row.every(cell => cell === null || cell === undefined || cell === '')) continue;
     if(row.slice(0, mergedHeaders.length).join('').trim() === '') continue;
 
     const obj = {};
-    mergedHeaders.forEach((header, index) => {
-      obj[header] = row[index] !== undefined ? row[index] : null;
-    });
+    let cellValue = row[0] || '';
+    if(typeof cellValue === 'string'){
+      cellValue = cellValue.trim();
+    }
+    obj[mergedHeaders[0]] = cellValue ? row[0] : (lastValidRow ? lastValidRow[0] : null);
+
+    for (let index = 1; index < mergedHeaders.length; index++) {
+      const header = mergedHeaders[index];
+      obj[header] = row[index];
+    };
+
     data.push(obj);
+    if((row[0] || '').trim()){
+      lastValidRow = [].concat(row);
+    }
   }
 
   return data;

@@ -41,3 +41,24 @@
     font-weight: 700;
     color: var(--primary);
 }
+
+.form-control {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg-light);
+    color: var(--text);
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-control option {
+    background-color: var(--bg-light);
+    color: var(--text);
+}
