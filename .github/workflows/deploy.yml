@@ -40,8 +40,6 @@ jobs:
 
       - name: Build project
         run: |
-          mkdir dist
-          cp -r public/* dist/
           cp CNAME dist/
       
       - name: Verify CNAME
