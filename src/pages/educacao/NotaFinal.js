@@ -22,6 +22,7 @@ export default function NotaFinal() {
         setNotas(notas.map(nota =>
             nota.id === id ? { ...nota, [campo]: valor } : nota
         ));
+        calcular()
     }
 
     function calcular() {
