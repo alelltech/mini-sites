@@ -32,16 +32,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate data
+        run: npm run process-data
+
       - name: Generate static files
         run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
-      - name: Build project
-        run: |
-          cp CNAME dist/
-          cp -r public/data dist/data
       
       - name: Verify CNAME
         run: |
