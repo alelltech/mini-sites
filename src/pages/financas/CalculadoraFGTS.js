@@ -13,7 +13,6 @@ export default function CalculadoraFGTS() {
         const aliquotaNum = parseFloat(aliquota);
 
         if (!saldoNum || !aliquotaNum) {
-            alert('Preencha todos os campos');
             return;
         }
 
@@ -60,7 +59,7 @@ export default function CalculadoraFGTS() {
                             min="0"
                             step="0.01"
                             value={saldo}
-                            onChange={(e) => setSaldo(e.target.value)}
+                            onChange={(e) => { setSaldo(e.target.value); calcular(); }}
                             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
                         />
                     </div>
@@ -74,7 +73,7 @@ export default function CalculadoraFGTS() {
                             min="0"
                             step="0.01"
                             value={aliquota}
-                            onChange={(e) => setAliquota(e.target.value)}
+                            onChange={(e) => { setAliquota(e.target.value); calcular(); }}
                             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
                         />
                     </div>

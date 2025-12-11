@@ -34,9 +34,13 @@ export default function SimuladorEmprestimo() {
         ...data['PF-TaxasDiarias'].map(item => ({ ...item, pessoa: 'PF' })),
         ...data['PF-TaxasMensais'].map(item => ({ ...item, pessoa: 'PF' })),
         ...data['PJ-TaxasDiarias'].map(item => ({ ...item, pessoa: 'PJ' })),
-      ].filter(item => 
-        item.taxas_medias_a_m && item.taxas_medias_a_a && item.instituicao_financeira
-      );
+      ].filter(item => {
+        if(typeof item.taxas_medias_a_m === 'string') return false;
+        if(typeof item.taxas_medias_a_a === 'string') return false;
+        if(!item.instituicao_financeira.trim()) return false;
+        
+        return item.taxas_medias_a_m && item.taxas_medias_a_a && item.instituicao_financeira;
+      });
       
       items.sort((a, b) => {
         return parseFloat(a.taxas_medias_a_m) - parseFloat(b.taxas_medias_a_m);
