@@ -23,6 +23,9 @@ function Home() {
       tools: [
         { name: 'Nota Final', icon: '📊', path: '/educacao/nota-final' },
         { name: 'Densidade', icon: '⚗️', path: '/educacao/densidade' },
+        { name: 'Calculadora Científica', icon: '🔬', path: '/educacao/cientifica' },
+        { name: 'Cronograma de Estudos', icon: '📅', path: '/educacao/cronograma-estudos' },
+        { name: 'Notação Científica', icon: '10ⁿ', path: '/educacao/notacao-cientifica' },
       ]
     },
     {
@@ -31,6 +34,12 @@ function Home() {
         { name: 'Desconto', icon: '🏷️', path: '/financas/desconto' },
         { name: 'Juros Compostos', icon: '📈', path: '/financas/juros-compostos' },
         { name: 'INSS', icon: '📋', path: '/financas/inss' },
+        { name: 'Empréstimo', icon: '🏦', path: '/financas/emprestimo' },
+        { name: 'FGTS', icon: '💼', path: '/financas/fgts' },
+        { name: 'Hipoteca', icon: '🏠', path: '/financas/hipoteca' },
+        { name: 'Horas Extras', icon: '⏰', path: '/financas/horas-extras' },
+        { name: 'Impostos', icon: '🏛️', path: '/financas/impostos' },
+        { name: 'Margem de Lucro', icon: '💰', path: '/financas/margem-lucro' },
       ]
     },
     {
@@ -39,10 +48,20 @@ function Home() {
         { name: 'UUID', icon: '🆔', path: '/desenvolvimento/uuid' },
         { name: 'Gerador CPF', icon: '🏷️', path: '/desenvolvimento/cpf' },
         { name: 'Hash', icon: '#️⃣', path: '/desenvolvimento/hash' },
+        { name: 'Base64', icon: '🔐', path: '/desenvolvimento/base64' },
+        { name: 'Base Numérica', icon: '🔢', path: '/desenvolvimento/base-numerica' },
+        { name: 'Gerador CNPJ', icon: '📊', path: '/desenvolvimento/cnpj' },
+        { name: 'Hex ↔ Decimal', icon: '🔄', path: '/desenvolvimento/hex-decimal' },
+        { name: 'Hex ↔ RGB', icon: '🎨', path: '/desenvolvimento/hex-rgb' },
+        { name: 'Formatador JSON', icon: '{}', path: '/desenvolvimento/json' },
+        { name: 'MD5', icon: '🔒', path: '/desenvolvimento/md5' },
+        { name: 'Paleta de Cores', icon: '🎭', path: '/desenvolvimento/paleta-cores' },
+        { name: 'SHA256', icon: '🔐', path: '/desenvolvimento/sha256' },
+        { name: 'URL Encoder', icon: '📍', path: '/desenvolvimento/url-encoder' },
       ]
     },
     {
-      title: 'Texto',
+      title: 'Processamento de Texto',
       tools: [
         { name: 'Maiúscula/Minúscula', icon: '🔤', path: '/texto/maiuscula-minuscula' },
         { name: 'Removedor de Acentos', icon: 'ã', path: '/texto/removedor-acentos' },
@@ -56,6 +75,12 @@ function Home() {
         { name: 'Porcentagem', icon: '%', path: '/utilitarios/porcentagem' },
         { name: 'Idade', icon: '🎂', path: '/utilitarios/idade' },
         { name: 'Validador CPF', icon: '✅', path: '/utilitarios/cpf-validador' },
+        { name: 'Calorias', icon: '🍎', path: '/utilitarios/calorias' },
+        { name: 'Validador CNPJ', icon: '🏢', path: '/utilitarios/cnpj-validador' },
+        { name: 'Dias Restantes', icon: '📆', path: '/utilitarios/dias-restantes' },
+        { name: 'Energia', icon: '⚡', path: '/utilitarios/energia' },
+        { name: 'Número Aleatório', icon: '🎲', path: '/utilitarios/numero-aleatorio' },
+        { name: 'Gerador de Senha', icon: '🔑', path: '/utilitarios/senha' },
       ]
     }
   ];
@@ -64,7 +89,7 @@ function Home() {
     <div className="home">
       <section className="hero">
         <h1>CalcZone BR</h1>
-        <p className="subtitle">24+ Calculadoras e Ferramentas Online Grátis</p>
+        <p className="subtitle">50+ Calculadoras e Ferramentas Online Grátis</p>
         <p className="description">Sem instalação, rápido e preciso. Calcule impostos, conversões, e muito mais!</p>
       </section>
 
