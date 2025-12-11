@@ -102,7 +102,11 @@ function processSheetWithMergedHeaders(sheet) {
 
     for (let index = 1; index < mergedHeaders.length; index++) {
       const header = mergedHeaders[index];
-      obj[header] = row[index];
+      cellValue = row[index] || '';
+      if(typeof cellValue === 'string'){
+        cellValue = cellValue.trim();
+      }
+      obj[header] = cellValue;
     };
 
     data.push(obj);
