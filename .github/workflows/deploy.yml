@@ -22,6 +22,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate static files
+        run: npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -30,11 +43,11 @@ jobs:
           mkdir dist
           cp -r public/* dist/
           cp CNAME dist/
-
+      
       - name: Verify CNAME
         run: |
           if [ ! -f dist/CNAME ]; then
-            echo "calc-br.zone" > dist/CNAME
+            echo "calczone.com.br" > dist/CNAME
           fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
