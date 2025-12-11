@@ -34,7 +34,9 @@ export default function SimuladorEmprestimo() {
                 ...data['PF-TaxasDiarias'].map(item => ({ ...item, pessoa: 'PF' })),
                 ...data['PF-TaxasMensais'].map(item => ({ ...item, pessoa: 'PF' })),
                 ...data['PJ-TaxasDiarias'].map(item => ({ ...item, pessoa: 'PJ' })),
-            ];
+            ].filter(item => 
+                item.taxas_medias_a_m && item.taxas_medias_a_a && item.instituicao_financeira
+            );
 
             items.sort((a, b) => {
                 return parseFloat(a.taxas_medias_a_m) - parseFloat(b.taxas_medias_a_m);
@@ -135,7 +137,7 @@ export default function SimuladorEmprestimo() {
                                 ))}
                             </select>
                         </div>
-                        <input
+                        {/* <input
                             id="taxa"
                             type="number"
                             placeholder="1.5"
@@ -144,7 +146,7 @@ export default function SimuladorEmprestimo() {
                             value={taxa}
                             onChange={(e) => setTaxa(e.target.value)}
                             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
-                        />
+                        /> */}
                     </div>
 
                     <div className="form-group">
