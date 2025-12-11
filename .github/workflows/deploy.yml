@@ -41,6 +41,7 @@ jobs:
       - name: Build project
         run: |
           cp CNAME dist/
+          cp -r public/data dist/data
       
       - name: Verify CNAME
         run: |
