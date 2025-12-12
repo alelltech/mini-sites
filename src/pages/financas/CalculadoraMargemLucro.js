@@ -91,19 +91,6 @@ export default function CalculadoraMargemLucro() {
 
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <button
-                            onClick={calcular}
-                            style={{
-                                padding: '10px 20px',
-                                background: '#007bff',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Calcular
-                        </button>
-                        <button
                             onClick={limpar}
                             style={{
                                 padding: '10px 20px',
