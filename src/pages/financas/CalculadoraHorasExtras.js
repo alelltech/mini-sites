@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
+
+const JORNADAS = [
+    { mensal: 168, texto: '40h/semana 8h/dia 168h/mes'},
+    { mensal: 220, texto: '44h/semana 8h/dia 220h/mes'},
+    { mensal: 200, texto: '40h/semana 8h/dia 200h/mes'},
+    { mensal: 180, texto: '36h/semana 6h/dia 180h/mes'},
+    { mensal: 150, texto: '30h/semana 6h/dia 150h/mes'}
+];
 
 export default function CalculadoraHorasExtras() {
     const [salario, setSalario] = useState('');
@@ -10,6 +18,11 @@ export default function CalculadoraHorasExtras() {
     const [resultado, setResultado] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
+    useEffect(() => {
+        const timeOutId = setTimeout(() => calcular(), 100);
+        return () => clearTimeout(timeOutId);
+    }, [salario, horasNormais, horas50, horas100]);
+
     function calcular() {
         const salarioNum = parseFloat(salario);
         const horasNormaisNum = parseFloat(horasNormais);
@@ -17,11 +30,10 @@ export default function CalculadoraHorasExtras() {
         const horas100Num = parseFloat(horas100);
 
         if (!salarioNum) {
-            alert('Preencha o salário');
             return;
         }
 
-        const valorHora = salarioNum / 160;
+        const valorHora = salarioNum / horasNormaisNum;
         const valorNormal = valorHora * horasNormaisNum;
         const valor50 = valorHora * 1.5 * horas50Num;
         const valor100 = valorHora * 2 * horas100Num;
@@ -81,21 +93,25 @@ export default function CalculadoraHorasExtras() {
                     </div>
 
                     <div className="form-group">
-                        <label>Distribuição de Horas</label>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginBottom: '15px' }}>
-                            <div>
-                                <label htmlFor="horasNormais" style={{ fontSize: '12px' }}>Horas Normais</label>
-                                <input
-                                    id="horasNormais"
-                                    type="number"
-                                    placeholder="0"
-                                    min="0"
-                                    step="0.5"
-                                    value={horasNormais}
-                                    onChange={(e) => setHorasNormais(e.target.value)}
-                                    style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
-                                />
-                            </div>
+                        <label htmlFor="jornada">Selecione a Jornada Semanal</label>
+                        <select
+                            id="jornada"
+                            value={horasNormais}
+                            onChange={(e) => setHorasNormais(e.target.value)}
+                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                        >
+                            <option value="">-- Escolha uma jornada --</option>
+                            {JORNADAS.map((jornada) => (
+                                <option key={jornada.mensal} value={String(jornada.mensal)}>
+                                    {jornada.texto}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Distribuição de Horas Extras</label>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '15px' }}>
                             <div>
                                 <label htmlFor="horas50" style={{ fontSize: '12px' }}>Horas 50%</label>
                                 <input
