@@ -13,7 +13,7 @@ export default function SimuladorEmprestimo() {
   const [valor, setValor] = useState('');
   const [taxa, setTaxa] = useState('');
   const [meses, setMeses] = useState('');
-  const [taxas, setTaxas] = useState([]);
+  const [taxas, setTaxas] = useState({});
   const [resultado, setResultado] = useState(null);
   
   // Carrega as taxas de crédito ao montar o componente
@@ -30,23 +30,46 @@ export default function SimuladorEmprestimo() {
     try {
       const response = await fetch('/data/taxascredito.json');
       const data = await response.json();
-      const items = [
-        ...data['PF-TaxasDiarias'].map(item => ({ ...item, pessoa: 'PF' })),
-        ...data['PF-TaxasMensais'].map(item => ({ ...item, pessoa: 'PF' })),
-        ...data['PJ-TaxasDiarias'].map(item => ({ ...item, pessoa: 'PJ' })),
-      ].filter(item => {
-        if(typeof item.taxas_medias_a_m === 'string') return false;
-        if(typeof item.taxas_medias_a_a === 'string') return false;
-        if(!item.instituicao_financeira.trim()) return false;
-        
-        return item.taxas_medias_a_m && item.taxas_medias_a_a && item.instituicao_financeira;
+      
+      // Filtra apenas itens válidos e agrupa por modalidade
+      const items = data.filter(item => {
+        return item.TaxaJurosAoMes && 
+               item.InstituicaoFinanceira && 
+               item.InstituicaoFinanceira.trim() &&
+               typeof item.TaxaJurosAoMes === 'number' &&
+               typeof item.TaxaJurosAoAno === 'number';
       });
       
-      items.sort((a, b) => {
-        return parseFloat(a.taxas_medias_a_m) - parseFloat(b.taxas_medias_a_m);
+      // Agrupa por modalidade
+      const agrupadoPorModalidade = {};
+      items.forEach(item => {
+        const chaveModalidade = item.Modalidade || 'Outros';
+        if (!agrupadoPorModalidade[chaveModalidade]) {
+          agrupadoPorModalidade[chaveModalidade] = [];
+        }
+        agrupadoPorModalidade[chaveModalidade].push(item);
       });
       
-      setTaxas(items);
+      // Ordena cada grupo por taxa
+      Object.keys(agrupadoPorModalidade).forEach(modalidade => {
+        agrupadoPorModalidade[modalidade].sort((a, b) => 
+          a.TaxaJurosAoMes - b.TaxaJurosAoMes
+        );
+      });
+      
+      // Ordena as modalidades pela taxa mais barata (primeira instituição)
+      const modalidadesOrdenadas = {};
+      Object.keys(agrupadoPorModalidade)
+        .sort((a, b) => {
+          const taxaMaisBarataA = agrupadoPorModalidade[a][0].TaxaJurosAoMes;
+          const taxaMaisBarataB = agrupadoPorModalidade[b][0].TaxaJurosAoMes;
+          return taxaMaisBarataA - taxaMaisBarataB;
+        })
+        .forEach(modalidade => {
+          modalidadesOrdenadas[modalidade] = agrupadoPorModalidade[modalidade];
+        });
+      
+      setTaxas(modalidadesOrdenadas);
     } catch (e) {
       console.error('Erro ao carregar taxas:', e);
     }
@@ -134,24 +157,21 @@ export default function SimuladorEmprestimo() {
     style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '10px' }}
     >
     <option value="">Selecionar taxa de instituição...</option>
-    {taxas.map((item, idx) => (
-      <option key={idx} value={item.taxas_medias_a_m.toFixed(2)}>
-      {item.pessoa} {item.taxas_medias_a_m.toFixed(2)}%am {item.taxas_medias_a_a.toFixed(2)}%aa - {item.instituicao_financeira}
-      </option>
+    {Object.keys(taxas).map(modalidade => (
+      <optgroup key={modalidade} label={modalidade}>
+        {taxas[modalidade].map((item, idx) => {
+          const emoji = item.Segmento === 'Pessoa Física' ? '👤' : '🏢';
+          return (
+            <option key={`${modalidade}-${idx}`} value={item.TaxaJurosAoMes.toFixed(2)}>
+              {emoji} {item.TaxaJurosAoMes.toFixed(2)}%am ({item.TaxaJurosAoAno.toFixed(2)}%aa) - {item.InstituicaoFinanceira}
+            </option>
+          );
+        })}
+      </optgroup>
     ))}
     </select>
     </div>
-    {/* <input
-      id="taxa"
-      type="number"
-      placeholder="1.5"
-      min="0"
-      step="0.01"
-      value={taxa}
-      onChange={(e) => setTaxa(e.target.value)}
-      style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
-      /> */}
-      </div>
+    </div>
       
       <div className="form-group">
       <label htmlFor="meses">Prazo (meses)</label>
@@ -233,18 +253,35 @@ export default function SimuladorEmprestimo() {
       </div>
       
       <section className="info-section" style={{ marginTop: '30px', padding: '20px', background: '#f8f9fa', borderRadius: '8px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
-      <div>
-      <h3>💡 Sobre Empréstimos</h3>
-      <p style={{ fontSize: '14px', color: '#666' }}>Os empréstimos são financiamentos que cobram juros sobre o valor emprestado. Esta calculadora mostra o valor da parcela e total a pagar.</p>
+      <h2 style={{ marginTop: '0', marginBottom: '20px' }}>📋 O que é PF e PJ?</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+      <div style={{ padding: '15px', background: 'white', borderRadius: '8px', border: '2px solid #007bff' }}>
+      <h3 style={{ color: '#007bff', marginTop: '0' }}>👤 Pessoa Física (PF)</h3>
+      <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Indivíduos ou consumidores que tomam crédito para uso pessoal.</p>
+      <div style={{ fontSize: '13px', color: '#555', lineHeight: '1.8' }}>
+      <p><strong>Características:</strong></p>
+      <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+      <li>Taxas geralmente mais baixas</li>
+      <li>Menor risco para instituições financeiras</li>
+      <li>Requer comprovação de renda pessoal</li>
+      <li>Processo de aprovação mais ágil</li>
+      </ul>
+      <p><strong>Exemplos:</strong> Empréstimos pessoais, financiamentos de carros para uso próprio, crédito pessoal direto.</p>
       </div>
-      <div>
-      <h3>📐 Fórmula Utilizada</h3>
-      <p style={{ fontSize: '14px', color: '#666' }}>Usa a tabela Price para cálculo das prestações, o sistema de amortização mais comum em financiamentos.</p>
       </div>
-      <div>
-      <h3>🔒 Privacidade</h3>
-      <p style={{ fontSize: '14px', color: '#666' }}>Todos os cálculos são feitos no seu navegador. Nenhum dado é enviado para servidores.</p>
+      <div style={{ padding: '15px', background: 'white', borderRadius: '8px', border: '2px solid #28a745' }}>
+      <h3 style={{ color: '#28a745', marginTop: '0' }}>🏢 Pessoa Jurídica (PJ)</h3>
+      <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>Empresas e sociedades que tomam crédito para financiar operações comerciais.</p>
+      <div style={{ fontSize: '13px', color: '#555', lineHeight: '1.8' }}>
+      <p><strong>Características:</strong></p>
+      <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+      <li>Taxas geralmente mais altas</li>
+      <li>Maior risco percebido pelas instituições</li>
+      <li>Requer documentação empresarial completa</li>
+      <li>Análise mais rigorosa do risco</li>
+      </ul>
+      <p><strong>Exemplos:</strong> Crédito para negócios, capital de giro, financiamento de máquinas e equipamentos, empréstimos comerciais.</p>
+      </div>
       </div>
       </div>
       </section>
