@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
@@ -8,17 +8,20 @@ export default function CalculadoraMargemLucro() {
     const [resultado, setResultado] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
+    useEffect(() => {
+        const timeOutId = setTimeout(() => calcular(), 100);
+        return () => clearTimeout(timeOutId);
+    }, [custo, preco]);
+
     function calcular() {
         const custoNum = parseFloat(custo);
         const precoNum = parseFloat(preco);
 
         if (!custoNum || !precoNum) {
-            alert('Preencha todos os campos');
             return;
         }
 
         if (precoNum < custoNum) {
-            alert('O preço de venda deve ser maior que o custo');
             return;
         }
 

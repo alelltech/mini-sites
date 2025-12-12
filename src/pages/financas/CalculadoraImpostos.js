@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
@@ -16,6 +16,11 @@ export default function CalculadoraImpostos() {
     const [resultado, setResultado] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
+    useEffect(() => {
+        const timeOutId = setTimeout(() => calcular(), 100);
+        return () => clearTimeout(timeOutId);
+    }, [valor, impostosSelecionados]);
+    
     function handleCheckboxChange(imposto) {
         setImpostosSelecionados(prev => ({
             ...prev,
@@ -26,7 +31,6 @@ export default function CalculadoraImpostos() {
     function calcular() {
         const valorNum = parseFloat(valor);
         if (!valorNum || Object.values(impostosSelecionados).every(v => !v)) {
-            alert('Preencha o valor e selecione pelo menos um imposto');
             return;
         }
 
@@ -115,19 +119,6 @@ export default function CalculadoraImpostos() {
                     </div>
 
                     <div style={{ display: 'flex', gap: '10px' }}>
-                        <button
-                            onClick={calcular}
-                            style={{
-                                padding: '10px 20px',
-                                background: '#007bff',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Calcular
-                        </button>
                         <button
                             onClick={limpar}
                             style={{
