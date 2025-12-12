@@ -87,32 +87,6 @@ export default function Base64() {
 
                 <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
                     <button
-                        onClick={handleEncode}
-                        style={{
-                            padding: '10px 20px',
-                            background: '#007bff',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        Codificar
-                    </button>
-                    <button
-                        onClick={handleDecode}
-                        style={{
-                            padding: '10px 20px',
-                            background: '#007bff',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        Decodificar
-                    </button>
-                    <button
                         onClick={clear}
                         style={{
                             padding: '10px 20px',
