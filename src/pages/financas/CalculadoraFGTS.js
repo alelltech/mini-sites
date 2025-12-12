@@ -1,42 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
 export default function CalculadoraFGTS() {
-    const [saldo, setSaldo] = useState('');
+    const [salario, setSalario] = useState('');
     const [aliquota, setAliquota] = useState('');
     const [resultado, setResultado] = useState(null);
     const [showResult, setShowResult] = useState(false);
 
+    const aliquotas = [
+        { valor: 8, descricao: '8% - Trabalhadores em Geral CLT (alíquota padrão)' },
+        { valor: 8 + 3.2, descricao: '11.2% - Empregado Doméstico Depósito (padrão + antecipação rescisória)' },
+        { valor: 2, descricao: '2% - Jovem Aprendiz' }
+    ];
+    useEffect(() => {
+        const timeOutId = setTimeout(() => calcular(), 100);
+        return () => clearTimeout(timeOutId);
+    }, [salario, aliquota]);
+
     function calcular() {
-        const saldoNum = parseFloat(saldo);
+        const salarioNum = parseFloat(salario);
         const aliquotaNum = parseFloat(aliquota);
 
-        if (!saldoNum || !aliquotaNum) {
+        if (!salarioNum || !aliquotaNum) {
             return;
         }
 
-        const rendimento = (saldoNum * aliquotaNum) / 100;
-        const totalComRendimento = saldoNum + rendimento;
+        const deposito = (salarioNum * aliquotaNum) / 100;
+        const depositoAnual = deposito * 12;
 
         setResultado({
-            saldo: saldoNum.toFixed(2),
+            salario: salarioNum.toFixed(2),
             aliquota: aliquotaNum.toFixed(2),
-            rendimento: rendimento.toFixed(2),
-            total: totalComRendimento.toFixed(2)
+            depositoMensal: deposito.toFixed(2),
+            depositoAnual: depositoAnual.toFixed(2)
         });
         setShowResult(true);
     }
 
     function limpar() {
-        setSaldo('');
+        setSalario('');
         setAliquota('');
         setResultado(null);
         setShowResult(false);
     }
 
     function copyResult() {
-        const text = `Saldo em Conta: R$ ${resultado.saldo}\nAlíquota: ${resultado.aliquota}%\n\nRendimento: R$ ${resultado.rendimento}\nTotal com Rendimento: R$ ${resultado.total}`;
+        const text = `Salário: R$ ${resultado.salario}\nAlíquota: ${resultado.aliquota}%\n\nDepósito Mensal: R$ ${resultado.depositoMensal}\nDepósito Anual: R$ ${resultado.depositoAnual}`;
         copyToClipboard(text).then(() => {
             alert('Copiado!');
         });
@@ -45,37 +55,40 @@ export default function CalculadoraFGTS() {
     return (
         <section className="tool-section">
             <div className="tool-header">
-                <h1>🏦 Calculadora de FGTS</h1>
-                <p className="description">Calcule saques e benefícios do FGTS</p>
+                <h1>🏦 Calculadora de Depósito FGTS</h1>
+                <p className="description">Calcule o depósito mensal de FGTS que a empresa deve fazer</p>
             </div>
             <div className="tool-container">
                 <div style={{ maxWidth: '600px' }}>
                     <div className="form-group">
-                        <label htmlFor="saldo">Saldo em Conta (R$)</label>
+                        <label htmlFor="salario">Salário Mensal (R$)</label>
                         <input
-                            id="saldo"
+                            id="salario"
                             type="number"
-                            placeholder="5000"
+                            placeholder="3000"
                             min="0"
                             step="0.01"
-                            value={saldo}
-                            onChange={(e) => { setSaldo(e.target.value); calcular(); }}
+                            value={salario}
+                            onChange={(e) => setSalario(e.target.value)}
                             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="aliquota">Alíquota (% ao ano)</label>
-                        <input
+                        <label htmlFor="aliquota">Alíquota FGTS</label>
+                        <select
                             id="aliquota"
-                            type="number"
-                            placeholder="8"
-                            min="0"
-                            step="0.01"
                             value={aliquota}
-                            onChange={(e) => { setAliquota(e.target.value); calcular(); }}
+                            onChange={(e) => setAliquota(e.target.value)}
                             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
-                        />
+                        >
+                            <option value="">Selecione uma alíquota</option>
+                            {aliquotas.map((item) => (
+                                <option key={item.valor} value={item.valor}>
+                                    {item.descricao}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div style={{ display: 'flex', gap: '10px' }}>
@@ -113,21 +126,27 @@ export default function CalculadoraFGTS() {
                             <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
                                 <tbody>
                                     <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Saldo Inicial</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Salário</td>
                                         <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            R$ {resultado.saldo}
+                                            R$ {resultado.salario}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Rendimento</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Alíquota</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
+                                            {resultado.aliquota}%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Depósito Mensal</td>
                                         <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#28a745' }}>
-                                            R$ {resultado.rendimento}
+                                            R$ {resultado.depositoMensal}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Total com Rendimento</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            R$ {resultado.total}
+                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Depósito Anual</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#007bff' }}>
+                                            R$ {resultado.depositoAnual}
                                         </td>
                                     </tr>
                                 </tbody>
