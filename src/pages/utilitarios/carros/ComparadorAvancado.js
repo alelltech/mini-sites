@@ -97,6 +97,70 @@ const ComparadorAvancado = () => {
     return !allSame;
   };
 
+  // Sistema de scoring para evidenciar melhores qualidades
+  const extractNumericValue = (value, field) => {
+    if (!value || value === '-') return null;
+    const match = String(value).match(/[\d.]+/);
+    return match ? parseFloat(match[0]) : null;
+  };
+
+  const getHighlights = () => {
+    if (selectedCars.length < 2) return { byIndex: {}, byField: {} };
+
+    const highlights = { byIndex: {}, byField: {} };
+    const comparisons = {
+      'motor_potencia_cv': { label: '⚡ Maior Potência', better: 'higher' },
+      'desempenho_velocidade_maxima_kmph': { label: '🏁 Maior Velocidade Máxima', better: 'higher' },
+      'motor_torque_kgfm': { label: '💪 Maior Torque', better: 'higher' },
+      'dimensoes_peso_em_ordem_de_marcha': { label: '⚖️ Menor Peso', better: 'lower' },
+      'desempenho_consumo_combustivel_cidade_kmpl': { label: '⛽ Melhor Consumo Urbano', better: 'higher' },
+      'desempenho_consumo_combustivel_estradas_kmpl': { label: '⛽ Melhor Consumo em Estrada', better: 'higher' },
+      'desempenho_aceleracao0100': { label: '🚀 Aceleração Mais Rápida', better: 'lower' },
+      'dimensoes_espaco_no_porta_malas': { label: '📦 Maior Porta-Malas', better: 'higher' },
+      'dimensoes_comprimento': { label: '📏 Maior Comprimento', better: 'higher' },
+      'dimensoes_altura': { label: '📏 Maior Altura', better: 'higher' },
+      'dimensoes_largura': { label: '📏 Maior Largura', better: 'higher' },
+    };
+
+    Object.entries(comparisons).forEach(([field, { label, better }]) => {
+      const values = selectedCars.map((car, idx) => ({
+        idx,
+        value: extractNumericValue(car[field], field),
+        name: car.nome_do_modelo
+      })).filter(v => v.value !== null);
+
+      if (values.length >= selectedCars.length) {
+        const winner = better === 'higher'
+          ? values.reduce((max, v) => v.value > max.value ? v : max)
+          : values.reduce((min, v) => v.value < min.value ? v : min);
+
+        if (!highlights.byIndex[winner.idx]) {
+          highlights.byIndex[winner.idx] = [];
+        }
+        highlights.byIndex[winner.idx].push(label);
+
+        // Rastrear campo destacado para cada carro
+        if (!highlights.byField[field]) {
+          highlights.byField[field] = {};
+        }
+        highlights.byField[field][winner.idx] = true;
+      }
+    });
+
+    return highlights;
+  };
+
+  const highlights = getHighlights();
+
+  const calculateOverallScore = (carIdx) => {
+    const score = highlights.byIndex[carIdx] ? highlights.byIndex[carIdx].length : 0;
+    return score;
+  };
+
+  const isFieldHighlighted = (field, carIdx) => {
+    return highlights.byField[field] && highlights.byField[field][carIdx];
+  };
+
   return (
     <div className="comparador-avancado-container">
       <div className="comparador-header">
@@ -164,31 +228,82 @@ const ComparadorAvancado = () => {
               </div>
             ) : (
               <div className="selected-list">
-                {selectedCars.map((car, index) => (
-                  <div key={index} className="selected-car-item">
-                    <div className="car-image-placeholder">
-                      <span>📸</span>
+                {selectedCars.map((car, index) => {
+                  const score = calculateOverallScore(index);
+                  const carHighlights = highlights.byIndex[index] || [];
+                  return (
+                    <div key={index} className={`selected-car-item ${score > 0 ? 'with-highlights' : ''}`}>
+                      <div className="car-image-placeholder">
+                        <span>📸</span>
+                      </div>
+                      <div className="car-info">
+                        <div className="car-header-info">
+                          <h3>{car.nome_do_modelo}</h3>
+                          {score > 0 && (
+                            <div className="score-badge">
+                              <span className="star">⭐</span>
+                              <span className="score-count">{score}</span>
+                            </div>
+                          )}
+                        </div>
+                        <p className="brand">{car.fabricante}</p>
+                        <p className="years">{car.anos_disponiveis || 'Anos não informados'}</p>
+                        {carHighlights.length > 0 && (
+                          <div className="highlights-list">
+                            {carHighlights.map((highlight, idx) => (
+                              <span key={idx} className="highlight-badge">{highlight}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => removeCar(index)}
+                        className="remove-btn"
+                        title="Remover da comparação"
+                      >
+                        ✕
+                      </button>
                     </div>
-                    <div className="car-info">
-                      <h3>{car.nome_do_modelo}</h3>
-                      <p className="brand">{car.fabricante}</p>
-                      <p className="years">{car.anos_disponiveis || 'Anos não informados'}</p>
-                    </div>
-                    <button
-                      onClick={() => removeCar(index)}
-                      className="remove-btn"
-                      title="Remover da comparação"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
 
           {selectedCars.length > 0 && (
             <div className="comparison-section">
+              {selectedCars.length > 1 && (
+                <div className="highlights-summary">
+                  <h2>🏆 Melhores Qualidades</h2>
+                  <div className="highlights-grid">
+                    {selectedCars.map((car, index) => {
+                      const carHighlights = highlights.byIndex[index] || [];
+                      const score = calculateOverallScore(index);
+                      return (
+                        <div key={index} className={`highlight-card ${score > 0 ? 'has-score' : 'no-score'}`}>
+                          <div className="card-header">
+                            <h3>{car.nome_do_modelo}</h3>
+                            {score > 0 && (
+                              <div className="score-display">
+                                <span className="score-text">{score} Destaque{score > 1 ? 's' : ''}</span>
+                              </div>
+                            )}
+                          </div>
+                          {carHighlights.length > 0 ? (
+                            <ul className="highlights-items">
+                              {carHighlights.map((highlight, idx) => (
+                                <li key={idx}>{highlight}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="no-highlights">Nenhuma destaque em relação aos outros</p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
               <div className="view-modes">
                 <button
                   className={`mode-btn ${viewMode === 'categories' ? 'active' : ''}`}
@@ -229,7 +344,10 @@ const ComparadorAvancado = () => {
                                       {fieldLabel.charAt(0).toUpperCase() + fieldLabel.slice(1).toLowerCase()}
                                     </td>
                                     {selectedCars.map((car, idx) => (
-                                      <td key={idx} className="field-value">
+                                      <td 
+                                        key={idx} 
+                                        className={`field-value ${isFieldHighlighted(field, idx) ? 'highlighted' : ''}`}
+                                      >
                                         {car[field] || '-'}
                                       </td>
                                     ))}
@@ -272,7 +390,10 @@ const ComparadorAvancado = () => {
                                   <strong>{fieldLabel.charAt(0).toUpperCase() + fieldLabel.slice(1).toLowerCase()}</strong>
                                 </td>
                                 {selectedCars.map((car, idx) => (
-                                  <td key={idx} className="field-value">
+                                  <td 
+                                    key={idx} 
+                                    className={`field-value ${isFieldHighlighted(field, idx) ? 'highlighted' : ''}`}
+                                  >
                                     {car[field] || '-'}
                                   </td>
                                 ))}
@@ -291,6 +412,7 @@ const ComparadorAvancado = () => {
 
       <footer className="comparador-footer">
         <p>💡 Dica: Valores em amarelo indicam características diferentes entre os modelos</p>
+        <p>🏆 Destaque: Cada carro recebe uma pontuação baseada em suas melhores qualidades comparativas</p>
       </footer>
     </div>
   );
