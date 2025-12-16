@@ -5,13 +5,22 @@ import '../styles/Home.css';
 function Home() {
   const categories = [
     {
-      title: 'Carros',
+      title: 'Utilitários',
       tools: [
-        { name: 'Comparador de Carros', icon: '🚗', path: '/comparador' },
+        { name: 'Comparador de Carros', icon: '🚗', path: '/utilitarios/comparador-carros' },
+        { name: 'IMC', icon: '⚖️', path: '/utilitarios/imc' },
+        { name: 'Porcentagem', icon: '%', path: '/utilitarios/porcentagem' },
+        { name: 'Idade', icon: '🎂', path: '/utilitarios/idade' },
+        { name: 'Validador CPF', icon: '✅', path: '/utilitarios/cpf-validador' },
+        { name: 'Calorias', icon: '🍎', path: '/utilitarios/calorias' },
+        { name: 'Validador CNPJ', icon: '🏢', path: '/utilitarios/cnpj-validador' },
+        { name: 'Dias Restantes', icon: '📆', path: '/utilitarios/dias-restantes' },
+        { name: 'Energia', icon: '⚡', path: '/utilitarios/energia' },
+        { name: 'Número Aleatório', icon: '🎲', path: '/utilitarios/numero-aleatorio' },
+        { name: 'Gerador de Senha', icon: '🔑', path: '/utilitarios/senha' },
       ]
     },
     {
-      title: 'Conversores',
       tools: [
         { name: 'Moedas', icon: '💱', path: '/conversores/moedas' },
         { name: 'Temperatura', icon: '🌡️', path: '/conversores/temperatura' },
@@ -72,21 +81,6 @@ function Home() {
         { name: 'Maiúscula/Minúscula', icon: '🔤', path: '/texto/maiuscula-minuscula' },
         { name: 'Removedor de Acentos', icon: 'ã', path: '/texto/removedor-acentos' },
         { name: 'Palavras e Caracteres', icon: '📝', path: '/texto/palavras-caracteres' },
-      ]
-    },
-    {
-      title: 'Utilitários',
-      tools: [
-        { name: 'IMC', icon: '⚖️', path: '/utilitarios/imc' },
-        { name: 'Porcentagem', icon: '%', path: '/utilitarios/porcentagem' },
-        { name: 'Idade', icon: '🎂', path: '/utilitarios/idade' },
-        { name: 'Validador CPF', icon: '✅', path: '/utilitarios/cpf-validador' },
-        { name: 'Calorias', icon: '🍎', path: '/utilitarios/calorias' },
-        { name: 'Validador CNPJ', icon: '🏢', path: '/utilitarios/cnpj-validador' },
-        { name: 'Dias Restantes', icon: '📆', path: '/utilitarios/dias-restantes' },
-        { name: 'Energia', icon: '⚡', path: '/utilitarios/energia' },
-        { name: 'Número Aleatório', icon: '🎲', path: '/utilitarios/numero-aleatorio' },
-        { name: 'Gerador de Senha', icon: '🔑', path: '/utilitarios/senha' },
       ]
     }
   ];

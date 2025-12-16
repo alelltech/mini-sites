@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Comparador.css';
-import carsData from '../../public/data/cars/meta_data.json';
+import '../../../styles/Comparador.css';
+import carsData from '../../../public/data/cars/meta_data.json';
 
 const Comparador = () => {
   const [selectedCars, setSelectedCars] = useState([]);
