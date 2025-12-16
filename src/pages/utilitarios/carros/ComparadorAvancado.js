@@ -66,6 +66,8 @@ const ComparadorAvancado = () => {
     const firstCar = selectedCars[0];
     Object.keys(firstCar).forEach(key => {
       const category = key.split('_')[0];
+      if(category === 'images') return;
+      
       if (!categories[category]) {
         categories[category] = [];
       }
