@@ -408,29 +408,33 @@ const ComparadorAvancado = () => {
                       <span className="expand-icon">{expandedCategory === 'images' ? '▼' : '▶'}</span>
                     </button>
                     {expandedCategory === 'images' && (
-                      <table className="comparison-table">
-                        <tbody>
-                          <tr className="field-row images-row">
-                            {selectedCars.map((car, idx) => (
-                              <td 
-                                key={idx} 
-                                className="field-value image-cell"
-                              >
-                                {car.images.map((image) => (
+                      <div className="images-grid-container">
+                        <div 
+                          className="images-grid"
+                          style={{ gridTemplateColumns: `repeat(${selectedCars.length}, 1fr)` }}
+                        >
+                          {selectedCars.map((car, idx) => (
+                            <div 
+                              key={idx} 
+                              className="image-grid-cell"
+                            >
+                              <div className="car-images-wrapper">
+                                {car.images.map((image, imgIdx) => (
                                   <img 
+                                    key={imgIdx}
                                     src={image}
                                     alt={`${car.nome_do_modelo}`}
                                     className="comparison-image"
                                     onError={(e) => {
                                       e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="120" height="80"%3E%3Crect fill="%23ddd" width="120" height="80"/%3E%3Ctext x="60" y="40" font-size="10" fill="%23666" text-anchor="middle" dy=".3em"%3ESem Imagem%3C/text%3E%3C/svg%3E';
                                     }}
-                                  />)
-                                )}
-                              </td>
-                            ))}
-                          </tr>
-                        </tbody>
-                      </table>
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
