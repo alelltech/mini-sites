@@ -8,6 +8,7 @@ function Home() {
       title: 'Utilitários',
       tools: [
         { name: 'Comparador de Carros', icon: '🚗', path: '/utilitarios/comparador-carros' },
+        { name: 'Tabela de Carros', icon: '📋', path: '/utilitarios/tabela-carros' },
         { name: 'IMC', icon: '⚖️', path: '/utilitarios/imc' },
         { name: 'Porcentagem', icon: '%', path: '/utilitarios/porcentagem' },
         { name: 'Idade', icon: '🎂', path: '/utilitarios/idade' },

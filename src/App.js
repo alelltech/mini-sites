@@ -4,6 +4,7 @@ import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Home from './pages/Home.js';
 import ComparadorAvancado from './pages/utilitarios/carros/ComparadorAvancado.js';
+import TabelaCarros from './pages/utilitarios/carros/TabelaCarros.js';
 
 // Conversores
 import ConvertorTemperatura from './pages/conversores/Temperatura.js';
@@ -79,6 +80,7 @@ function App() {
 
           {/* Comparador de Carros */}
           <Route path="/utilitarios/comparador-carros" element={<ComparadorAvancado />} />
+          <Route path="/utilitarios/tabela-carros" element={<TabelaCarros />} />
 
           {/* Conversores */}
           <Route path="/conversores/temperatura" element={<ConvertorTemperatura />} />
