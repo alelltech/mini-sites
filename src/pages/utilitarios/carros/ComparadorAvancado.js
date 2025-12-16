@@ -37,8 +37,9 @@ const ComparadorAvancado = () => {
     const loadCarImages = async () => {
       const images = {};
       for (const car of selectedCars) {
-        const imagePath = `/public/data/cars/${car.fabricante}/${car.fabricante}-${car.nome_do_modelo}.jpg`;
-        images[car.nome_do_modelo] = imagePath;
+        if (car.images && car.images.length > 0) {
+          images[car.nome_do_modelo] = car.images[0];
+        }
       }
       setCarImages(images);
     };
@@ -233,8 +234,15 @@ const ComparadorAvancado = () => {
                   const carHighlights = highlights.byIndex[index] || [];
                   return (
                     <div key={index} className={`selected-car-item ${score > 0 ? 'with-highlights' : ''}`}>
-                      <div className="car-image-placeholder">
-                        <span>📸</span>
+                      <div className="car-image-container">
+                        <img 
+                          src={car.images && car.images.length > 0 ? car.images[0] : '/data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80"%3E%3Crect fill="%23ddd" width="80" height="80"/%3E%3Ctext x="40" y="40" font-size="10" fill="%23666" text-anchor="middle" dy=".3em"%3ESem Imagem%3C/text%3E%3C/svg%3E'}
+                          alt={`${car.nome_do_modelo}`}
+                          className="car-image"
+                          onError={(e) => {
+                            e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80"%3E%3Crect fill="%23ddd" width="80" height="80"/%3E%3Ctext x="40" y="40" font-size="10" fill="%23666" text-anchor="middle" dy=".3em"%3ESem Imagem%3C/text%3E%3C/svg%3E';
+                          }}
+                        />
                       </div>
                       <div className="car-info">
                         <div className="car-header-info">
@@ -272,6 +280,36 @@ const ComparadorAvancado = () => {
 
           {selectedCars.length > 0 && (
             <div className="comparison-section">
+              {selectedCars.length > 0 && (
+                <div className="images-gallery">
+                  <h2>📸 Comparação de Fotos</h2>
+                  <div className="gallery-grid">
+                    {selectedCars.map((car, index) => (
+                      <div key={index} className="gallery-item">
+                        <div className="image-wrapper">
+                          <img 
+                            src={car.images && car.images.length > 0 ? car.images[0] : ''}
+                            alt={`${car.nome_do_modelo}`}
+                            className="gallery-image"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextElementSibling.style.display = 'flex';
+                            }}
+                          />
+                          <div className="image-placeholder" style={{ display: 'none' }}>
+                            <span>📷</span>
+                            <p>Imagem não encontrada</p>
+                          </div>
+                        </div>
+                        <div className="gallery-info">
+                          <h3>{car.nome_do_modelo}</h3>
+                          <p className="gallery-brand">{car.fabricante}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               {selectedCars.length > 1 && (
                 <div className="highlights-summary">
                   <h2>🏆 Melhores Qualidades</h2>
@@ -359,6 +397,40 @@ const ComparadorAvancado = () => {
                       )}
                     </div>
                   ))}
+                  <div key="images" className="category-block">
+                    <button
+                      className="category-title"
+                      onClick={() => setExpandedCategory(expandedCategory === 'images' ? null : 'images')}
+                    >
+                      <span>{categoryLabels['images'] || 'Fotos'}</span>
+                      <span className="expand-icon">{expandedCategory === 'images' ? '▼' : '▶'}</span>
+                    </button>
+                    {expandedCategory === 'images' && (
+                      <table className="comparison-table">
+                        <tbody>
+                          <tr className="field-row images-row">
+                            {selectedCars.map((car, idx) => (
+                              <td 
+                                key={idx} 
+                                className="field-value image-cell"
+                              >
+                                {car.images.map((image) => (
+                                  <img 
+                                    src={image}
+                                    alt={`${car.nome_do_modelo}`}
+                                    className="comparison-image"
+                                    onError={(e) => {
+                                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="120" height="80"%3E%3Crect fill="%23ddd" width="120" height="80"/%3E%3Ctext x="60" y="40" font-size="10" fill="%23666" text-anchor="middle" dy=".3em"%3ESem Imagem%3C/text%3E%3C/svg%3E';
+                                    }}
+                                  />)
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                        </tbody>
+                      </table>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <div className="detailed-comparison">
