@@ -5,6 +5,12 @@ import '../styles/Home.css';
 function Home() {
   const categories = [
     {
+      title: 'Carros',
+      tools: [
+        { name: 'Comparador de Carros', icon: '🚗', path: '/comparador' },
+      ]
+    },
+    {
       title: 'Conversores',
       tools: [
         { name: 'Moedas', icon: '💱', path: '/conversores/moedas' },

@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Home from './pages/Home.js';
+import ComparadorAvancado from './pages/ComparadorAvancado.js';
 
 // Conversores
 import ConvertorTemperatura from './pages/conversores/Temperatura.js';
@@ -75,6 +76,9 @@ function App() {
         <Routes>
           {/* Home */}
           <Route path="/" element={<Home />} />
+
+          {/* Comparador de Carros */}
+          <Route path="/comparador" element={<ComparadorAvancado />} />
 
           {/* Conversores */}
           <Route path="/conversores/temperatura" element={<ConvertorTemperatura />} />

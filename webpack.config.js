@@ -53,6 +53,16 @@ export default {
     historyApiFallback: true,
     compress: true,
     open: true,
+    // setupMiddlewares: (middlewares, devServer) => {
+    //   devServer.app.use((req, res, next) => {
+    //     const nonce = Math.random().toString(36).substr(2, 9);
+    //     res.locals = res.locals || {};
+    //     res.locals.nonce = nonce;
+    //     res.set('Content-Security-Policy', `default-src 'self'; script-src 'self' 'strict-dynamic' 'nonce-${nonce}' https://pagead2.googlesyndication.com; frame-src https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:;`);
+    //     next();
+    //   });
+    //   return middlewares;
+    // },
   },
   resolve: {
     extensions: ['.js', '.jsx'],

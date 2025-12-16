@@ -29,6 +29,8 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "glob": "^9.0.0",
+    "@types/glob": "^9.0.0",
     "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",
     "@babel/preset-react": "^7.23.3",
