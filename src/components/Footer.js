@@ -9,9 +9,8 @@ function Footer() {
       <div className="footer-container">
         <p>&copy; {currentYear} CalcZone BR. Todos os direitos reservados.</p>
         <div className="footer-links">
-          <a href="#privacy">Privacidade</a>
-          <a href="#terms">Termos</a>
-          <a href="#contact">Contato</a>
+          <a href="/privacy.html" target="_blank" rel="noopener noreferrer">Privacidade</a>
+          <a href="/terms.html" target="_blank" rel="noopener noreferrer">Termos</a>
         </div>
       </div>
     </footer>

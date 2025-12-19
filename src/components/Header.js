@@ -9,8 +9,7 @@ function Header() {
         <Link to="/" className="logo">CalcZone BR</Link>
         <nav className="nav">
           <Link to="/">Início</Link>
-          <a href="#about">Sobre</a>
-          <a href="#contact">Contato</a>
+          <a href="/guia-completo.html">Guia</a>
         </nav>
       </div>
     </header>
