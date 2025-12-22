@@ -2,9 +2,11 @@ import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
+import AdSenseGuard from './components/AdSenseGuard.js';
 import Home from './pages/Home.js';
 import ComparadorAvancado from './pages/utilitarios/carros/ComparadorAvancado.js';
 import TabelaCarros from './pages/utilitarios/carros/TabelaCarros.js';
+import NotFound from './pages/NotFound.js';
 
 // Conversores
 import ConvertorTemperatura from './pages/conversores/Temperatura.js';
@@ -72,6 +74,7 @@ import './styles/App.css';
 function App() {
   return (
     <Router>
+      <AdSenseGuard />
       <Header />
       <main className="main-content">
         <Routes>
@@ -142,6 +145,7 @@ function App() {
           <Route path="/utilitarios/energia" element={<CalculadoraEnergia />} />
           <Route path="/utilitarios/numero-aleatorio" element={<GeradorNumeroAleatorio />} />
           <Route path="/utilitarios/senha" element={<GeradorSenha />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
