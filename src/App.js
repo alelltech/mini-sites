@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import AdSenseGuard from './components/AdSenseGuard.js';
+import MiniChat from './components/MiniChat.js';
 import Home from './pages/Home.js';
 import ComparadorAvancado from './pages/utilitarios/carros/ComparadorAvancado.js';
 import TabelaCarros from './pages/utilitarios/carros/TabelaCarros.js';
@@ -148,6 +149,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <MiniChat />
       <Footer />
     </Router>
   );

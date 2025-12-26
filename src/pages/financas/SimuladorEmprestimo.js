@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useUrlParams from '../../utils/useUrlParams.js';
 import { copyToClipboard, formatCurrency } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
@@ -16,6 +17,20 @@ export default function SimuladorEmprestimo() {
   const [taxas, setTaxas] = useState({});
   const [resultado, setResultado] = useState(null);
   
+  // Ler parâmetros da URL para financiamento
+  useUrlParams({
+    valorTotal: (valorTotal) => {
+      const searchParams = new URLSearchParams(window.location.search);
+      const entrada = parseFloat(searchParams.get('entrada')) || 0;
+      const valorFinanciar = parseFloat(valorTotal) - entrada;
+      if (valorFinanciar > 0) {
+        setValor(valorFinanciar.toString());
+      }
+    },
+    numeroParcelas: setMeses,
+    taxaJuros: setTaxa
+  });
+
   // Carrega as taxas de crédito ao montar o componente
   useEffect(() => {
     carregarTaxas();

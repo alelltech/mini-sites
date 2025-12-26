@@ -48,7 +48,7 @@ export default {
     }),
   ],
   devServer: {
-    port: 3000,
+    port: 3005,
     hot: true,
     historyApiFallback: true,
     compress: true,

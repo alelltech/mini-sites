@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useUrlParams from '../../utils/useUrlParams.js';
 import { formatCurrency, safeParseFloat } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
@@ -6,6 +7,12 @@ export default function Desconto() {
     const [preco, setPreco] = useState('');
     const [desconto, setDesconto] = useState('');
     const [resultado, setResultado] = useState(null);
+
+    // Ler parâmetros da URL
+    useUrlParams({
+        valorOriginal: setPreco,
+        percentualDesconto: setDesconto
+    });
 
     useEffect(() => {
         calcular();

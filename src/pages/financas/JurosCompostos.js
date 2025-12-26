@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useUrlParams from '../../utils/useUrlParams.js';
 import { formatCurrency, formatNumber, safeParseFloat } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
@@ -8,6 +9,13 @@ export default function JurosCompostos() {
     const [tempo, setTempo] = useState('');
     const [frequencia, setFrequencia] = useState('12');
     const [resultado, setResultado] = useState(null);
+
+    // Ler parâmetros da URL
+    useUrlParams({
+        valorInicial: setCapital,
+        periodo: (value) => setTempo((parseFloat(value) / 12).toString()), // converter meses para anos
+        taxaJuros: setTaxa
+    });
 
     useEffect(() => {
         calcular();

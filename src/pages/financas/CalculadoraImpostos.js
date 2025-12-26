@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useUrlParams from '../../utils/useUrlParams.js';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
@@ -15,6 +16,11 @@ export default function CalculadoraImpostos() {
     const [impostosSelecionados, setImpostosSelecionados] = useState({});
     const [resultado, setResultado] = useState(null);
     const [showResult, setShowResult] = useState(false);
+
+    // Ler parâmetros da URL
+    useUrlParams({
+        rendaMensal: setValor
+    });
 
     useEffect(() => {
         const timeOutId = setTimeout(() => calcular(), 100);

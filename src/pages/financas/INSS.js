@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import useUrlParams from '../../utils/useUrlParams.js';
 import { formatCurrency, formatNumber, safeParseFloat } from '../../utils/globalFunctions.js';
 import '../../styles/conversor.css';
 
 export default function INSS() {
     const [salario, setSalario] = useState('');
     const [resultado, setResultado] = useState(null);
+
+    // Ler parâmetros da URL
+    useUrlParams({
+        salario: setSalario
+    });
 
     useEffect(() => {
         calcular();

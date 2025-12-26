@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import useUrlParams from '../../utils/useUrlParams.js';
 import '../../styles/conversor.css';
 
 export default function IMC() {
     const [peso, setPeso] = useState('');
     const [altura, setAltura] = useState('');
     const [resultado, setResultado] = useState(null);
+
+    // Ler parâmetros da URL (altura vem em metros, converter para cm)
+    useUrlParams({
+        peso: setPeso,
+        altura: (value) => setAltura((parseFloat(value) * 100).toString())
+    });
 
     useEffect(() => {
         calcular();
