@@ -69,6 +69,7 @@ import ContadorDiasRestantes from './pages/utilitarios/ContadorDiasRestantes.js'
 import CalculadoraEnergia from './pages/utilitarios/CalculadoraEnergia.js';
 import GeradorNumeroAleatorio from './pages/utilitarios/GeradorNumeroAleatorio.js';
 import GeradorSenha from './pages/utilitarios/GeradorSenha.js';
+import AvaliacaoCorporal from './pages/utilitarios/AvaliacaoCorporal.js';
 
 import './styles/App.css';
 
@@ -146,6 +147,7 @@ function App() {
           <Route path="/utilitarios/energia" element={<CalculadoraEnergia />} />
           <Route path="/utilitarios/numero-aleatorio" element={<GeradorNumeroAleatorio />} />
           <Route path="/utilitarios/senha" element={<GeradorSenha />} />
+          <Route path="/utilitarios/avaliacao-corporal" element={<AvaliacaoCorporal />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

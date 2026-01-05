@@ -10,6 +10,7 @@ function Home() {
         { name: 'Comparador de Carros', icon: '🚗', path: '/utilitarios/comparador-carros' },
         { name: 'Tabela de Carros', icon: '📋', path: '/utilitarios/tabela-carros' },
         { name: 'IMC', icon: '⚖️', path: '/utilitarios/imc' },
+        { name: 'Avaliação Corporal', icon: '📏', path: '/utilitarios/avaliacao-corporal' },
         { name: 'Porcentagem', icon: '%', path: '/utilitarios/porcentagem' },
         { name: 'Idade', icon: '🎂', path: '/utilitarios/idade' },
         { name: 'Validador CPF', icon: '✅', path: '/utilitarios/cpf-validador' },
