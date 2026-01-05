@@ -5,7 +5,6 @@ const AvaliacaoCorporal = () => {
   const [clientes, setClientes] = useState([]);
   const [clienteSelecionado, setClienteSelecionado] = useState(null);
   const [modoEdicao, setModoEdicao] = useState(false);
-  const [etapaAtual, setEtapaAtual] = useState(1);
   
   const [formData, setFormData] = useState({
     nome: '',
@@ -155,7 +154,6 @@ const AvaliacaoCorporal = () => {
     });
     setClienteSelecionado(null);
     setModoEdicao(true);
-    setEtapaAtual(1);
   };
 
   const salvarAvaliacao = () => {
@@ -192,7 +190,6 @@ const AvaliacaoCorporal = () => {
     setFormData(cliente);
     setClienteSelecionado(cliente);
     setModoEdicao(true);
-    setEtapaAtual(1);
   };
 
   const excluirCliente = (id) => {
@@ -280,18 +277,6 @@ Observações: ${cliente.observacoes || '-'}
     URL.revokeObjectURL(url);
   };
 
-  const proximaEtapa = () => {
-    if (etapaAtual < 4) {
-      setEtapaAtual(etapaAtual + 1);
-    }
-  };
-
-  const etapaAnterior = () => {
-    if (etapaAtual > 1) {
-      setEtapaAtual(etapaAtual - 1);
-    }
-  };
-
   return (
     <div className="avaliacao-corporal-container">
       <div className="avaliacao-header">
@@ -366,29 +351,16 @@ Observações: ${cliente.observacoes || '-'}
         </div>
       ) : (
         <div className="formulario-avaliacao">
-          <div className="progress-bar">
-            <div className={`step ${etapaAtual >= 1 ? 'active' : ''}`}>
-              <div className="step-number">1</div>
-              <div className="step-label">Dados Pessoais</div>
-            </div>
-            <div className={`step ${etapaAtual >= 2 ? 'active' : ''}`}>
-              <div className="step-number">2</div>
-              <div className="step-label">Medidas</div>
-            </div>
-            <div className={`step ${etapaAtual >= 3 ? 'active' : ''}`}>
-              <div className="step-number">3</div>
-              <div className="step-label">Dobras Cutâneas</div>
-            </div>
-            <div className={`step ${etapaAtual >= 4 ? 'active' : ''}`}>
-              <div className="step-number">4</div>
-              <div className="step-label">Condicionamento</div>
-            </div>
-          </div>
-
-          {/* Etapa 1: Dados Pessoais */}
-          {etapaAtual === 1 && (
-            <div className="etapa-form">
-              <h2>Dados Pessoais e Antropométricos</h2>
+          <div className="formulario-scroll">
+            {/* Seção 1: Dados Pessoais */}
+            <div className="secao-form">
+              <div className="secao-header">
+                <span className="secao-numero">01</span>
+                <div className="secao-titulo">
+                  <h2>Dados Pessoais e Antropométricos</h2>
+                  <p className="secao-subtitulo">Informações básicas do cliente e medidas fundamentais</p>
+                </div>
+              </div>
               
               <div className="form-grid">
                 <div className="form-group full-width">
@@ -500,12 +472,16 @@ Observações: ${cliente.observacoes || '-'}
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Etapa 2: Circunferências */}
-          {etapaAtual === 2 && (
-            <div className="etapa-form">
-              <h2>Circunferências Corporais (cm)</h2>
+            {/* Seção 2: Circunferências */}
+            <div className="secao-form">
+              <div className="secao-header">
+                <span className="secao-numero">02</span>
+                <div className="secao-titulo">
+                  <h2>Circunferências Corporais</h2>
+                  <p className="secao-subtitulo">Medidas de perímetros em diferentes regiões do corpo (em centímetros)</p>
+                </div>
+              </div>
               
               <div className="medidas-com-imagem">
                 <div className="form-area">
@@ -699,12 +675,16 @@ Observações: ${cliente.observacoes || '-'}
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Etapa 3: Dobras Cutâneas */}
-          {etapaAtual === 3 && (
-            <div className="etapa-form">
-              <h2>Dobras Cutâneas (mm)</h2>
+            {/* Seção 3: Dobras Cutâneas */}
+            <div className="secao-form">
+              <div className="secao-header">
+                <span className="secao-numero">03</span>
+                <div className="secao-titulo">
+                  <h2>Dobras Cutâneas</h2>
+                  <p className="secao-subtitulo">Protocolo de 7 dobras para estimativa de composição corporal (em milímetros)</p>
+                </div>
+              </div>
               
               <div className="medidas-com-imagem">
                 <div className="form-area">
@@ -833,12 +813,16 @@ Observações: ${cliente.observacoes || '-'}
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Etapa 4: Condicionamento Físico */}
-          {etapaAtual === 4 && (
-            <div className="etapa-form">
-              <h2>Testes de Condicionamento Físico</h2>
+            {/* Seção 4: Condicionamento Físico */}
+            <div className="secao-form">
+              <div className="secao-header">
+                <span className="secao-numero">04</span>
+                <div className="secao-titulo">
+                  <h2>Testes de Condicionamento Físico</h2>
+                  <p className="secao-subtitulo">Avaliação de capacidades físicas e performance</p>
+                </div>
+              </div>
               
               <div className="form-section">
                 <h3>Força e Resistência Muscular</h3>
@@ -938,32 +922,17 @@ Observações: ${cliente.observacoes || '-'}
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
           <div className="form-navigation">
             <div className="nav-buttons">
-              {etapaAtual > 1 && (
-                <button onClick={etapaAnterior} className="btn-secondary">
-                  ← Anterior
-                </button>
-              )}
-              
-              <button onClick={() => {
-                setModoEdicao(false);
-                setEtapaAtual(1);
-              }} className="btn-cancel">
+              <button onClick={() => setModoEdicao(false)} className="btn-cancel">
                 Cancelar
               </button>
 
-              {etapaAtual < 4 ? (
-                <button onClick={proximaEtapa} className="btn-primary">
-                  Próximo →
-                </button>
-              ) : (
-                <button onClick={salvarAvaliacao} className="btn-success">
-                  💾 Salvar Avaliação
-                </button>
-              )}
+              <button onClick={salvarAvaliacao} className="btn-success">
+                💾 Salvar Avaliação
+              </button>
             </div>
           </div>
         </div>
