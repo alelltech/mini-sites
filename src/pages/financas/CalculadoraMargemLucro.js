@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function CalculadoraMargemLucro() {
     const [custo, setCusto] = useState('');
@@ -54,16 +53,27 @@ export default function CalculadoraMargemLucro() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>💰 Calculadora de Margem e Lucro</h1>
-                <p className="description">Calcule margem de lucro, markup e preço final para seu negócio</p>
-            </div>
-            <div className="tool-container">
-                <div style={{ maxWidth: '600px' }}>
-                    <div className="form-group">
-                        <label htmlFor="custo">Custo do Produto (R$)</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-graph" style={{ marginRight: '10px' }}></i>
+                        Calculadora de Margem e Lucro
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule margem de lucro, markup e preço final para seu negócio</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="custo" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Custo do Produto (R$):</label>
                         <input
+                            className="p-input p-form-text"
                             id="custo"
                             type="number"
                             placeholder="100"
@@ -71,13 +81,14 @@ export default function CalculadoraMargemLucro() {
                             step="0.01"
                             value={custo}
                             onChange={(e) => setCusto(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="preco">Preço de Venda (R$)</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="preco" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Preço de Venda (R$):</label>
                         <input
+                            className="p-input p-form-text"
                             id="preco"
                             type="number"
                             placeholder="150"
@@ -85,77 +96,60 @@ export default function CalculadoraMargemLucro() {
                             step="0.01"
                             value={preco}
                             onChange={(e) => setPreco(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
+                </form>
 
-                    <div style={{ display: 'flex', gap: '10px' }}>
+                {showResult && resultado && (
+                    <div className="p-card p-shadow-1" style={{ background: 'rgba(255,255,255,0.5)', borderRadius: '15px', padding: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '15px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Resultado</h3>
+                        <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Custo do Produto</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.custo}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Preço de Venda</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.preco}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px', fontSize: '14px', color: '#666', fontWeight: '600' }}>Lucro</td>
+                                    <td style={{ padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px', fontSize: '18px', fontWeight: '700', color: '#28a745', textAlign: 'right' }}>R$ {resultado.lucro}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px', fontSize: '14px', color: '#666', fontWeight: '600' }}>Margem de Lucro</td>
+                                    <td style={{ padding: '12px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px', fontSize: '18px', fontWeight: '700', color: '#667eea', textAlign: 'right' }}>{resultado.margemLucro}%</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Markup</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>{resultado.markup}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <button
-                            onClick={limpar}
+                            onClick={copyResult}
+                            className="p-btn"
                             style={{
-                                padding: '10px 20px',
-                                background: '#6c757d',
+                                width: '100%',
+                                padding: '12px',
+                                marginTop: '15px',
+                                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                borderRadius: '10px',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                transition: 'all 0.3s ease'
                             }}
                         >
-                            Limpar
+                            Copiar Resultado
                         </button>
                     </div>
-
-                    {showResult && resultado && (
-                        <div className="result">
-                            <h3>Resultado</h3>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                                <tbody>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Custo</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>R$ {resultado.custo}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Preço de Venda</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>R$ {resultado.preco}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>Lucro</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#28a745' }}>
-                                            R$ {resultado.lucro}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Margem de Lucro</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            {resultado.margemLucro}%
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Markup</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            {resultado.markup}%
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button
-                                onClick={copyResult}
-                                style={{
-                                    padding: '8px 16px',
-                                    marginTop: '15px',
-                                    background: '#28a745',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Copiar Resultado
-                            </button>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
-        </section>
+        </div>
     );
 }

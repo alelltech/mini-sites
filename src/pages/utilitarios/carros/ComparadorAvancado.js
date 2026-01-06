@@ -165,12 +165,32 @@ const ComparadorAvancado = () => {
   };
 
   return (
-    <div className="comparador-avancado-container">
-      <div className="comparador-header">
-        <h1>🚗 Comparador de Carros</h1>
-        <p>Selecione até 4 modelos para comparar características detalhadas</p>
-      </div>
+    <div style={{ 
+      padding: '20px',
+      maxWidth: '1400px',
+      margin: '0 auto'
+    }}>
+      <div className="p-card p-shadow-2" style={{
+        background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+        backdropFilter: 'blur(40px) saturate(150%)',
+        border: '1px solid rgba(255,255,255,0.2)',
+        borderRadius: '20px',
+        padding: '30px'
+      }}>
+        <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+          <h1 style={{ 
+            fontSize: '28px', 
+            fontWeight: '600',
+            marginBottom: '10px',
+            color: '#333'
+          }}>
+            <i className="icon-speedometer" style={{ marginRight: '10px' }}></i>
+            Comparador de Carros Avançado
+          </h1>
+          <p style={{ color: '#666', fontSize: '14px' }}>Selecione até 4 modelos para comparar características detalhadas</p>
+        </div>
 
+    <div className="comparador-avancado-container">
       <div className="comparador-content">
         <div className="comparador-sidebar">
           <div className="search-section">
@@ -492,6 +512,8 @@ const ComparadorAvancado = () => {
         <p>💡 Dica: Valores em amarelo indicam características diferentes entre os modelos</p>
         <p>🏆 Destaque: Cada carro recebe uma pontuação baseada em suas melhores qualidades comparativas</p>
       </footer>
+    </div>
+    </div>
     </div>
   );
 };

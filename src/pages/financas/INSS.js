@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useUrlParams from '../../utils/useUrlParams.js';
 import { formatCurrency, formatNumber, safeParseFloat } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function INSS() {
     const [salario, setSalario] = useState('');
@@ -54,16 +53,27 @@ export default function INSS() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>💼 Calculadora de INSS</h1>
-                <p className="description">Calcule o desconto de INSS no seu salário</p>
-            </div>
-            <div className="tool-container">
-                <form className="tool-form">
-                    <div className="form-group">
-                        <label htmlFor="salario">Salário Bruto (R$)</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-briefcase" style={{ marginRight: '10px' }}></i>
+                        Calculadora de INSS
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule o desconto de INSS no seu salário</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="salario" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Salário Bruto (R$):</label>
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             id="salario"
                             placeholder="Ex: 3000"
@@ -71,33 +81,34 @@ export default function INSS() {
                             step="0.01"
                             value={salario}
                             onChange={(e) => setSalario(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
                 </form>
 
                 {resultado && (
-                    <div className="result">
-                        <h2>Resultado</h2>
-                        <div className="result-content">
-                            <div className="result-item">
-                                <label>Salário Bruto</label>
-                                <value>{formatCurrency(resultado.salario)}</value>
-                            </div>
-                            <div className="result-item">
-                                <label>Alíquota</label>
-                                <value>{formatNumber(resultado.aliquota, 2)}%</value>
-                            </div>
-                            <div className="result-item">
-                                <label>INSS Descontado</label>
-                                <value style={{ color: '#dc3545' }}>-{formatCurrency(resultado.inss)}</value>
-                            </div>
-                            <div className="result-item">
-                                <label>Salário Líquido</label>
-                                <value style={{ fontSize: '1.3rem', color: '#28a745' }}>
-                                    {formatCurrency(resultado.salarioLiquido)}
-                                </value>
-                            </div>
-                        </div>
+                    <div className="p-card p-shadow-1" style={{ background: 'rgba(255,255,255,0.5)', borderRadius: '15px', padding: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', marginBottom: '20px' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '15px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Resultado</h3>
+                        <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Salário Bruto</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>{formatCurrency(resultado.salario)}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Alíquota</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>{formatNumber(resultado.aliquota, 2)}%</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>INSS Descontado</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#dc3545', textAlign: 'right' }}>-{formatCurrency(resultado.inss)}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px', fontSize: '14px', color: '#666', fontWeight: '600' }}>Salário Líquido</td>
+                                    <td style={{ padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px', fontSize: '20px', fontWeight: '700', color: '#28a745', textAlign: 'right' }}>{formatCurrency(resultado.salarioLiquido)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 )}
 
@@ -129,6 +140,6 @@ export default function INSS() {
                     </table>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

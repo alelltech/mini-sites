@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/conversor.css';
 
 export default function Porcentagem() {
     const [total, setTotal] = useState('');
@@ -37,47 +36,106 @@ export default function Porcentagem() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>📊 Calculadora de Porcentagem</h1>
-                <p className="description">Calcule porcentagens de qualquer valor</p>
-            </div>
-            <div className="tool-container">
-                <form className="tool-form">
-                    <div className="form-group">
-                        <label htmlFor="total">Valor Total:</label>
+        <div style={{ 
+            padding: '20px',
+            maxWidth: '800px',
+            margin: '0 auto'
+        }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ 
+                        fontSize: '28px', 
+                        fontWeight: '600',
+                        marginBottom: '10px',
+                        color: '#333'
+                    }}>
+                        <i className="icon-calculator" style={{ marginRight: '10px' }}></i>
+                        Calculadora de Porcentagem
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule porcentagens de qualquer valor</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div style={{ marginBottom: '20px' }}>
+                        <label htmlFor="total" style={{ 
+                            display: 'block',
+                            marginBottom: '8px',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            color: '#333'
+                        }}>
+                            Valor Total (R$):
+                        </label>
                         <input
+                            className="p-input"
                             type="number"
                             id="total"
                             placeholder="Ex: 200"
                             step="0.01"
                             value={total}
                             onChange={(e) => setTotal(e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: '12px 16px',
+                                fontSize: '16px',
+                                border: '1px solid rgba(0,0,0,0.1)',
+                                borderRadius: '10px',
+                                background: 'rgba(255,255,255,0.9)',
+                                transition: 'all 0.3s ease'
+                            }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="percentual">Porcentagem (%):</label>
+                    <div style={{ marginBottom: '20px' }}>
+                        <label htmlFor="percentual" style={{ 
+                            display: 'block',
+                            marginBottom: '8px',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            color: '#333'
+                        }}>
+                            Porcentagem (%):
+                        </label>
                         <input
+                            className="p-input"
                             type="number"
                             id="percentual"
                             placeholder="Ex: 15"
                             step="0.1"
                             value={percentual}
                             onChange={(e) => setPercentual(e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: '12px 16px',
+                                fontSize: '16px',
+                                border: '1px solid rgba(0,0,0,0.1)',
+                                borderRadius: '10px',
+                                background: 'rgba(255,255,255,0.9)',
+                                transition: 'all 0.3s ease'
+                            }}
                         />
                     </div>
                 </form>
 
-                <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                     <button
+                        className="p-btn p-shadow-1"
                         onClick={limpar}
                         style={{
-                            padding: '10px 20px',
-                            background: '#6c757d',
+                            padding: '12px 24px',
+                            background: 'linear-gradient(145deg, rgba(108, 117, 125, 0.9), rgba(108, 117, 125, 0.7))',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '10px',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
                         }}
                     >
                         Limpar
@@ -85,38 +143,94 @@ export default function Porcentagem() {
                 </div>
 
                 {resultado && (
-                    <div className="result">
-                        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <div className="p-card p-shadow-1" style={{
+                        background: 'rgba(255,255,255,0.5)',
+                        borderRadius: '15px',
+                        padding: '20px',
+                        backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(255,255,255,0.3)'
+                    }}>
+                        <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
                             <tbody>
                                 <tr>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        <strong>Valor Total</strong>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(255,255,255,0.7)',
+                                        borderRadius: '8px 0 0 8px',
+                                        fontWeight: '500',
+                                        color: '#333'
+                                    }}>
+                                        Valor Total
                                     </td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(255,255,255,0.7)',
+                                        borderRadius: '0 8px 8px 0',
+                                        textAlign: 'right',
+                                        color: '#333'
+                                    }}>
                                         R$ {resultado.total}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        <strong>Porcentagem</strong>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(255,255,255,0.7)',
+                                        borderRadius: '8px 0 0 8px',
+                                        fontWeight: '500',
+                                        color: '#333'
+                                    }}>
+                                        Porcentagem
                                     </td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(255,255,255,0.7)',
+                                        borderRadius: '0 8px 8px 0',
+                                        textAlign: 'right',
+                                        color: '#333'
+                                    }}>
                                         {resultado.percentual}%
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        <strong>Valor da Porcentagem</strong>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(40, 167, 69, 0.1)',
+                                        borderRadius: '8px 0 0 8px',
+                                        fontWeight: '500',
+                                        color: '#333'
+                                    }}>
+                                        Valor da Porcentagem
                                     </td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd', color: '#28a745', fontWeight: 'bold' }}>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(40, 167, 69, 0.1)',
+                                        borderRadius: '0 8px 8px 0',
+                                        textAlign: 'right',
+                                        color: '#28a745',
+                                        fontWeight: 'bold'
+                                    }}>
                                         R$ {resultado.valorPercentual}
                                     </td>
                                 </tr>
-                                <tr style={{ background: '#f0f0f0' }}>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        <strong>Valor Final (com %)</strong>
+                                <tr>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(102, 126, 234, 0.1)',
+                                        borderRadius: '8px 0 0 8px',
+                                        fontWeight: '500',
+                                        color: '#333'
+                                    }}>
+                                        Valor Final (com %)
                                     </td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#667eea' }}>
+                                    <td style={{ 
+                                        padding: '12px 16px',
+                                        background: 'rgba(102, 126, 234, 0.1)',
+                                        borderRadius: '0 8px 8px 0',
+                                        textAlign: 'right',
+                                        fontWeight: 'bold',
+                                        color: '#667eea'
+                                    }}>
                                         R$ {resultado.valorFinal}
                                     </td>
                                 </tr>
@@ -125,6 +239,6 @@ export default function Porcentagem() {
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

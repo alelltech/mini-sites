@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import useUrlParams from '../../utils/useUrlParams.js';
-import '../../styles/conversor.css';
 
 export default function IMC() {
     const [peso, setPeso] = useState('');
@@ -61,46 +60,105 @@ export default function IMC() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>⚖️ Calculadora de IMC</h1>
-                <p className="description">Calcule seu Índice de Massa Corporal</p>
-            </div>
-            <div className="tool-container">
-                <form className="tool-form">
-                    <div className="form-group">
-                        <label htmlFor="peso">Peso (kg):</label>
+        <div style={{ 
+            padding: '20px',
+            maxWidth: '800px',
+            margin: '0 auto'
+        }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ 
+                        fontSize: '28px', 
+                        fontWeight: '600',
+                        marginBottom: '10px',
+                        color: '#333'
+                    }}>
+                        <i className="icon-heart" style={{ marginRight: '10px' }}></i>
+                        Calculadora de IMC
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule seu Índice de Massa Corporal</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div style={{ marginBottom: '20px' }}>
+                        <label htmlFor="peso" style={{ 
+                            display: 'block',
+                            marginBottom: '8px',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            color: '#333'
+                        }}>
+                            Peso (kg):
+                        </label>
                         <input
+                            className="p-input"
                             type="number"
                             id="peso"
                             placeholder="Ex: 75"
                             step="0.1"
                             value={peso}
                             onChange={(e) => setPeso(e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: '12px 16px',
+                                fontSize: '16px',
+                                border: '1px solid rgba(0,0,0,0.1)',
+                                borderRadius: '10px',
+                                background: 'rgba(255,255,255,0.9)',
+                                transition: 'all 0.3s ease'
+                            }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="altura">Altura (cm):</label>
+                    <div style={{ marginBottom: '20px' }}>
+                        <label htmlFor="altura" style={{ 
+                            display: 'block',
+                            marginBottom: '8px',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            color: '#333'
+                        }}>
+                            Altura (cm):
+                        </label>
                         <input
+                            className="p-input"
                             type="number"
                             id="altura"
                             placeholder="Ex: 180"
                             value={altura}
                             onChange={(e) => setAltura(e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: '12px 16px',
+                                fontSize: '16px',
+                                border: '1px solid rgba(0,0,0,0.1)',
+                                borderRadius: '10px',
+                                background: 'rgba(255,255,255,0.9)',
+                                transition: 'all 0.3s ease'
+                            }}
                         />
                     </div>
                 </form>
 
-                <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                     <button
+                        className="p-btn p-shadow-1"
                         onClick={limpar}
                         style={{
-                            padding: '10px 20px',
-                            background: '#6c757d',
+                            padding: '12px 24px',
+                            background: 'linear-gradient(145deg, rgba(108, 117, 125, 0.9), rgba(108, 117, 125, 0.7))',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '10px',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
                         }}
                     >
                         Limpar
@@ -108,7 +166,14 @@ export default function IMC() {
                 </div>
 
                 {resultado && (
-                    <div className="result">
+                    <div className="p-card p-shadow-1" style={{
+                        background: 'rgba(255,255,255,0.5)',
+                        borderRadius: '15px',
+                        padding: '20px',
+                        backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(255,255,255,0.3)',
+                        textAlign: 'center'
+                    }}>
                         <div style={{
                             fontSize: '2.5rem',
                             fontWeight: 'bold',
@@ -128,9 +193,16 @@ export default function IMC() {
                     </div>
                 )}
 
-                <div style={{ marginTop: '30px', background: '#f8f9fa', padding: '20px', borderRadius: '8px' }}>
-                    <h3 style={{ marginTop: 0 }}>📊 Classificação do IMC</h3>
-                    <ul style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.8' }}>
+                <div className="p-card p-shadow-1" style={{ 
+                    marginTop: '30px', 
+                    background: 'rgba(255,255,255,0.5)', 
+                    borderRadius: '15px',
+                    padding: '20px',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255,255,255,0.3)'
+                }}>
+                    <h3 style={{ marginTop: 0, color: '#333', fontSize: '18px', fontWeight: '600' }}>📊 Classificação do IMC</h3>
+                    <ul style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.8', color: '#555' }}>
                         <li>Abaixo de 18,5: Abaixo do peso</li>
                         <li>18,5 - 24,9: Peso normal</li>
                         <li>25,0 - 29,9: Sobrepeso</li>
@@ -140,6 +212,6 @@ export default function IMC() {
                     </ul>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 function calcularPrestacao(valor, taxaAnual, anos) {
     const taxa = (taxaAnual / 100) / 12;
@@ -64,16 +63,27 @@ export default function CalculadoraHipoteca() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🏠 Calculadora de Hipoteca</h1>
-                <p className="description">Simule pagamentos de hipoteca e financiamento imobiliário</p>
-            </div>
-            <div className="tool-container">
-                <div style={{ maxWidth: '600px' }}>
-                    <div className="form-group">
-                        <label htmlFor="valor">Valor do Imóvel (R$)</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-home" style={{ marginRight: '10px' }}></i>
+                        Calculadora de Hipoteca
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Simule pagamentos de hipoteca e financiamento imobiliário</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="valor" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Valor do Imóvel (R$):</label>
                         <input
+                            className="p-input p-form-text"
                             id="valor"
                             type="number"
                             placeholder="300000"
@@ -81,13 +91,14 @@ export default function CalculadoraHipoteca() {
                             step="0.01"
                             value={valor}
                             onChange={(e) => setValor(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="taxa">Taxa de Juros (% ao ano)</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="taxa" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Taxa de Juros (% ao ano):</label>
                         <input
+                            className="p-input p-form-text"
                             id="taxa"
                             type="number"
                             placeholder="5.5"
@@ -95,13 +106,14 @@ export default function CalculadoraHipoteca() {
                             step="0.01"
                             value={taxa}
                             onChange={(e) => setTaxa(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="anos">Prazo (anos)</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="anos" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Prazo (anos):</label>
                         <input
+                            className="p-input p-form-text"
                             id="anos"
                             type="number"
                             placeholder="30"
@@ -109,75 +121,56 @@ export default function CalculadoraHipoteca() {
                             step="1"
                             value={anos}
                             onChange={(e) => setAnos(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
+                </form>
 
-                    <div style={{ display: 'flex', gap: '10px' }}>
+                {showResult && resultado && (
+                    <div className="p-card p-shadow-1" style={{ background: 'rgba(255,255,255,0.5)', borderRadius: '15px', padding: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '15px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Resultado</h3>
+                        <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px', fontSize: '14px', color: '#666', fontWeight: '600' }}>Prestação Mensal</td>
+                                    <td style={{ padding: '12px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px', fontSize: '18px', fontWeight: '700', color: '#667eea', textAlign: 'right' }}>R$ {resultado.prestacao}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Total de Meses</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>{resultado.totalMeses}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Total a Pagar</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.totalPago}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Total de Juros</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#dc3545', textAlign: 'right' }}>R$ {resultado.totalJuros}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <button
-                            onClick={limpar}
+                            onClick={copyResult}
+                            className="p-btn"
                             style={{
-                                padding: '10px 20px',
-                                background: '#6c757d',
+                                width: '100%',
+                                padding: '12px',
+                                marginTop: '15px',
+                                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                borderRadius: '10px',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                transition: 'all 0.3s ease'
                             }}
                         >
-                            Limpar
+                            Copiar Resultado
                         </button>
                     </div>
-
-                    {showResult && resultado && (
-                        <div className="result">
-                            <h3>Resultado</h3>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                                <tbody>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Prestação Mensal</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            R$ {resultado.prestacao}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Total de Meses</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                            {resultado.totalMeses}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Total a Pagar</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            R$ {resultado.totalPago}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Total de Juros</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#dc3545' }}>
-                                            R$ {resultado.totalJuros}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button
-                                onClick={copyResult}
-                                style={{
-                                    padding: '8px 16px',
-                                    marginTop: '15px',
-                                    background: '#28a745',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Copiar Resultado
-                            </button>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
-        </section>
+        </div>
     );
 }

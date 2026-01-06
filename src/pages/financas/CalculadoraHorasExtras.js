@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 const JORNADAS = [
     { mensal: 168, texto: '40h/semana 8h/dia 168h/mes'},
@@ -71,16 +70,27 @@ export default function CalculadoraHorasExtras() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>⏰ Calculadora de Horas Extras</h1>
-                <p className="description">Calcule o valor de horas extras com diferentes percentuais</p>
-            </div>
-            <div className="tool-container">
-                <div style={{ maxWidth: '600px' }}>
-                    <div className="form-group">
-                        <label htmlFor="salario">Salário Mensal (R$)</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-clock" style={{ marginRight: '10px' }}></i>
+                        Calculadora de Horas Extras
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule o valor de horas extras com diferentes percentuais</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="salario" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Salário Mensal (R$):</label>
                         <input
+                            className="p-input p-form-text"
                             id="salario"
                             type="number"
                             placeholder="3000"
@@ -88,17 +98,18 @@ export default function CalculadoraHorasExtras() {
                             step="0.01"
                             value={salario}
                             onChange={(e) => setSalario(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="jornada">Selecione a Jornada Semanal</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="jornada" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Selecione a Jornada Semanal:</label>
                         <select
+                            className="p-select p-form-select"
                             id="jornada"
                             value={horasNormais}
                             onChange={(e) => setHorasNormais(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         >
                             <option value="">-- Escolha uma jornada --</option>
                             {JORNADAS.map((jornada) => (
@@ -109,12 +120,13 @@ export default function CalculadoraHorasExtras() {
                         </select>
                     </div>
 
-                    <div className="form-group">
-                        <label>Distribuição de Horas Extras</label>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '15px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Distribuição de Horas Extras:</label>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                             <div>
-                                <label htmlFor="horas50" style={{ fontSize: '12px' }}>Horas 50%</label>
+                                <label htmlFor="horas50" style={{ display: 'block', fontSize: '12px', marginBottom: '6px', color: '#666' }}>Horas 50%</label>
                                 <input
+                                    className="p-input p-form-text"
                                     id="horas50"
                                     type="number"
                                     placeholder="0"
@@ -122,12 +134,13 @@ export default function CalculadoraHorasExtras() {
                                     step="0.5"
                                     value={horas50}
                                     onChange={(e) => setHoras50(e.target.value)}
-                                    style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+                                    style={{ width: '100%', padding: '10px 14px', fontSize: '14px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', background: 'rgba(255,255,255,0.9)' }}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="horas100" style={{ fontSize: '12px' }}>Horas 100%</label>
+                                <label htmlFor="horas100" style={{ display: 'block', fontSize: '12px', marginBottom: '6px', color: '#666' }}>Horas 100%</label>
                                 <input
+                                    className="p-input p-form-text"
                                     id="horas100"
                                     type="number"
                                     placeholder="0"
@@ -135,96 +148,66 @@ export default function CalculadoraHorasExtras() {
                                     step="0.5"
                                     value={horas100}
                                     onChange={(e) => setHoras100(e.target.value)}
-                                    style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px' }}
+                                    style={{ width: '100%', padding: '10px 14px', fontSize: '14px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px', background: 'rgba(255,255,255,0.9)' }}
                                 />
                             </div>
                         </div>
                     </div>
+                </form>
 
-                    <div style={{ display: 'flex', gap: '10px' }}>
+                {showResult && resultado && (
+                    <div className="p-card p-shadow-1" style={{ background: 'rgba(255,255,255,0.5)', borderRadius: '15px', padding: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '15px', fontSize: '18px', fontWeight: '600', color: '#333' }}>Resultado</h3>
+                        <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Valor Hora Normal</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.valorHora}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Horas Normais ({resultado.horasNormais}h)</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.valorNormal}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Horas 50% ({resultado.horas50}h)</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.valor50}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '14px', color: '#666' }}>Horas 100% ({resultado.horas100}h)</td>
+                                    <td style={{ padding: '12px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '16px', fontWeight: '600', color: '#333', textAlign: 'right' }}>R$ {resultado.valor100}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px', fontSize: '14px', color: '#666', fontWeight: '600' }}>Total Extras</td>
+                                    <td style={{ padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px', fontSize: '18px', fontWeight: '700', color: '#28a745', textAlign: 'right' }}>R$ {resultado.totalExtras}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px', fontSize: '14px', color: '#666', fontWeight: '600' }}>Total com Normal</td>
+                                    <td style={{ padding: '12px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px', fontSize: '18px', fontWeight: '700', color: '#667eea', textAlign: 'right' }}>R$ {resultado.totalComNormal}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <button
-                            onClick={calcular}
+                            onClick={copyResult}
+                            className="p-btn"
                             style={{
-                                padding: '10px 20px',
-                                background: '#007bff',
+                                width: '100%',
+                                padding: '12px',
+                                marginTop: '15px',
+                                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                borderRadius: '10px',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                transition: 'all 0.3s ease'
                             }}
                         >
-                            Calcular
-                        </button>
-                        <button
-                            onClick={limpar}
-                            style={{
-                                padding: '10px 20px',
-                                background: '#6c757d',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Limpar
+                            Copiar Resultado
                         </button>
                     </div>
-
-                    {showResult && resultado && (
-                        <div className="result">
-                            <h3>Resultado</h3>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                                <tbody>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Valor Hora Normal</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            R$ {resultado.valorHora}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Horas Normais ({resultado.horasNormais}h)</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>R$ {resultado.valorNormal}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Horas 50% ({resultado.horas50}h)</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>R$ {resultado.valor50}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Horas 100% ({resultado.horas100}h)</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>R$ {resultado.valor100}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>Total Extras</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#28a745' }}>
-                                            R$ {resultado.totalExtras}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>Total com Normal</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>
-                                            R$ {resultado.totalComNormal}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button
-                                onClick={copyResult}
-                                style={{
-                                    padding: '8px 16px',
-                                    marginTop: '15px',
-                                    background: '#28a745',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                Copiar Resultado
-                            </button>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
-        </section>
+        </div>
     );
 }

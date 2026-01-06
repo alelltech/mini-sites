@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/conversor.css';
 
 const ALIMENTOS = {
     arroz: { nome: 'Arroz (100g)', calorias: 100 },
@@ -57,20 +56,31 @@ export default function CalculadoraCalorias() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🍎 Calculadora de Calorias</h1>
-                <p className="description">Calcule o gasto calórico de alimentos</p>
-            </div>
-            <div className="tool-container">
-                <div style={{ maxWidth: '600px' }}>
-                    <div className="form-group">
-                        <label htmlFor="alimento">Alimento/Bebida:</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-energy" style={{ marginRight: '10px' }}></i>
+                        Calculadora de Calorias
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule o gasto calórico de alimentos</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="alimento" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Alimento/Bebida:</label>
                         <select
+                            className="p-form-select"
                             id="alimento"
                             value={alimento}
                             onChange={(e) => setAlimento(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         >
                             <option value="">Selecione um alimento...</option>
                             {Object.entries(ALIMENTOS).map(([key, data]) => (
@@ -81,45 +91,45 @@ export default function CalculadoraCalorias() {
                         </select>
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="quantidade">Quantidade (gramas ou unidades):</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="quantidade" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Quantidade (gramas ou unidades):</label>
                         <input
+                            className="p-input p-form-text"
                             id="quantidade"
                             type="number"
                             value={quantidade}
                             onChange={(e) => setQuantidade(e.target.value)}
                             step="0.1"
                             min="0"
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
-
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                        <button
-                            onClick={limpar}
-                            style={{
-                                padding: '10px 20px',
-                                background: '#6c757d',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Limpar
-                        </button>
-                    </div>
-
-                    {showResult && resultado && (
-                        <div className="result">
-                            <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#007bff', marginBottom: '10px' }}>
-                                {resultado.calorias} kcal
-                            </div>
-                            <p>{resultado.quantidade}g de {resultado.alimento}</p>
-                        </div>
-                    )}
+                </form>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                        onClick={limpar}
+                        style={{
+                            padding: '10px 20px',
+                            background: '#6c757d',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        Limpar
+                    </button>
                 </div>
+
+                {showResult && resultado && (
+                    <div className="result">
+                        <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#007bff', marginBottom: '10px' }}>
+                            {resultado.calorias} kcal
+                        </div>
+                        <p>{resultado.quantidade}g de {resultado.alimento}</p>
+                    </div>
+                )}
             </div>
-        </section>
+        </div>
     );
 }

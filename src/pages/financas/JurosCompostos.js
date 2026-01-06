@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useUrlParams from '../../utils/useUrlParams.js';
 import { formatCurrency, formatNumber, safeParseFloat } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function JurosCompostos() {
     const [capital, setCapital] = useState('');
@@ -53,16 +52,29 @@ export default function JurosCompostos() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>💰 Calculadora de Juros Compostos</h1>
-                <p className="description">Calcule o rendimento de investimentos com juros compostos</p>
-            </div>
-            <div className="tool-container">
-                <form className="tool-form">
-                    <div className="form-group">
-                        <label htmlFor="capital">Capital Inicial (R$)</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-graph" style={{ marginRight: '10px' }}></i>
+                        Calculadora de Juros Compostos
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Calcule o rendimento de investimentos com juros compostos</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="capital" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>
+                            Capital Inicial (R$):
+                        </label>
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             id="capital"
                             placeholder="1000"
@@ -70,11 +82,15 @@ export default function JurosCompostos() {
                             step="0.01"
                             value={capital}
                             onChange={(e) => setCapital(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="taxa">Taxa de Juros (% ao ano)</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="taxa" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>
+                            Taxa de Juros (% ao ano):
+                        </label>
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             id="taxa"
                             placeholder="10"
@@ -82,11 +98,15 @@ export default function JurosCompostos() {
                             step="0.01"
                             value={taxa}
                             onChange={(e) => setTaxa(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="tempo">Tempo (anos)</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="tempo" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>
+                            Tempo (anos):
+                        </label>
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             id="tempo"
                             placeholder="5"
@@ -94,14 +114,19 @@ export default function JurosCompostos() {
                             step="0.1"
                             value={tempo}
                             onChange={(e) => setTempo(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="frequencia">Frequência de Capitalização</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="frequencia" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>
+                            Frequência de Capitalização:
+                        </label>
                         <select
+                            className="p-select p-form-select"
                             id="frequencia"
                             value={frequencia}
                             onChange={(e) => setFrequencia(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         >
                             <option value="1">Anual</option>
                             <option value="2">Semestral</option>
@@ -113,33 +138,40 @@ export default function JurosCompostos() {
                 </form>
 
                 {resultado && (
-                    <div className="result">
-                        <h2>Resultado</h2>
-                        <div className="result-content">
-                            <div className="result-item">
-                                <label>Capital Inicial</label>
-                                <value>{formatCurrency(resultado.capital)}</value>
-                            </div>
-                            <div className="result-item">
-                                <label>Juros Ganhos</label>
-                                <value style={{ color: '#28a745' }}>+{formatCurrency(resultado.jurosGanhos)}</value>
-                            </div>
-                            <div className="result-item">
-                                <label>Montante Final</label>
-                                <value style={{ fontSize: '1.3rem' }}>{formatCurrency(resultado.montante)}</value>
-                            </div>
-                            <div className="result-item">
-                                <label>Taxa por Período</label>
-                                <value>{formatNumber(resultado.taxaPeriodo, 4)}%</value>
-                            </div>
-                            <div className="result-item">
-                                <label>Períodos Totais</label>
-                                <value>{resultado.periodos}</value>
-                            </div>
-                        </div>
+                    <div className="p-card p-shadow-1" style={{
+                        background: 'rgba(255,255,255,0.5)',
+                        borderRadius: '15px',
+                        padding: '20px',
+                        backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(255,255,255,0.3)'
+                    }}>
+                        <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px' }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px 0 0 8px', fontWeight: '500', color: '#333' }}>Capital Inicial</td>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.7)', borderRadius: '0 8px 8px 0', textAlign: 'right', color: '#333' }}>{formatCurrency(resultado.capital)}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '8px 0 0 8px', fontWeight: '500', color: '#333' }}>Juros Ganhos</td>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '0 8px 8px 0', textAlign: 'right', color: '#28a745', fontWeight: 'bold' }}>+{formatCurrency(resultado.jurosGanhos)}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '8px 0 0 8px', fontWeight: '500', color: '#333' }}>Montante Final</td>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '0 8px 8px 0', textAlign: 'right', fontWeight: 'bold', color: '#667eea', fontSize: '1.3rem' }}>{formatCurrency(resultado.montante)}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px 0 0 8px', fontWeight: '500', color: '#333' }}>Taxa por Período</td>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.7)', borderRadius: '0 8px 8px 0', textAlign: 'right', color: '#333' }}>{formatNumber(resultado.taxaPeriodo, 4)}%</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.7)', borderRadius: '8px 0 0 8px', fontWeight: '500', color: '#333' }}>Períodos Totais</td>
+                                    <td style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.7)', borderRadius: '0 8px 8px 0', textAlign: 'right', color: '#333' }}>{resultado.periodos}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

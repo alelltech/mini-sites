@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/conversor.css';
 
 export default function Geradorcpf() {
     const [cpfs, setCpfs] = useState('');

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { formatNumber, safeParseFloat } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function ConvertorComprimento() {
     const [valor, setValor] = useState('');
@@ -31,28 +30,43 @@ export default function ConvertorComprimento() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>📏 Conversor de Comprimento</h1>
-            </div>
-            <div className="tool-container">
-                <form className="tool-form">
-                    <div className="form-group">
-                        <label htmlFor="valor">Valor</label>
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-ruler" style={{ marginRight: '10px' }}></i>
+                        Conversor de Comprimento
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Converta entre diferentes unidades de comprimento</p>
+                </div>
+
+                <form style={{ marginBottom: '20px' }}>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="valor" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Valor:</label>
                         <input 
+                            className="p-input p-form-text"
                             type="number" 
                             id="valor" 
                             placeholder="100"
                             value={valor}
                             onChange={(e) => setValor(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="de">De</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="de" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>De:</label>
                         <select 
+                            className="p-select p-form-select"
                             id="de" 
                             value={de}
                             onChange={(e) => setDe(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         >
                             <option value="m">Metro (m)</option>
                             <option value="km">Quilômetro (km)</option>
@@ -62,12 +76,14 @@ export default function ConvertorComprimento() {
                             <option value="pol">Polegada (pol)</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="para">Para</label>
+                    <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                        <label htmlFor="para" className="p-form-label" style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#333' }}>Para:</label>
                         <select 
+                            className="p-select p-form-select"
                             id="para" 
                             value={para}
                             onChange={(e) => setPara(e.target.value)}
+                            style={{ width: '100%', padding: '12px 16px', fontSize: '16px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px', background: 'rgba(255,255,255,0.9)', transition: 'all 0.3s ease' }}
                         >
                             <option value="m">Metro (m)</option>
                             <option value="km">Quilômetro (km)</option>
@@ -79,14 +95,12 @@ export default function ConvertorComprimento() {
                     </div>
                 </form>
                 {resultado && (
-                    <div className="result">
-                        <div className="result-item">
-                            <label>{de} → {para}</label>
-                            <value>{resultado}</value>
-                        </div>
+                    <div className="p-card p-shadow-1" style={{ background: 'rgba(255,255,255,0.5)', borderRadius: '15px', padding: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', textAlign: 'center' }}>
+                        <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>{de} → {para}</div>
+                        <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#667eea' }}>{resultado}</div>
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

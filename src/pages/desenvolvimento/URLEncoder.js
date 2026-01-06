@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function URLEncoder() {
     const [input, setInput] = useState('');

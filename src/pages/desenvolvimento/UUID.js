@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/conversor.css';
 
 export default function UUID() {
     const [uuids, setUuids] = useState('');
@@ -35,85 +34,75 @@ export default function UUID() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🔑 Gerador de UUID</h1>
-                <p className="description">Gere identificadores universais únicos (UUID v4)</p>
-            </div>
-            <div className="tool-container">
+        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(40px) saturate(150%)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                padding: '30px'
+            }}>
+                <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '600', marginBottom: '10px', color: '#333' }}>
+                        <i className="icon-key" style={{ marginRight: '10px' }}></i>
+                        Gerador de UUID
+                    </h1>
+                    <p style={{ color: '#666', fontSize: '14px' }}>Gere identificadores universais únicos (UUID v4)</p>
+                </div>
                 <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
-                    <button
-                        onClick={generateOne}
-                        style={{
-                            padding: '10px 20px',
-                            background: '#667eea',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
+                    <button onClick={generateOne} className="p-btn" style={{
+                        flex: '1', padding: '12px',
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        color: 'white', border: 'none', borderRadius: '10px',
+                        cursor: 'pointer', fontSize: '14px', fontWeight: '600',
+                        transition: 'all 0.3s ease'
+                    }}>
                         Gerar Um UUID
                     </button>
-                    <button
-                        onClick={generateMultiple}
-                        style={{
-                            padding: '10px 20px',
-                            background: '#764ba2',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
+                    <button onClick={generateMultiple} className="p-btn" style={{
+                        flex: '1', padding: '12px',
+                        background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                        color: 'white', border: 'none', borderRadius: '10px',
+                        cursor: 'pointer', fontSize: '14px', fontWeight: '600',
+                        transition: 'all 0.3s ease'
+                    }}>
                         Gerar 10 UUIDs
                     </button>
-                    <button
-                        onClick={clear}
-                        style={{
-                            padding: '10px 20px',
-                            background: '#6c757d',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
+                    <button onClick={clear} className="p-btn" style={{
+                        padding: '12px 24px',
+                        background: 'linear-gradient(145deg, rgba(108, 117, 125, 0.9), rgba(108, 117, 125, 0.7))',
+                        color: 'white', border: 'none', borderRadius: '10px',
+                        cursor: 'pointer', fontSize: '14px', fontWeight: '600'
+                    }}>
                         Limpar
                     </button>
                 </div>
 
                 {uuids && (
-                    <div className="result">
-                        <strong>UUIDs Gerados:</strong>
+                    <div className="p-card p-shadow-1" style={{
+                        background: 'rgba(255,255,255,0.5)', borderRadius: '15px',
+                        padding: '20px', backdropFilter: 'blur(10px)',
+                        border: '1px solid rgba(255,255,255,0.3)'
+                    }}>
                         <pre style={{
-                            background: 'white',
-                            padding: '15px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
-                            overflowX: 'auto',
-                            marginTop: '10px',
-                            marginBottom: '10px'
+                            background: 'rgba(255,255,255,0.9)', padding: '15px',
+                            border: '1px solid rgba(0,0,0,0.1)', borderRadius: '10px',
+                            overflowX: 'auto', marginBottom: '15px', fontFamily: 'monospace',
+                            fontSize: '14px', color: '#333'
                         }}>
                             {uuids}
                         </pre>
-                        <button
-                            onClick={copyResult}
-                            style={{
-                                padding: '8px 16px',
-                                background: '#28a745',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                                fontSize: '14px'
-                            }}
-                        >
+                        <button onClick={copyResult} className="p-btn" style={{
+                            width: '100%', padding: '12px',
+                            background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                            color: 'white', border: 'none', borderRadius: '10px',
+                            cursor: 'pointer', fontSize: '14px', fontWeight: '600'
+                        }}>
                             📋 Copiar Tudo
                         </button>
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }
