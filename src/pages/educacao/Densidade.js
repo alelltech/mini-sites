@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { formatNumber, safeParseFloat } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function Densidade() {
     const [valor, setValor] = useState('');
@@ -54,30 +53,35 @@ export default function Densidade() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>⚗️ Conversor de Densidade</h1>
-                <p className="description">Converta entre diferentes unidades de densidade</p>
-            </div>
-            <div className="tool-container">
-                <form className="tool-form">
-                    <div className="form-group">
-                        <label htmlFor="valor">Valor:</label>
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-flask"></i> Conversor de Densidade
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Converta entre diferentes unidades de densidade</p>
+                
+                <form style={{ display: 'grid', gap: '15px', marginBottom: '20px' }}>
+                    <div className="p-form-group">
+                        <label htmlFor="valor" className="p-form-label">Valor:</label>
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             id="valor"
                             placeholder="Digite o valor..."
                             step="0.0001"
                             value={valor}
                             onChange={(e) => setValor(e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="de">De:</label>
+                    <div className="p-form-group">
+                        <label htmlFor="de" className="p-form-label">De:</label>
                         <select
+                            className="p-select p-form-select"
                             id="de"
                             value={de}
                             onChange={(e) => setDe(e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         >
                             <option value="kg_m3">kg/m³</option>
                             <option value="g_cm3">g/cm³</option>
@@ -85,12 +89,14 @@ export default function Densidade() {
                             <option value="g_ml">g/mL</option>
                         </select>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="para">Para:</label>
+                    <div className="p-form-group">
+                        <label htmlFor="para" className="p-form-label">Para:</label>
                         <select
+                            className="p-select p-form-select"
                             id="para"
                             value={para}
                             onChange={(e) => setPara(e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         >
                             <option value="kg_m3">kg/m³</option>
                             <option value="g_cm3">g/cm³</option>
@@ -100,16 +106,18 @@ export default function Densidade() {
                     </div>
                 </form>
 
-                <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                     <button
                         onClick={limpar}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#6c757d',
+                            background: 'linear-gradient(135deg, #6c757d 0%, #5a6268 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Limpar
@@ -117,30 +125,22 @@ export default function Densidade() {
                 </div>
 
                 {resultado && (
-                    <div className="result">
+                    <div className="p-card" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '20px' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                             <tbody>
                                 <tr>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        <strong>Origem</strong>
-                                    </td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        {resultado.origem}
-                                    </td>
+                                    <td style={{ padding: '12px', borderBottom: '1px solid rgba(255,255,255,0.2)', fontWeight: '700' }}>Origem</td>
+                                    <td style={{ padding: '12px', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>{resultado.origem}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd' }}>
-                                        <strong>Resultado</strong>
-                                    </td>
-                                    <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold', color: '#667eea' }}>
-                                        {resultado.resultado}
-                                    </td>
+                                    <td style={{ padding: '12px', fontWeight: '700' }}>Resultado</td>
+                                    <td style={{ padding: '12px', fontWeight: '700', color: '#667eea' }}>{resultado.resultado}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

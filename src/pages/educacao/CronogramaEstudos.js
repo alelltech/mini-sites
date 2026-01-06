@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/conversor.css';
 
 export default function CronogramaEstudos() {
     const [materia, setMateria] = useState('');
@@ -58,95 +57,105 @@ export default function CronogramaEstudos() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>📚 Gerador de Cronograma de Estudos</h1>
-                <p className="description">Crie cronogramas de estudos personalizados</p>
-            </div>
-            <div className="tool-container">
-                <div className="form-group">
-                    <label htmlFor="materia">Disciplina/Matéria:</label>
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-calendar"></i> Gerador de Cronograma
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Crie cronogramas de estudos personalizados</p>
+                
+                <div className="p-form-group" style={{ marginBottom: '15px' }}>
+                    <label htmlFor="materia" className="p-form-label">Disciplina/Matéria:</label>
                     <input
                         id="materia"
+                        className="p-input p-form-text"
                         type="text"
                         placeholder="Ex: Matemática, História..."
                         value={materia}
                         onChange={(e) => setMateria(e.target.value)}
-                        style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                     />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px' }}>
-                    <div className="form-group">
-                        <label htmlFor="dataInicio">Data de Início:</label>
+                    <div className="p-form-group">
+                        <label htmlFor="dataInicio" className="p-form-label">Data de Início:</label>
                         <input
                             id="dataInicio"
+                            className="p-input p-form-text"
                             type="date"
                             value={dataInicio}
                             onChange={(e) => setDataInicio(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="dataFinal">Data de Prova/Avaliação:</label>
+                    <div className="p-form-group">
+                        <label htmlFor="dataFinal" className="p-form-label">Data de Prova:</label>
                         <input
                             id="dataFinal"
+                            className="p-input p-form-text"
                             type="date"
                             value={dataFinal}
                             onChange={(e) => setDataFinal(e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         />
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="topicos">Tópicos a Estudar (um por linha):</label>
+                <div className="p-form-group" style={{ marginBottom: '15px' }}>
+                    <label htmlFor="topicos" className="p-form-label">Tópicos a Estudar:</label>
                     <textarea
                         id="topicos"
+                        className="p-form-text"
                         rows="5"
                         placeholder="Tópico 1&#10;Tópico 2&#10;Tópico 3"
                         value={topicos}
                         onChange={(e) => setTopicos(e.target.value)}
-                        style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="horas">Horas de Estudo por Dia:</label>
+                <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                    <label htmlFor="horas" className="p-form-label">Horas de Estudo/Dia:</label>
                     <input
                         id="horas"
+                        className="p-input p-form-text"
                         type="number"
                         value={horas}
                         onChange={(e) => setHoras(e.target.value)}
                         min="1"
                         step="0.5"
-                        style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '15px' }}
+                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                     />
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                     <button
                         onClick={gerar}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Gerar Cronograma
                     </button>
                     <button
                         onClick={limpar}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#6c757d',
+                            background: 'linear-gradient(135deg, #6c757d 0%, #5a6268 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Limpar
@@ -154,27 +163,27 @@ export default function CronogramaEstudos() {
                 </div>
 
                 {showResult && cronogramaResult && (
-                    <div className="result">
-                        <h3>Cronograma: {cronogramaResult.materia}</h3>
+                    <div className="p-card" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '20px', marginTop: '20px' }}>
+                        <h3 style={{ fontSize: '18px', fontWeight: '700', marginTop: 0 }}>Cronograma: {cronogramaResult.materia}</h3>
                         <div>
                             {cronogramaResult.cronograma.map((item, index) => (
                                 <div
                                     key={index}
                                     style={{
-                                        padding: '8px',
-                                        margin: '5px 0',
-                                        background: '#e7f3ff',
-                                        borderLeft: '4px solid #007bff',
-                                        borderRadius: '2px'
+                                        padding: '12px',
+                                        margin: '8px 0',
+                                        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(242, 93, 108, 0.1) 100%)',
+                                        borderLeft: '4px solid #667eea',
+                                        borderRadius: '6px'
                                     }}
                                 >
-                                    <strong>{item.dia}</strong> - {item.topico} ({item.horas}h)
+                                    <strong>{item.data}</strong> - {item.topico} ({item.horas}h)
                                 </div>
                             ))}
                         </div>
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

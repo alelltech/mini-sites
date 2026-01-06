@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 function generateCNPJ() {
     let cnpj = '';
@@ -51,48 +50,55 @@ export default function GeradorCNPJ() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🏢 Gerador de CNPJ</h1>
-                <p className="description">Gera CNPJs válidos (apenas para testes)</p>
-            </div>
-            <div className="tool-container">
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-briefcase"></i> Gerador de CNPJ
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Gera CNPJs válidos para testes</p>
+                
                 <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
                     <button
                         onClick={generateOne}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Gerar Um CNPJ
                     </button>
                     <button
                         onClick={generateMultiple}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Gerar 10 CNPJs
                     </button>
                     <button
                         onClick={clear}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#6c757d',
+                            background: 'linear-gradient(135deg, #6c757d 0%, #5a6268 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Limpar
@@ -100,31 +106,33 @@ export default function GeradorCNPJ() {
                 </div>
 
                 {output && (
-                    <div className="result">
-                        <strong>CNPJ(s) Gerado(s):</strong>
+                    <div className="p-card" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '20px', marginTop: '20px' }}>
+                        <p style={{ fontWeight: '700', marginTop: 0, marginBottom: '12px' }}>CNPJ(s) Gerado(s):</p>
                         <pre style={{
-                            background: '#fff',
-                            padding: '10px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
-                            fontSize: '18px',
-                            fontWeight: 'bold',
-                            marginTop: '10px',
-                            marginBottom: '10px',
-                            overflowX: 'auto'
+                            background: 'rgba(255,255,255,0.9)',
+                            padding: '15px',
+                            borderRadius: '8px',
+                            fontSize: '16px',
+                            fontWeight: '700',
+                            marginTop: '0',
+                            marginBottom: '15px',
+                            overflowX: 'auto',
+                            fontFamily: 'monospace'
                         }}>
                             {output}
                         </pre>
                         <button
                             onClick={copyResult}
+                            className="p-btn"
                             style={{
-                                padding: '8px 16px',
-                                background: '#28a745',
+                                padding: '10px 16px',
+                                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: '4px',
+                                borderRadius: '8px',
                                 cursor: 'pointer',
-                                fontSize: '12px'
+                                fontSize: '14px',
+                                fontWeight: '600'
                             }}
                         >
                             Copiar
@@ -132,6 +140,6 @@ export default function GeradorCNPJ() {
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

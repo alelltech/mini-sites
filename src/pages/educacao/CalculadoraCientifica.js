@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/conversor.css';
 
 export default function CalculadoraCientifica() {
     const [display, setDisplay] = useState('0');
@@ -103,42 +102,68 @@ export default function CalculadoraCientifica() {
     const funcButtonStyle = { ...buttonStyle, background: '#2196f3', color: '#fff' };
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🧮 Calculadora Científica</h1>
-                <p className="description">Realize operações avançadas com funções científicas</p>
-            </div>
-            <div className="tool-container" style={{ maxWidth: '500px' }}>
-                <div style={{ background: '#333', padding: '20px', borderRadius: '8px' }}>
+        <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-calculator"></i> Calculadora Científica
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Realize operações avançadas com funções científicas</p>
+                
+                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '20px', borderRadius: '12px' }}>
                     <div style={{
-                        background: '#000',
+                        background: 'rgba(0,0,0,0.7)',
                         color: '#fff',
                         padding: '15px',
-                        borderRadius: '4px',
+                        borderRadius: '8px',
                         textAlign: 'right',
                         fontSize: '24px',
-                        marginBottom: '10px',
+                        marginBottom: '15px',
                         fontFamily: 'monospace',
                         wordWrap: 'break-word',
-                        minHeight: '30px'
+                        minHeight: '40px',
+                        border: '2px solid rgba(102, 126, 234, 0.3)'
                     }}>
-                        {display}
+                        {display || '0'}
                     </div>
 
                     <div style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(4, 1fr)',
-                        gap: '5px'
+                        gap: '8px'
                     }}>
-                        <button style={clearButtonStyle} onClick={handleClear}>C</button>
-                        <button style={operatorButtonStyle} onClick={() => handleAddChar('(')}>( </button>
-                        <button style={operatorButtonStyle} onClick={() => handleAddChar(')')}>)</button>
-                        <button style={operatorButtonStyle} onClick={() => handleAddChar('/')}>/</button>
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)', color: '#fff', gridColumn: 'span 2' }} onClick={handleClear}>C</button>
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', color: '#fff' }} onClick={() => handleAddChar('(')}>( </button>
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', color: '#fff' }} onClick={() => handleAddChar(')')}>)</button>
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={() => handleAddChar('/')}>/</button>
 
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('7')}>7</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('8')}>8</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('9')}>9</button>
-                        <button style={operatorButtonStyle} onClick={() => handleAddChar('×')}>×</button>
+                        {['7', '8', '9'].map(n => <button key={n} style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255,255,255,0.2)', color: '#fff' }} onClick={() => handleAddChar(n)}>{n}</button>)}
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={() => handleAddChar('×')}>×</button>
+
+                        {['4', '5', '6'].map(n => <button key={n} style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255,255,255,0.2)', color: '#fff' }} onClick={() => handleAddChar(n)}>{n}</button>)}
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={() => handleAddChar('-')}>−</button>
+
+                        {['1', '2', '3'].map(n => <button key={n} style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255,255,255,0.2)', color: '#fff' }} onClick={() => handleAddChar(n)}>{n}</button>)}
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={() => handleAddChar('+')}>+</button>
+
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255,255,255,0.2)', color: '#fff', gridColumn: 'span 2' }} onClick={() => handleAddChar('0')}>0</button>
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255,255,255,0.2)', color: '#fff' }} onClick={() => handleAddChar('.')}>.</button>
+                        <button style={{ padding: '15px', fontSize: '14px', fontWeight: '700', border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)', color: '#fff' }} onClick={handleCalculate}>=</button>
+
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleSqrt}>√</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={() => handleAddChar('^')}>x^y</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleSin}>sin</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleCos}>cos</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleTan}>tan</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleLog}>log</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleLn}>ln</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handlePi}>π</button>
+                        <button style={{ padding: '10px', fontSize: '12px', fontWeight: '600', border: 'none', borderRadius: '6px', cursor: 'pointer', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: '#fff' }} onClick={handleE}>e</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
 
                         <button style={numberButtonStyle} onClick={() => handleAddChar('4')}>4</button>
                         <button style={numberButtonStyle} onClick={() => handleAddChar('5')}>5</button>

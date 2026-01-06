@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function HexDecimal() {
     const [decimal, setDecimal] = useState('');
@@ -79,72 +78,81 @@ export default function HexDecimal() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🔄 Conversor Hex/Decimal</h1>
-                <p className="description">Converta entre hexadecimal e decimal</p>
-            </div>
-            <div className="tool-container">
-                <div className="form-group">
-                    <label htmlFor="decimal">Valor Decimal:</label>
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-shuffle"></i> Conversor Hex/Decimal
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Converta entre hexadecimal e decimal</p>
+                
+                <div className="p-form-group" style={{ marginBottom: '15px' }}>
+                    <label htmlFor="decimal" className="p-form-label">Valor Decimal:</label>
                     <input
                         id="decimal"
+                        className="p-input p-form-text"
                         type="number"
                         placeholder="Digite um número decimal..."
                         value={decimal}
                         onChange={(e) => setDecimal(e.target.value)}
-                        style={{ width: '100%', padding: '10px', fontFamily: 'monospace', border: '1px solid #ddd', borderRadius: '4px' }}
+                        style={{ width: '100%', padding: '10px', fontFamily: 'monospace', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="hexadecimal">Valor Hexadecimal:</label>
+                <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                    <label htmlFor="hexadecimal" className="p-form-label">Valor Hexadecimal:</label>
                     <input
                         id="hexadecimal"
+                        className="p-input p-form-text"
                         type="text"
                         placeholder="Digite um valor hex (ex: FF, 1A2B)..."
                         value={hexadecimal}
                         onChange={(e) => setHexadecimal(e.target.value)}
-                        style={{ width: '100%', padding: '10px', fontFamily: 'monospace', border: '1px solid #ddd', borderRadius: '4px' }}
+                        style={{ width: '100%', padding: '10px', fontFamily: 'monospace', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                     />
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap', marginBottom: '20px' }}>
                     <button
                         onClick={handleDecimalToHex}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         → Para Hex
                     </button>
                     <button
                         onClick={handleHexToDecimal}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         ← Para Decimal
                     </button>
                     <button
                         onClick={clear}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#6c757d',
+                            background: 'linear-gradient(135deg, #6c757d 0%, #5a6268 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Limpar
@@ -152,29 +160,31 @@ export default function HexDecimal() {
                 </div>
 
                 {resultText && (
-                    <div className="result">
-                        <strong>Resultado:</strong>
+                    <div className="p-card" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '20px' }}>
+                        <p style={{ fontWeight: '700', marginTop: 0, marginBottom: '12px' }}>Resultado:</p>
                         <pre style={{
-                            background: 'white',
+                            background: 'rgba(255,255,255,0.9)',
                             padding: '15px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
+                            borderRadius: '8px',
                             fontFamily: 'monospace',
-                            marginTop: '10px',
-                            marginBottom: '10px',
-                            overflowX: 'auto'
+                            marginTop: '0',
+                            marginBottom: '15px',
+                            overflowX: 'auto',
+                            fontSize: '14px'
                         }}>
                             {resultText}
                         </pre>
                         <button
                             onClick={copyResult}
+                            className="p-btn"
                             style={{
-                                padding: '8px 16px',
-                                background: '#28a745',
+                                padding: '10px 16px',
+                                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontWeight: '600'
                             }}
                         >
                             Copiar
@@ -182,6 +192,6 @@ export default function HexDecimal() {
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

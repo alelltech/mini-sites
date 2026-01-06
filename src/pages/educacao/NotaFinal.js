@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/conversor.css';
 
 export default function NotaFinal() {
     const [notas, setNotas] = useState([
@@ -57,18 +56,20 @@ export default function NotaFinal() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>📊 Calculadora de Nota Final</h1>
-                <p className="description">Calcule a média ponderada das suas avaliações</p>
-            </div>
-            <div className="tool-container">
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-graph"></i> Calculadora de Nota Final
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Calcule a média ponderada das suas avaliações</p>
+                
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '20px' }}>
                     {notas.map((nota, index) => (
                         <div key={nota.id} style={{ display: 'flex', gap: '10px', alignItems: 'flex-end' }}>
                             <div style={{ flex: 1 }}>
-                                <label>Nota {index + 1}:</label>
+                                <label className="p-form-label" style={{ marginBottom: '8px', display: 'block' }}>Nota {index + 1}:</label>
                                 <input
+                                    className="p-input p-form-text"
                                     type="number"
                                     min="0"
                                     max="10"
@@ -76,30 +77,33 @@ export default function NotaFinal() {
                                     placeholder="0 a 10"
                                     value={nota.valor}
                                     onChange={(e) => atualizarNota(nota.id, 'valor', e.target.value)}
-                                    style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                                 />
                             </div>
-                            <div style={{ width: '100px' }}>
-                                <label>Peso:</label>
+                            <div style={{ width: '120px' }}>
+                                <label className="p-form-label" style={{ marginBottom: '8px', display: 'block' }}>Peso:</label>
                                 <input
+                                    className="p-input p-form-text"
                                     type="number"
                                     min="0"
                                     step="0.1"
                                     value={nota.peso}
                                     onChange={(e) => atualizarNota(nota.id, 'peso', e.target.value)}
-                                    style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                                 />
                             </div>
                             {notas.length > 1 && (
                                 <button
                                     onClick={() => removerNota(nota.id)}
+                                    className="p-btn"
                                     style={{
                                         padding: '10px 15px',
-                                        background: '#dc3545',
+                                        background: 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)',
                                         color: 'white',
                                         border: 'none',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer'
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        fontWeight: '600'
                                     }}
                                 >
                                     ✕
@@ -109,42 +113,48 @@ export default function NotaFinal() {
                     ))}
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
                     <button
                         onClick={adicionarNota}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#28a745',
+                            background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         + Adicionar Nota
                     </button>
                     <button
                         onClick={calcular}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#667eea',
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Calcular Média
                     </button>
                     <button
                         onClick={limpar}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#6c757d',
+                            background: 'linear-gradient(135deg, #6c757d 0%, #5a6268 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Limpar
@@ -152,16 +162,16 @@ export default function NotaFinal() {
                 </div>
 
                 {resultado && (
-                    <div className="result">
-                        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#667eea', marginBottom: '10px' }}>
+                    <div className="p-card" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '20px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '42px', fontWeight: '700', color: '#667eea', marginBottom: '12px' }}>
                             {resultado.media.toFixed(1)}
                         </div>
-                        <p style={{ fontSize: '1.2rem', margin: 0 }}>
-                            Situação: <strong>{resultado.situacao}</strong>
+                        <p style={{ fontSize: '16px', margin: 0, fontWeight: '600' }}>
+                            Situação: <span style={{ color: resultado.situacao === 'Aprovado' ? '#28a745' : resultado.situacao === 'Recuperação' ? '#ffc107' : '#dc3545' }}>{resultado.situacao}</span>
                         </p>
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }

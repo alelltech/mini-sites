@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { copyToClipboard } from '../../utils/globalFunctions.js';
-import '../../styles/conversor.css';
 
 export default function HexRGB() {
     const [hex, setHex] = useState('');
@@ -153,104 +152,115 @@ export default function HexRGB() {
     }
 
     return (
-        <section className="tool-section">
-            <div className="tool-header">
-                <h1>🎨 Conversor Hex/RGB</h1>
-                <p className="description">Converta cores entre hexadecimal e RGB</p>
-            </div>
-            <div className="tool-container">
-                <div className="form-group">
-                    <label htmlFor="hex">Hex:</label>
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+            <div className="p-card p-shadow-2" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%)', backdropFilter: 'blur(40px) saturate(150%)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '30px' }}>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', margin: '0 0 10px 0' }}>
+                    <i className="icon-palette"></i> Conversor Hex/RGB
+                </h1>
+                <p style={{ color: '#999', marginBottom: '25px' }}>Converta cores entre hexadecimal e RGB</p>
+                
+                <div className="p-form-group" style={{ marginBottom: '15px' }}>
+                    <label htmlFor="hex" className="p-form-label">Hex:</label>
                     <input
                         id="hex"
+                        className="p-input p-form-text"
                         type="text"
                         placeholder="#FF5733"
                         value={hex}
                         onChange={handleHexInput}
-                        style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', marginBottom: '10px' }}
+                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                     />
                 </div>
 
-                <div className="form-group">
-                    <label>RGB:</label>
+                <div className="p-form-group" style={{ marginBottom: '15px' }}>
+                    <label className="p-form-label">RGB:</label>
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             placeholder="R (0-255)"
                             min="0"
                             max="255"
                             value={r}
                             onChange={handleRInput}
-                            style={{ flex: 1, padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                            style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         />
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             placeholder="G (0-255)"
                             min="0"
                             max="255"
                             value={g}
                             onChange={handleGInput}
-                            style={{ flex: 1, padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                            style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         />
                         <input
+                            className="p-input p-form-text"
                             type="number"
                             placeholder="B (0-255)"
                             min="0"
                             max="255"
                             value={b}
                             onChange={handleBInput}
-                            style={{ flex: 1, padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+                            style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)' }}
                         />
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="colorPicker">Seletor de Cor:</label>
+                <div className="p-form-group" style={{ marginBottom: '20px' }}>
+                    <label htmlFor="colorPicker" className="p-form-label">Seletor de Cor:</label>
                     <input
                         id="colorPicker"
                         type="color"
                         value={hex || '#000000'}
                         onChange={handleColorPicker}
-                        style={{ width: '60px', height: '40px', border: 'none', cursor: 'pointer', borderRadius: '4px' }}
+                        style={{ width: '60px', height: '40px', border: 'none', cursor: 'pointer', borderRadius: '8px' }}
                     />
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', marginBottom: '20px', flexWrap: 'wrap' }}>
                     <button
                         onClick={handleHexToRgb}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Hex → RGB
                     </button>
                     <button
                         onClick={handleRgbToHex}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#007bff',
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         RGB → Hex
                     </button>
                     <button
                         onClick={clear}
+                        className="p-btn"
                         style={{
                             padding: '10px 20px',
-                            background: '#6c757d',
+                            background: 'linear-gradient(135deg, #6c757d 0%, #5a6268 100%)',
                             color: 'white',
                             border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600'
                         }}
                     >
                         Limpar
@@ -258,34 +268,37 @@ export default function HexRGB() {
                 </div>
 
                 {previewColor && (
-                    <div className="result">
+                    <div className="p-card" style={{ background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '20px' }}>
                         <div style={{
                             width: '100%',
-                            height: '60px',
-                            borderRadius: '4px',
+                            height: '80px',
+                            borderRadius: '12px',
                             marginBottom: '15px',
-                            border: '1px solid #ddd',
+                            border: '2px solid rgba(255,255,255,0.3)',
                             backgroundColor: previewColor
                         }} />
                         <pre style={{
-                            background: '#fff',
-                            padding: '10px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
+                            background: 'rgba(255,255,255,0.9)',
+                            padding: '15px',
+                            borderRadius: '8px',
                             overflow: 'auto',
-                            marginBottom: '10px'
+                            marginBottom: '15px',
+                            fontFamily: 'monospace',
+                            fontSize: '14px'
                         }}>
                             {`Hex: ${resultHex}\nRGB: ${resultRGB}`}
                         </pre>
                         <button
                             onClick={copyResult}
+                            className="p-btn"
                             style={{
-                                padding: '8px 16px',
-                                background: '#28a745',
+                                padding: '10px 16px',
+                                background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                                 color: 'white',
                                 border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontWeight: '600'
                             }}
                         >
                             Copiar
@@ -293,6 +306,6 @@ export default function HexRGB() {
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     );
 }
