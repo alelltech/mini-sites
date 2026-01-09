@@ -86,20 +86,34 @@ export default function CalculadoraCientifica() {
         setDisplay(display + Math.E.toString().substring(0, 5));
     }
 
-    const buttonStyle = {
-        padding: '15px',
-        fontSize: '16px',
-        fontWeight: 'bold',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer'
-    };
+    function handleSqrt() {
+        handleSquareRoot();
+    }
 
-    const numberButtonStyle = { ...buttonStyle, background: '#555', color: '#fff' };
-    const operatorButtonStyle = { ...buttonStyle, background: '#ff9500', color: '#fff' };
-    const equalsButtonStyle = { ...buttonStyle, background: '#28a745', color: '#fff', gridColumn: 'span 2' };
-    const clearButtonStyle = { ...buttonStyle, background: '#dc3545', color: '#fff', gridColumn: 'span 2' };
-    const funcButtonStyle = { ...buttonStyle, background: '#2196f3', color: '#fff' };
+    function handleSin() {
+        handleSine();
+    }
+
+    function handleCos() {
+        handleCosine();
+    }
+
+    function handleTan() {
+        handleTangent();
+    }
+
+    function handleLog() {
+        handleLogarithm();
+    }
+
+    function handleLn() {
+        try {
+            const result = Math.log(eval(display));
+            setDisplay(String(result));
+        } catch (e) {
+            setDisplay('Erro');
+        }
+    }
 
     return (
         <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
@@ -162,34 +176,5 @@ export default function CalculadoraCientifica() {
                 </div>
             </div>
         </div>
-    );
-}
-
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('4')}>4</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('5')}>5</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('6')}>6</button>
-                        <button style={operatorButtonStyle} onClick={() => handleAddChar('−')}>−</button>
-
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('1')}>1</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('2')}>2</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('3')}>3</button>
-                        <button style={operatorButtonStyle} onClick={() => handleAddChar('+')}>+</button>
-
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('0')}>0</button>
-                        <button style={numberButtonStyle} onClick={() => handleAddChar('.')}>.</button>
-                        <button style={equalsButtonStyle} onClick={handleCalculate}>=</button>
-
-                        <button style={funcButtonStyle} onClick={handleSquareRoot}>√</button>
-                        <button style={funcButtonStyle} onClick={handleSquare}>x²</button>
-                        <button style={funcButtonStyle} onClick={handleLogarithm}>log</button>
-                        <button style={funcButtonStyle} onClick={handleSine}>sin</button>
-                        <button style={funcButtonStyle} onClick={handleCosine}>cos</button>
-                        <button style={funcButtonStyle} onClick={handleTangent}>tan</button>
-                        <button style={funcButtonStyle} onClick={handlePi}>π</button>
-                        <button style={funcButtonStyle} onClick={handleE}>e</button>
-                    </div>
-                </div>
-            </div>
-        </section>
     );
 }
